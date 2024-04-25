@@ -6,14 +6,14 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-
 import {
   ThemeProvider,
-  useTheme,
   PreventFlashOnWrongTheme,
+  useTheme,
 } from "remix-themes";
 import { themeSessionResolver } from "./sessions.server";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import Navbar from "./components/navbar";
 import stylesheet from "~/tailwind.css?url";
 import clsx from "clsx";
 
@@ -48,8 +48,19 @@ function App() {
         <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+          rel="stylesheet"
+        ></link>
       </head>
-      <body className="min-h-screen w-full">
+      <body className="min-h-screen w-full bg-background px-4 md:px-8">
+        <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

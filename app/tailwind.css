@@ -4,22 +4,20 @@
 
 @layer base {
   :root {
-    --background: #f5f5f5;
+    --background: #f3eeea;
     --text: #333;
     --primary: #2c8ecd;
     --secondary: #e74c3c;
-    --destructive: #c0392b;
     --success: #28a745;
     --warning: #f39c12;
   }
 
   .dark,
   :root[class~="dark"] {
-    --background: #121212;
-    --text: #e0e0e0;
-    --primary: #3498db;
-    --secondary: #e74c3c;
-    --destructive: #c0392b;
+    --background: #00224d;
+    --text: #dff5ff;
+    --primary: #ff204e;
+    --secondary: #008dda;
     --success: #28a745;
     --warning: #f39c12;
   }
@@ -27,10 +25,18 @@
 
 @layer base {
   body {
-    @apply bg-background text-text;
+    @apply bg-background text-text font-sans antialiased;
+  }
+
+  a {
+    @apply hover:text-secondary;
   }
 
   .container {
-    @apply mx-auto max-w-7xl px-4;
+    @apply mx-auto max-w-6xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-primary h-10 px-4 py-2;
   }
 }
