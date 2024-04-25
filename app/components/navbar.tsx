@@ -7,10 +7,10 @@ function Navbar() {
   const [theme, setTheme] = useTheme();
 
   return (
-    <nav className="max-w-5xl mx-auto flex justify-between items-end font-bold">
+    <nav className="max-w-5xl mx-auto flex justify-between items-end font-bold border-b border-text ">
       <div className="flex gap-4 md:gap-8">
         <Link to="/" className="group">
-          <h4 className="flex md:scale-100">
+          <h4 className="flex md:scale-100 m-0 p-0">
             <span className="text-[120px] text-primary group-hover:text-text transition-all">
               A
             </span>
