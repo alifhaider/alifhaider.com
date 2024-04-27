@@ -5,9 +5,19 @@ import { SectionTitle } from "~/components/common";
 import {
   Project,
   ProjectDescription,
+  ProjectLaguages,
   ProjectLink,
   ProjectTitle,
 } from "~/components/project";
+
+import {
+  Experience,
+  ExperienceCompany,
+  ExperienceDescription,
+  ExperienceInfo,
+  ExperienceTitle,
+  ExxperienceDate,
+} from "~/components/experience";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,21 +26,132 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+type Project = {
+  name: string;
+  link?: string;
+  linkText?: string;
+  description: string;
+  languages: string[];
+};
+
+const projects: Array<Project> = [
+  {
+    name: "Nulandia Admin Dashboard",
+    link: "https://admin.nulandia.com",
+    linkText: "admin.nulandia.com",
+    description:
+      "Nulandia Admin Dashboard is a fully responsive admin dashboard built with React, and Tailwind CSS",
+    languages: ["React", "Tailwind CSS"],
+  },
+  {
+    name: "Nulandia Game UI",
+    description:
+      "Actual game UI for Nulandia. It is built with Godot Engine and GDScript. I have worked on the UI part of the game. That includes choosing avatar, creating lots, assign lots for sale, create district, etc.",
+    languages: ["Godot Engine", "GDScript"],
+  },
+  {
+    name: "Hydepenthouse Airbnb",
+    link: "https://hydepenthouse.com",
+    linkText: "hydepenthouse.com",
+    description:
+      "Hydepnethouse Airbnb is a fully responsive webapp built with Remix.run. I have worked on the frontend part of the project.",
+    languages: ["Remix.run", "TypeScript", "SCSS"],
+  },
+  {
+    name: "Definya Game",
+    link: "https://play.definya.com/",
+    linkText: "play.definya.com",
+    description:
+      "Definya is a MMORPG game built with the MERN stack. I have worked in this game as a Full-Stack Engineer. I built the Chat System, Friend System, Help System and many more.",
+    languages: [
+      "TypeScript",
+      "React",
+      "MongoDB",
+      "WebSocket",
+      "Styled Components",
+    ],
+  },
+  {
+    name: "SPORFORYA",
+    link: "https://sporforya.com/",
+    linkText: "sporforya.com",
+    description:
+      "Definya is a MMORPG game built with the MERN stack. I have worked in this game as a Full-Stack Engineer. I built the Chat System, Friend System, Help System and many more.",
+    languages: ["Next.js", "TypeScript"],
+  },
+  {
+    name: "Promenade",
+    link: "https://promenade.ai",
+    linkText: "promenade.ai",
+    description:
+      "Promenade is a platform for the real estate industry. I have worked on the frontend part of the project.",
+    languages: ["React", "CSS"],
+  },
+  {
+    name: "Fryends",
+    link: "https://fryends.com",
+    linkText: "fryends.com",
+    description:
+      "Fryends is a social media platform. I have worked on the frontend part of the project.",
+    languages: ["React", "CSS"],
+  },
+];
+
+const experiences = [
+  {
+    title: "Software Engineer",
+    company: "Impulse Communications",
+    to: "https://impulsecommunications.ai",
+    location: "Remote, USA",
+    date: "2023 - Present",
+    description:
+      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+  },
+  {
+    title: "Web Application Developer",
+    company: "Upwork - Upwork Profile",
+    to: "https://upwork.com",
+    location: "Remote",
+    date: "2021 - Present",
+    description:
+      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+  },
+  {
+    title: "Frontend Engineer",
+    company: "MBAKOP LLC",
+    to: "https://mbakop.com",
+    location: "Remote, USA",
+    date: "2021 - 2023",
+    description:
+      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+  },
+];
+
 export default function Index() {
   return (
     <div className="mx-auto mt-10 max-w-5xl space-y-20">
       <section>
-        <h2 className="text-3xl font-semibold tracking-wide">
-          Hey, I&apos;m Alif Haider.
+        <h2 className="mb-6 w-fit bg-secondary pl-2 pr-8 text-3xl font-semibold tracking-wide text-background">
+          Hey, I&apos;m <span className="underline">Alif Haider</span>.
         </h2>
-        <p className="mt-4 text-lg md:text-xl">
-          I am a software engineer. I have completed my graduation with Computer
-          Science and Engineering from North South University. <br /> I am
-          building web applications for over two years. I am also a tech
-          enthusiast and I love to learn new technologies. I am always open to
-          new opportunities and challenges. <br />
-          Feel free to reach out to me.
-        </p>
+        <div className="space-y-3">
+          <p className="mt-4 text-lg md:text-xl">
+            I am a software engineer. I have been building web applications and
+            solving problems for over{" "}
+            <span className="font-medium">two years</span>. I am also a tech
+            enthusiast and I love to learn new technologies. I am always open to
+            new opportunities and challenges.{" "}
+          </p>
+          <p>
+            {" "}
+            I have completed my graduation in{" "}
+            <span className="font-medium">
+              Computer Science and Engineering
+            </span>{" "}
+            from North South University.
+          </p>
+          <p> Feel free to reach out to me.</p>
+        </div>
 
         <div className="mt-4 flex gap-4">
           <IconButton href="https://twitter.com/haider_alif">
@@ -42,8 +163,8 @@ export default function Index() {
         </div>
       </section>
 
-      <div className="flex flex-col gap-10 border-text md:flex-row">
-        <div className="space-y-20 border-text md:border-r md:pr-10">
+      <div className="border-border flex flex-col gap-10 md:flex-row">
+        <div className="border-border space-y-20  md:sticky md:top-0 md:h-screen md:border-r md:pr-10">
           <section>
             <SectionTitle title="About" />
             <ul className="space-y-4">
@@ -116,7 +237,7 @@ export default function Index() {
             </ul>
           </section>
 
-          <section>
+          <section className="overflow-y-auto">
             <SectionTitle title="Expertise" />
 
             <ul className="space-y-4">
@@ -129,55 +250,49 @@ export default function Index() {
           </section>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-grow">
           <SectionTitle title="Projects" />
-          <ul className="space-y-8">
-            <Project>
-              <ProjectTitle>Nulandia Admin Dashboard</ProjectTitle>
-              <ProjectLink to="https://admin.nulandia.com">
-                admin.nulandia.com
-              </ProjectLink>
-              <ProjectDescription>
-                Nulandia Admin Dashboard is a fully responsive admin dashboard
-                built with React, and Tailwind CSS
-              </ProjectDescription>
-            </Project>
-
-            <Project>
-              <ProjectTitle>Nulandia Game UI</ProjectTitle>
-              <ProjectDescription>
-                Actual game UI for Nulandia. It is built with Godot Engine and
-                GDScript. I have worked on the UI part of the game. That
-                includes choosing avatar, creating lots, assign lots for sale,
-                create district, etc.
-              </ProjectDescription>
-            </Project>
-
-            <Project>
-              <ProjectTitle>Hydepenthouse Airbnb</ProjectTitle>
-              <ProjectLink to="https://hydepenthouse.com">
-                hydepenthouse.com
-              </ProjectLink>
-              <ProjectDescription>
-                Hydepnethouse Airbnb is a fully responsive webapp built with
-                Remix.run. I have worked on the frontend part of the project.
-              </ProjectDescription>
-            </Project>
-
-            <Project>
-              <ProjectTitle>Definya Game</ProjectTitle>
-              <ProjectLink to="https://play.definya.com/">
-                play.definya.com
-              </ProjectLink>
-              <ProjectDescription>
-                Definya is a MMORPG game built with the MERN stack. I have
-                worked in this game as a Full-Stack Engineer. I built the Chat
-                System, Friend System, Help System and many more.
-              </ProjectDescription>
-            </Project>
+          <ul className="space-y-14">
+            {projects.map((project, index) => (
+              <Project key={index}>
+                <ProjectTitle>{project.name}</ProjectTitle>
+                {project.link && (
+                  <ProjectLink to={project.link}>
+                    {project.linkText}
+                  </ProjectLink>
+                )}
+                <ProjectDescription>{project.description}</ProjectDescription>
+                {project.languages && (
+                  <ProjectLaguages languages={project.languages} />
+                )}
+              </Project>
+            ))}
           </ul>
         </div>
       </div>
+
+      <section>
+        <SectionTitle title="Experience" />
+        <ul className="space-y-6">
+          {experiences.map((experience, index) => (
+            <Experience key={index}>
+              <ExperienceTitle text={experience.title} />
+              <ExperienceInfo>
+                <ExperienceCompany
+                  to={experience.to}
+                  location={experience.location}
+                >
+                  {experience.company}
+                </ExperienceCompany>
+                <ExxperienceDate>{experience.date}</ExxperienceDate>
+              </ExperienceInfo>
+              <ExperienceDescription>
+                {experience.description}
+              </ExperienceDescription>
+            </Experience>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
@@ -213,7 +328,7 @@ function InfoItem({
 
 function BoxItem({ text }: { text: string }) {
   return (
-    <li className="flex items-center justify-center border border-text px-6 py-3">
+    <li className="border-border flex items-center justify-center rounded-sm border px-6 py-3 shadow-inner">
       {text}
     </li>
   );

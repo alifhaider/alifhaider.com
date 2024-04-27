@@ -5,11 +5,12 @@
 @layer base {
   :root {
     --background: #f3eeea;
-    --text: #333;
-    --primary: #2c8ecd;
-    --secondary: #e74c3c;
-    --success: #28a745;
-    --warning: #f39c12;
+    --text: #1f2421;
+    --gray: #4d5061;
+    --primary: #49a078;
+    --secondary: #ff204e;
+    --warning: #2a9d8f;
+    --border: #dce1de;
   }
 
   .dark,
@@ -17,19 +18,16 @@
     --background: #00224d;
     --text: #dff5ff;
     --primary: #ff204e;
-    --secondary: #008dda;
-    --success: #28a745;
-    --warning: #f39c12;
+    --secondary: #5debd7;
+    --warning: #fff455;
+    --gray: #83858c;
+    --border: #83858c; /* remove this line */
   }
 }
 
 @layer base {
   body {
-    @apply bg-background text-text font-sans antialiased;
-  }
-
-  a {
-    @apply hover:text-secondary;
+    @apply bg-background font-sans text-text antialiased;
   }
 
   .container {
@@ -37,6 +35,10 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-primary h-10 px-4 py-2;
+    @apply inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md border bg-background px-4 py-2 text-sm  font-medium ring-offset-background transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  p {
+    @apply text-gray text-pretty text-lg md:text-xl;
   }
 }

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { Theme, useTheme } from "remix-themes";
 import LightIcon from "~/assets/icons/LightIcon";
 import NightIcon from "~/assets/icons/NightIcon";
@@ -7,35 +7,35 @@ function Navbar() {
   const [theme, setTheme] = useTheme();
 
   return (
-    <nav className="max-w-5xl mx-auto flex justify-between items-end font-bold border-b border-text ">
+    <nav className="border-border mx-auto flex max-w-5xl items-end justify-between border-b font-bold ">
       <div className="flex gap-4 md:gap-8">
         <Link to="/" className="group">
-          <h4 className="flex md:scale-100 m-0 p-0">
-            <span className="text-[120px] text-primary group-hover:text-text transition-all">
+          <h4 className="m-0 flex p-0 md:scale-100">
+            <span className="text-[120px] text-primary transition-all group-hover:text-text">
               A
             </span>
             <span className="flex flex-col justify-center">
-              <span className="text-7xl tracking-wider text-primary group-hover:text-text transition-all">
+              <span className="text-7xl tracking-wider text-primary transition-all group-hover:text-text">
                 lif
               </span>
-              <span className="-mt-4 ml-[2px] text-4xl tracking-tighter group-hover:text-primary transition-all">
+              <span className="-mt-4 ml-[2px] text-4xl tracking-tighter transition-all group-hover:text-primary">
                 Haider
               </span>
             </span>
           </h4>
         </Link>
-        <ul className="flex items-end mb-[41px] transition-colors text-lg">
+        {/* <ul className="mb-[41px] flex items-end text-lg transition-colors">
           <li>
             <NavLink to="/blogs" className="hover:text-secondary">
               Blogs
             </NavLink>
           </li>
-        </ul>
+        </ul> */}
       </div>
-      <div className="flex items-center mb-12 shadow-md  border-text border rounded-md transition-all">
+      <div className="border-border mb-12 flex items-center  rounded-md border shadow-md transition-all">
         <button
-          className={`py-2 px-3 rounded-l-md ${
-            theme === Theme.LIGHT ? "bg-background" : "bg-slate-500"
+          className={`rounded-l-md px-3 py-2 ${
+            theme === Theme.LIGHT ? "bg-background" : "bg-border text-primary"
           }`}
           onClick={() => setTheme(Theme.LIGHT)}
         >
@@ -43,8 +43,8 @@ function Navbar() {
           <span className="sr-only">Light theme</span>
         </button>
         <button
-          className={`py-2 px-3 rounded-r-md ${
-            theme === Theme.DARK ? "bg-background" : "bg-slate-500"
+          className={`rounded-r-md px-3 py-2 ${
+            theme === Theme.DARK ? "bg-background" : "bg-border text-primary"
           }`}
           onClick={() => setTheme(Theme.DARK)}
         >

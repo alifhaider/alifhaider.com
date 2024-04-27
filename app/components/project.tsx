@@ -23,23 +23,30 @@ interface ProjectImagesProps {
 }
 
 const Project = ({ children }: ProjectProps) => {
-  return <li className="space-y-2">{children}</li>;
+  return <li>{children}</li>;
 };
 
 Project.displayName = "Project";
 
 const ProjectTitle = ({ children }: ProjectTitleProps) => {
-  return <h6 className="text-2xl font-medium text-primary">{children}</h6>;
+  return (
+    <h6 className="text-xl font-medium text-primary md:text-3xl">{children}</h6>
+  );
 };
 
 ProjectTitle.displayName = "ProjectTitle";
 
 const ProjectLink = ({ to, children }: ProjectLinkProps) => {
   return (
-    <div className="flex items-center gap-3 text-sm">
-      <LinkIcon />
+    <div className="group mt-1 flex items-center gap-3 text-sm text-secondary transition-all ">
+      <LinkIcon className="transition-all group-hover:mb-2" />
 
-      <a href={to} target="_blank" rel="noopener noreferrer">
+      <a
+        href={to}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="transition-all group-hover:underline"
+      >
         {children}
       </a>
     </div>
@@ -49,10 +56,27 @@ const ProjectLink = ({ to, children }: ProjectLinkProps) => {
 ProjectLink.displayName = "ProjectLink";
 
 const ProjectDescription = ({ children }: ProjectDescriptionProps) => {
-  return <p className="">{children}</p>;
+  return <p className="mt-2">{children}</p>;
 };
 
 ProjectDescription.displayName = "ProjectDescription";
+
+const ProjectLaguages = ({ languages }: { languages: string[] }) => {
+  return (
+    <ul className="mt-2 flex flex-wrap gap-2">
+      {languages.map((language, index) => (
+        <li
+          key={index}
+          className="rounded-2xl border border-secondary px-3 py-1.5 text-xs font-medium"
+        >
+          {language}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+ProjectLaguages.displayName = "ProjectLaguages";
 
 const ProjectImages = ({ images }: ProjectImagesProps) => {
   return (
@@ -71,5 +95,5 @@ export {
   ProjectTitle,
   ProjectLink,
   ProjectDescription,
-  ProjectImages,
+  ProjectLaguages,
 };

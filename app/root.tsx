@@ -16,6 +16,7 @@ import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import Navbar from "./components/navbar";
 import stylesheet from "~/tailwind.css?url";
 import clsx from "clsx";
+import Footer from "./components/footer";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -62,6 +63,7 @@ function App() {
       <body className="min-h-screen w-full bg-background px-4 md:px-8">
         <Navbar />
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>

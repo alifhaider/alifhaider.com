@@ -6,13 +6,14 @@ export default {
     fontFamily: {
       sans: ["Rubik", "sans-serif"],
     },
-    extend: {
-      colors: {
-        background: "var(--background)",
-        text: "var(--text)",
-        primary: "var(--primary)",
-        secondary: "var(--secondary)",
-      },
+    colors: {
+      background: "var(--background)",
+      text: "var(--text)",
+      primary: "var(--primary)",
+      secondary: "var(--secondary)",
+      warning: "var(--warning)",
+      gray: "var(--gray)",
+      border: "var(--border)",
     },
   },
   plugins: [],
