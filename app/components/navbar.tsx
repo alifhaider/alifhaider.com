@@ -4,7 +4,7 @@ import LightIcon from "~/assets/icons/LightIcon";
 import NightIcon from "~/assets/icons/NightIcon";
 
 function Navbar() {
-  const [theme, setTheme] = useTheme();
+  const [, setTheme] = useTheme();
 
   return (
     <nav className="border-border mx-auto flex max-w-5xl items-end justify-between border-b font-bold ">
