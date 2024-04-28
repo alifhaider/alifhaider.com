@@ -147,20 +147,83 @@ export default function Index() {
         <div className="space-y-3">
           <p className="mt-4 text-lg md:text-xl">
             I am a software engineer. I have been building web applications and
-            solving problems for over{" "}
-            <span className="font-medium">two years</span>. I am also a tech
-            enthusiast and I love to learn new technologies. I am always open to
-            new opportunities and challenges.{" "}
+            solving problems for web
+            <span className="font-medium"> over two years</span>.
           </p>
           <p>
-            {" "}
-            I have completed my graduation in{" "}
+            I am also a tech enthusiast, I always love to learn new
+            technologies. The majority of the apps I built with{" "}
+            <a
+              href="https://react.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-secondary hover:underline"
+            >
+              React.js
+            </a>{" "}
+            and modern frameworks of React.js(
+            <a
+              href="https://nextjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline"
+            >
+              Next.js
+            </a>{" "}
+            or
+            <a
+              href="https://remix.run/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline"
+            >
+              {" "}
+              Remix.run
+            </a>
+            ), however, I have ideas of how to use{" "}
+            <a
+              href="https://rust-cli.github.io/book/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline"
+            >
+              Rust for CLI{" "}
+            </a>{" "}
+            tools or{" "}
+            <a
+              href="https://www.geeksforgeeks.org/cpp-for-game-development/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline"
+            >
+              C++,{" "}
+            </a>
+            and{" "}
+            <a
+              href="https://godotengine.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline"
+            >
+              Godot
+            </a>{" "}
+            to build a game.
+          </p>
+          <p>
+            I have completed my graduation in{""}
             <span className="font-medium">
               Computer Science and Engineering
             </span>{" "}
             from North South University.
           </p>
-          <p> Feel free to reach out to me.</p>
+          <p>
+            I am always interested in hearing about your project plans, in need
+            of any suggestions, or just want to say
+            <span className="bg-gray mx-1 text-nowrap rounded-lg px-3 py-1 text-base font-medium text-background">
+              Hi 🙌
+            </span>
+            feel free to reach out to me.
+          </p>
         </div>
 
         <div className="mt-4 flex gap-4">
