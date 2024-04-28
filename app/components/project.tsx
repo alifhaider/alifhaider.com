@@ -29,9 +29,7 @@ const Project = ({ children }: ProjectProps) => {
 Project.displayName = "Project";
 
 const ProjectTitle = ({ children }: ProjectTitleProps) => {
-  return (
-    <h6 className="text-xl font-medium text-primary md:text-3xl">{children}</h6>
-  );
+  return <h6>{children}</h6>;
 };
 
 ProjectTitle.displayName = "ProjectTitle";
@@ -56,14 +54,14 @@ const ProjectLink = ({ to, children }: ProjectLinkProps) => {
 ProjectLink.displayName = "ProjectLink";
 
 const ProjectDescription = ({ children }: ProjectDescriptionProps) => {
-  return <p className="mt-2">{children}</p>;
+  return <p className="mt-3">{children}</p>;
 };
 
 ProjectDescription.displayName = "ProjectDescription";
 
 const ProjectLaguages = ({ languages }: { languages: string[] }) => {
   return (
-    <ul className="mt-2 flex flex-wrap gap-2">
+    <ul className="mt-3 flex flex-wrap gap-2">
       {languages.map((language, index) => (
         <li
           key={index}

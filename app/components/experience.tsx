@@ -7,16 +7,14 @@ const Experience = ({ children }: { children: ReactNode }) => {
 Experience.displayName = "Experience";
 
 const ExperienceTitle = ({ text }: { text: string }) => {
-  return (
-    <h6 className="text-xl font-medium text-primary md:text-3xl">{text}</h6>
-  );
+  return <h6>{text}</h6>;
 };
 
 ExperienceTitle.displayName = "ExperienceTitle";
 
 const ExperienceInfo = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex items-center justify-between text-lg md:text-xl">
+    <div className="flex flex-col text-lg md:flex-row md:items-center md:justify-between md:text-xl">
       {children}
     </div>
   );
@@ -34,17 +32,19 @@ const ExperienceCompany = ({
   location: string;
 }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-col md:flex-row md:items-center">
       <a
         href={to}
         target="_blank"
         rel="noopener noreferrer"
         className="font-semibold text-secondary underline-offset-2 transition-all hover:underline"
       >
-        <span className="text-base">@</span>
         {children}
       </a>
-      <div className="text-border text-lg md:text-xl">/ {location}</div>
+      <div className="text-gray md:text-xl">
+        <span className="hidden md:inline-block">/</span>
+        {location}
+      </div>
     </div>
   );
 };

@@ -40,13 +40,13 @@ const projects: Array<Project> = [
     link: "https://admin.nulandia.com",
     linkText: "admin.nulandia.com",
     description:
-      "Nulandia Admin Dashboard is a fully responsive admin dashboard built with React, and Tailwind CSS",
+      "Nulandia Admin Dashboard is a fully responsive admin dashboard built with React, and Tailwind CSS. I have worked on the frontend part of the project. This admin dashboard is used to manage the Nulandia game, create neighborhoods, assign lots, change building types, etc.",
     languages: ["React", "Tailwind CSS"],
   },
   {
     name: "Nulandia Game UI",
     description:
-      "Actual game UI for Nulandia. It is built with Godot Engine and GDScript. I have worked on the UI part of the game. That includes choosing avatar, creating lots, assign lots for sale, create district, etc.",
+      "Game UI for Nulandia. It is built with Godot Engine and GDScript. I have worked on the UI part of the game. That includes choosing avatar, creating buildings, districts by user, assign lots to sale, marketplace, and so on.",
     languages: ["Godot Engine", "GDScript"],
   },
   {
@@ -54,29 +54,30 @@ const projects: Array<Project> = [
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
     description:
-      "Hydepnethouse Airbnb is a fully responsive webapp built with Remix.run. I have worked on the frontend part of the project.",
+      "Hydepnethouse Airbnb is a fully responsive web app built with Remix.run. This application built as a template for various Airbnb like websites. In server based on the domains it decides which color scheme and favicon to use and then it serves the app for that domain. Boosting performance and maintaining SEO was the main goal of this project.",
     languages: ["Remix.run", "TypeScript", "SCSS"],
   },
   {
-    name: "Definya Game",
+    name: "Definya MMORPG Game",
     link: "https://play.definya.com/",
     linkText: "play.definya.com",
     description:
-      "Definya is a MMORPG game built with the MERN stack. I have worked in this game as a Full-Stack Engineer. I built the Chat System, Friend System, Help System and many more.",
+      "Definya game is built with the MERN stack. It had WebSocket integration to get player positions and everything. I helped building the Chat System, Friend System, Help System and Marketplace system.",
     languages: [
       "TypeScript",
       "React",
       "MongoDB",
       "WebSocket",
+      "Redis",
       "Styled Components",
     ],
   },
   {
-    name: "SPORFORYA",
-    link: "https://sporforya.com/",
-    linkText: "sporforya.com",
+    name: "SPORFORYA Admin Dashboard",
+    link: "https://admin.sporforya.com/",
+    linkText: "admin.sporforya.com",
     description:
-      "Definya is a MMORPG game built with the MERN stack. I have worked in this game as a Full-Stack Engineer. I built the Chat System, Friend System, Help System and many more.",
+      "SPORFORYA is a sports platform. I helped building the admin dashboard for the platform. It is used to manage the platform, create events, manage users, etc.",
     languages: ["Next.js", "TypeScript"],
   },
   {
@@ -84,15 +85,15 @@ const projects: Array<Project> = [
     link: "https://promenade.ai",
     linkText: "promenade.ai",
     description:
-      "Promenade is a platform for the real estate industry. I have worked on the frontend part of the project.",
+      "Promenade is a military job application platform where veterans can find jobs after retirement. I have worked on building the admin dashboard of the project.",
     languages: ["React", "CSS"],
   },
   {
-    name: "Fryends",
-    link: "https://fryends.com",
-    linkText: "fryends.com",
+    name: "Funcomp",
+    link: "https://funcomp.com",
+    linkText: "funcomp.com",
     description:
-      "Fryends is a social media platform. I have worked on the frontend part of the project.",
+      "Funcomp is a platform where people can find fun activities like video games, movies, etc. I built the landing page and the admin dashboard of the project.",
     languages: ["React", "CSS"],
   },
 ];
@@ -111,13 +112,22 @@ const experiences = [
     title: "Web Application Developer",
     company: "Upwork - Upwork Profile",
     to: "https://upwork.com",
-    location: "Remote",
+    location: "Remote, Freelancer",
     date: "2021 - Present",
     description:
       "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
   },
   {
-    title: "Frontend Engineer",
+    title: "Frontend Dev",
+    company: "SPORFORYA",
+    to: "https://sporforya.com",
+    location: "Remote, USA",
+    date: "2021 - 2023",
+    description:
+      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+  },
+  {
+    title: "Frontend Dev",
     company: "MBAKOP LLC",
     to: "https://mbakop.com",
     location: "Remote, USA",
@@ -252,7 +262,7 @@ export default function Index() {
 
         <div className="flex-grow">
           <SectionTitle title="Projects" />
-          <ul className="space-y-14">
+          <ul className="space-y-10 md:space-y-14">
             {projects.map((project, index) => (
               <Project key={index}>
                 <ProjectTitle>{project.name}</ProjectTitle>
@@ -273,7 +283,7 @@ export default function Index() {
 
       <section>
         <SectionTitle title="Experience" />
-        <ul className="space-y-6">
+        <ul className="space-y-10 md:space-y-14">
           {experiences.map((experience, index) => (
             <Experience key={index}>
               <ExperienceTitle text={experience.title} />
@@ -293,6 +303,31 @@ export default function Index() {
           ))}
         </ul>
       </section>
+
+      <section>
+        <SectionTitle title="Hobby" />
+
+        <ul className="space-y-6">
+          <li>
+            <h6>Video Games</h6>
+            <p>
+              I love to play video games. I have been playing video games since
+              I was a kid. I love to play MMORPG games. I have played games like
+              World of Warcraft, Guild Wars 2, Final Fantasy XIV, etc.
+            </p>
+          </li>
+
+          <li>
+            <h6>Movies</h6>
+            <p>
+              I love to watch movies. I love to watch movies of all genres. I
+              love to watch movies with friends and family.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <p className="text-secondary dark:text-text">Hello </p>
     </div>
   );
 }

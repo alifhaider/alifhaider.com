@@ -34,18 +34,14 @@ function Navbar() {
       </div>
       <div className="border-border mb-12 flex items-center  rounded-md border shadow-md transition-all">
         <button
-          className={`rounded-l-md px-3 py-2 ${
-            theme === Theme.LIGHT ? "bg-background" : "bg-border text-primary"
-          }`}
+          className="dark:bg-border rounded-l-md bg-background px-3 py-2 dark:text-primary"
           onClick={() => setTheme(Theme.LIGHT)}
         >
           <LightIcon />
           <span className="sr-only">Light theme</span>
         </button>
         <button
-          className={`rounded-r-md px-3 py-2 ${
-            theme === Theme.DARK ? "bg-background" : "bg-border text-primary"
-          }`}
+          className="bg-gray rounded-r-md px-3  py-2 text-primary dark:bg-background dark:text-text"
           onClick={() => setTheme(Theme.DARK)}
         >
           <NightIcon />
