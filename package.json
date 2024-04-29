@@ -16,11 +16,17 @@
     "@remix-run/serve": "^2.8.1",
     "@vercel/remix": "^2.9.0",
     "clsx": "^2.1.0",
+    "esbuild": "^0.20.2",
     "isbot": "^4.1.0",
+    "mdx-bundler": "^10.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
     "remix-themes": "^1.3.1",
-    "tiny-invariant": "^1.3.3"
+    "tiny-invariant": "^1.3.3",
+    "unified": "^11.0.4"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.1",

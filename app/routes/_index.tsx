@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json, type MetaFunction } from "@remix-run/node";
 import Github from "~/assets/icons/Github";
 import Twitter from "~/assets/icons/Twitter";
 import { SectionTitle } from "~/components/common";
@@ -19,6 +19,8 @@ import {
   ExxperienceDate,
 } from "~/components/experience";
 import { type ReactNode } from "react";
+import { getPosts } from "~/mdx.server";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -195,7 +197,19 @@ const experiences = [
   },
 ];
 
+export async function loader() {
+  const blogs = await getPosts();
+
+  return json(blogs.slice(0, 3), {
+    headers: {
+      "Cache-Control": "private, max-age=3600",
+      Vary: "Cookie",
+    },
+  });
+}
+
 export default function Index() {
+  const data = useLoaderData<typeof loader>();
   return (
     <div className="mx-auto mt-10 max-w-5xl space-y-20">
       <section>
@@ -337,14 +351,6 @@ export default function Index() {
               <BoxItem text="GDScript" />
             </ul>
           </section>
-
-          <section className="overflow-y-auto">
-            <SectionTitle title="Education" />
-
-            <ul className="space-y-4">
-              <li>North South University</li>
-            </ul>
-          </section>
         </div>
 
         <div className="flex-grow">
@@ -422,6 +428,29 @@ export default function Index() {
               .
             </p>
           </li>
+        </ul>
+      </section>
+
+      <section>
+        <SectionTitle title="Blogs" />
+
+        <ul>
+          {data.map((post) => (
+            <li key={post.slug} className="space-y-3">
+              <h3 className="text-3xl font-medium text-primary">
+                {post.title}
+              </h3>
+              <p>{post.description}</p>
+              <div>
+                <a
+                  className="border-b border-dashed text-sm text-secondary"
+                  href={`/blog/${post.slug}`}
+                >
+                  Read the article
+                </a>
+              </div>
+            </li>
+          ))}
         </ul>
       </section>
     </div>
