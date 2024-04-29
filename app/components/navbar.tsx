@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 import { Theme, useTheme } from "remix-themes";
 import LightIcon from "~/assets/icons/LightIcon";
 import NightIcon from "~/assets/icons/NightIcon";
@@ -24,13 +24,13 @@ function Navbar() {
             </span>
           </h4>
         </Link>
-        {/* <ul className="mb-[41px] flex items-end text-lg transition-colors">
+        <ul className="mb-[41px] flex items-end text-lg transition-colors">
           <li>
-            <NavLink to="/blogs" className="hover:text-secondary">
-              Blogs
+            <NavLink to="/blog" className="hover:text-secondary">
+              Blog
             </NavLink>
           </li>
-        </ul> */}
+        </ul>
       </div>
       <div className="border-border mb-12 flex items-center  rounded-md border shadow-md transition-all">
         <button

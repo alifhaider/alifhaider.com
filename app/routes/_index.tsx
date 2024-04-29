@@ -161,27 +161,27 @@ const experiences = [
     company: "Impulse Communications",
     to: "https://impulsecommunications.ai",
     location: "Remote, USA",
-    date: "2023 - Present",
+    date: "Feb'23 - Present",
     description:
-      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+      "Working on the Nulandia Admin Dashboard and Nulandia Game UI.",
   },
   {
     title: "Web Application Developer",
     company: "Upwork - Upwork Profile",
     to: "https://upwork.com",
     location: "Remote, Freelancer",
-    date: "2021 - Present",
+    date: "Feb'21 - Present",
     description:
-      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+      "I have been working as a freelancer on Upwork. Most of the jobs I took were via Upwork. I gathered all my experience from Upwork Projects.",
   },
   {
     title: "Frontend Dev",
     company: "SPORFORYA",
     to: "https://sporforya.com",
     location: "Remote, USA",
-    date: "2021 - 2023",
+    date: "Jun'22 - Mar'23",
     description:
-      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+      "A part-time job where I helped building and maintaining the SPORFORYA Admin Dashboard and I also build several landing pages.",
   },
 
   {
@@ -189,9 +189,9 @@ const experiences = [
     company: "MBAKOP LLC",
     to: "https://mbakop.com",
     location: "Remote, USA",
-    date: "2021 - 2023",
+    date: "Mar'22 - Dec'22",
     description:
-      "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+      "First full-time job where I worked in a team. I was responsible for building the Funcomp platform, I also helped building a Widget which was used in the company websites.",
   },
 ];
 
@@ -215,10 +215,8 @@ export default function Index() {
             frameworks of React.js (
             <BioLink to="https://nextjs.org">Next.js</BioLink> or{" "}
             <BioLink to="https://remix.run">Remix.run</BioLink>), however, I
-            also have ideas of how to use{" "}
-            <BioLink to="https://rust-cli.github.io/book/index.html">
-              Rust for CLI
-            </BioLink>{" "}
+            also have ideas to use{" "}
+            <BioLink to="https://www.rust-lang.org/">Rust</BioLink> for CLI
             tools or{" "}
             <BioLink to="https://www.geeksforgeeks.org/cpp-for-game-development/">
               C++,{" "}
@@ -336,7 +334,15 @@ export default function Index() {
               <BoxItem text="JavaScript" />
               <BoxItem text="React" />
               <BoxItem text="Remix.run" />
-              <BoxItem text="Godot Script" />
+              <BoxItem text="GDScript" />
+            </ul>
+          </section>
+
+          <section className="overflow-y-auto">
+            <SectionTitle title="Education" />
+
+            <ul className="space-y-4">
+              <li>North South University</li>
             </ul>
           </section>
         </div>
@@ -392,23 +398,32 @@ export default function Index() {
           <li>
             <h6>Video Games</h6>
             <p>
-              I love to play video games. I have been playing video games since
-              I was a kid. I love to play MMORPG games. I have played games like
-              World of Warcraft, Guild Wars 2, Final Fantasy XIV, etc.
+              I love to play video games. Most of my leisure time I spend
+              playing video games either on phone or PC. I love to play games
+              like{" "}
+              <pre>
+                <code>DOTA2, FIFA Mobile, PUBG Mobile,</code>
+              </pre>{" "}
+              etc.
             </p>
           </li>
 
           <li>
             <h6>Movies</h6>
             <p>
-              I love to watch movies. I love to watch movies of all genres. I
-              love to watch movies with friends and family.
+              I watch a lot of movies. A total movie freak. My favorite genres
+              are Crime, Thriller, Romance, and Sci-Fi. My favorities are{" "}
+              <pre>
+                <code>
+                  V for Vendetta, Shawshank Redemption, The Green Mile, and
+                  Titanic
+                </code>
+              </pre>
+              .
             </p>
           </li>
         </ul>
       </section>
-
-      <p className="text-secondary dark:text-text">Hello </p>
     </div>
   );
 }
@@ -419,7 +434,7 @@ function BioLink({ to, children }: { to: string; children: React.ReactNode }) {
       href={to}
       target="_blank"
       rel="noopener noreferrer"
-      className="font-medium text-secondary hover:underline"
+      className="text-nowrap font-medium text-secondary hover:underline"
     >
       {children}
     </a>

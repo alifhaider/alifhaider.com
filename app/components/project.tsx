@@ -74,7 +74,7 @@ const ProjectLaguages = ({
             href={language.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl border border-secondary px-3 py-1.5 text-xs font-medium transition-all hover:border-primary hover:bg-text hover:text-background"
+            className="rounded-2xl border border-secondary px-3 py-1.5 text-xs font-medium transition-all hover:border-text hover:bg-text hover:text-primary hover:underline"
           >
             {language.name}
           </a>

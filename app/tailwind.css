@@ -43,7 +43,7 @@
   }
 
   p a {
-    @apply text-secondary transition-all group-hover:underline;
+    @apply text-justify text-secondary transition-all group-hover:underline;
   }
 
   h6 {
