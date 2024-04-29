@@ -18,6 +18,7 @@ import {
   ExperienceTitle,
   ExxperienceDate,
 } from "~/components/experience";
+import { type ReactNode } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,8 +31,67 @@ type Project = {
   name: string;
   link?: string;
   linkText?: string;
-  description: string;
-  languages: string[];
+  description: ReactNode;
+  languages: Array<{ name: string; link: string }>;
+};
+
+const language = {
+  TS: {
+    name: "TypeScript",
+    link: "https://www.typescriptlang.org",
+  },
+  JS: {
+    name: "JavaScript",
+    link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  REACT: {
+    name: "React",
+    link: "https://react.dev",
+  },
+  REMIX: {
+    name: "Remix.run",
+    link: "https://remix.run",
+  },
+  GDSCRIPT: {
+    name: "Godot Script",
+    link: "https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html",
+  },
+  GDENGINE: {
+    name: "Godot Engine",
+    link: "https://godotengine.org/",
+  },
+  MONGO: {
+    name: "MongoDB",
+    link: "https://www.mongodb.com/",
+  },
+  WS: {
+    name: "WebSocket",
+    link: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+  },
+  REDIS: {
+    name: "Redis",
+    link: "https://redis.io/",
+  },
+  STYLED: {
+    name: "Styled Components",
+    link: "https://styled-components.com/",
+  },
+  CSS: {
+    name: "CSS",
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+  },
+  SCSS: {
+    name: "SCSS",
+    link: "https://sass-lang.com/",
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    link: "https://tailwindcss.com/",
+  },
+  REDUX: {
+    name: "Redux",
+    link: "https://redux.js.org/",
+  },
 };
 
 const projects: Array<Project> = [
@@ -39,37 +99,34 @@ const projects: Array<Project> = [
     name: "Nulandia Admin Dashboard",
     link: "https://admin.nulandia.com",
     linkText: "admin.nulandia.com",
-    description:
-      "Nulandia Admin Dashboard is a fully responsive admin dashboard built with React, and Tailwind CSS. I have worked on the frontend part of the project. This admin dashboard is used to manage the Nulandia game, create neighborhoods, assign lots, change building types, etc.",
-    languages: ["React", "Tailwind CSS"],
+    description: `Nulandia Admin Dashboard is an interesting project for me. It actually is for updating game interface of Nulandia through web forms and backend team had the full control of which typeof form-fields(<pre><code>input field</code></pre> or <pre><code>select field</code></pre>) will be rendered where. I called it <pre><code>Dynamic Fonts</pre></code>`,
+    languages: [language.REACT, language.TAILWIND],
   },
   {
     name: "Nulandia Game UI",
     description:
-      "Game UI for Nulandia. It is built with Godot Engine and GDScript. I have worked on the UI part of the game. That includes choosing avatar, creating buildings, districts by user, assign lots to sale, marketplace, and so on.",
-    languages: ["Godot Engine", "GDScript"],
+      "Game UI for Nulandia. It is firstly built in with <pre><code>React.js</code></pre> but later they wanted to implement those within the game which was using <pre><code>Godot Gmae Engine</code></pre> and <pre><code>GDScript</code></pre>. This was a new programming language for me. Learning a different pattern to write code I thought would be way harder but worked out smoothly.",
+    languages: [language.GDENGINE, language.GDSCRIPT],
   },
   {
     name: "Hydepenthouse Airbnb",
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
-    description:
-      "Hydepnethouse Airbnb is a fully responsive web app built with Remix.run. This application built as a template for various Airbnb like websites. In server based on the domains it decides which color scheme and favicon to use and then it serves the app for that domain. Boosting performance and maintaining SEO was the main goal of this project.",
-    languages: ["Remix.run", "TypeScript", "SCSS"],
+    description: `Hydepnethouse is an Airbnb like website. This project is built with <pre><code>Remix.run</code></pre>. Previously I had no experience to work professionally using Remix. But I had a huge interest in Remix since when it Open Sourced. I watched and learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer">Epic Web Workshops</a>.`,
+    languages: [language.REMIX, language.TS, language.SCSS],
   },
   {
     name: "Definya MMORPG Game",
     link: "https://play.definya.com/",
     linkText: "play.definya.com",
-    description:
-      "Definya game is built with the MERN stack. It had WebSocket integration to get player positions and everything. I helped building the Chat System, Friend System, Help System and Marketplace system.",
+    description: `Definya game is built with the MERN stack. This is also a first time for writing backend code. Intering part of this project is, it structured really well. <pre><code>PhaserJS</code></pre> was used for the game but everything else is handled by <pre><code>React.js</code></pre>.`,
     languages: [
-      "TypeScript",
-      "React",
-      "MongoDB",
-      "WebSocket",
-      "Redis",
-      "Styled Components",
+      language.REACT,
+      language.TS,
+      language.MONGO,
+      language.WS,
+      language.REDIS,
+      language.STYLED,
     ],
   },
   {
@@ -77,24 +134,24 @@ const projects: Array<Project> = [
     link: "https://admin.sporforya.com/",
     linkText: "admin.sporforya.com",
     description:
-      "SPORFORYA is a sports platform. I helped building the admin dashboard for the platform. It is used to manage the platform, create events, manage users, etc.",
-    languages: ["Next.js", "TypeScript"],
-  },
-  {
-    name: "Promenade",
-    link: "https://promenade.ai",
-    linkText: "promenade.ai",
-    description:
-      "Promenade is a military job application platform where veterans can find jobs after retirement. I have worked on building the admin dashboard of the project.",
-    languages: ["React", "CSS"],
+      "SPORFORYA is a sports activities managing platform. Creating events, managing events, managing members was the part of this application.",
+    languages: [language.REACT, language.TS, language.CSS],
   },
   {
     name: "Funcomp",
     link: "https://funcomp.com",
     linkText: "funcomp.com",
     description:
-      "Funcomp is a platform where people can find fun activities like video games, movies, etc. I built the landing page and the admin dashboard of the project.",
-    languages: ["React", "CSS"],
+      "Funcomp is a platform where people can find fun activities like video games, movies, etc. While I was building this I was mostly new to <pre><code>React.js</code></pre>. To manage CRUD here I used <pre><code>Redux</code></pre> and this is the last project I used Redux.",
+    languages: [language.REACT, language.REDUX, language.CSS],
+  },
+  {
+    name: "Promenade",
+    link: "https://promenade.ai",
+    linkText: "promenade.ai",
+    description:
+      "Promenade is a military job application platform where veterans can find jobs and appoint to a training center. This is the first react project I have ever worked on. I was new to <pre><code>React.js</pre></code> and <pre><code>Redux</pre></code> at that time.",
+    languages: [language.REACT, language.REDUX, language.CSS],
   },
 ];
 
@@ -126,6 +183,7 @@ const experiences = [
     description:
       "I have been working as a Software Engineer at Nulandia. I have been working on the Nulandia Admin Dashboard and Nulandia Game UI.",
   },
+
   {
     title: "Frontend Dev",
     company: "MBAKOP LLC",
@@ -148,85 +206,45 @@ export default function Index() {
           <p className="mt-4 text-lg md:text-xl">
             I am a software engineer. I have been building web applications and
             solving problems for web
-            <span className="font-medium"> over two years</span>.
+            <strong> over two years</strong>.
           </p>
           <p>
             I am also a tech enthusiast, I always love to learn new
             technologies. The majority of the apps I built with{" "}
-            <a
-              href="https://react.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-secondary hover:underline"
-            >
-              React.js
-            </a>{" "}
-            and modern frameworks of React.js(
-            <a
-              href="https://nextjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:underline"
-            >
-              Next.js
-            </a>{" "}
-            or
-            <a
-              href="https://remix.run/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:underline"
-            >
-              {" "}
-              Remix.run
-            </a>
-            ), however, I have ideas of how to use{" "}
-            <a
-              href="https://rust-cli.github.io/book/index.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:underline"
-            >
-              Rust for CLI{" "}
-            </a>{" "}
+            <BioLink to="https://react.dev">React.js</BioLink> and modern
+            frameworks of React.js (
+            <BioLink to="https://nextjs.org">Next.js</BioLink> or{" "}
+            <BioLink to="https://remix.run">Remix.run</BioLink>), however, I
+            also have ideas of how to use{" "}
+            <BioLink to="https://rust-cli.github.io/book/index.html">
+              Rust for CLI
+            </BioLink>{" "}
             tools or{" "}
-            <a
-              href="https://www.geeksforgeeks.org/cpp-for-game-development/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:underline"
-            >
+            <BioLink to="https://www.geeksforgeeks.org/cpp-for-game-development/">
               C++,{" "}
-            </a>
-            and{" "}
-            <a
-              href="https://godotengine.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:underline"
-            >
-              Godot
-            </a>{" "}
-            to build a game.
+            </BioLink>
+            and <BioLink to="https://godotengine.org/">Godot</BioLink> to build
+            a game.
           </p>
           <p>
             I have completed my graduation in{""}
-            <span className="font-medium">
-              Computer Science and Engineering
-            </span>{" "}
-            from North South University.
+            <strong> Computer Science and Engineering</strong> from North South
+            University.
           </p>
           <p>
             I am always interested in hearing about your project plans, in need
             of any suggestions, or just want to say
-            <span className="bg-gray mx-1 text-nowrap rounded-lg px-3 py-1 text-base font-medium text-background">
-              Hi 🙌
-            </span>
+            <pre>
+              <code>Hi 🙌</code>
+            </pre>
             feel free to reach out to me.
           </p>
         </div>
 
         <div className="mt-4 flex gap-4">
+          {/* <IconButton href="https://facebook.com/haider.alif">
+            <img className="h-8 w-8" src={facebook} alt="Facebook" />
+          </IconButton> */}
           <IconButton href="https://twitter.com/haider_alif">
             <Twitter />
           </IconButton>
@@ -395,6 +413,19 @@ export default function Index() {
   );
 }
 
+function BioLink({ to, children }: { to: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={to}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-medium text-secondary hover:underline"
+    >
+      {children}
+    </a>
+  );
+}
+
 function IconButton({
   children,
   href,
@@ -417,7 +448,7 @@ function InfoItem({
   text: string;
 }) {
   return (
-    <li className="flex items-center gap-6">
+    <li title={text} className="flex items-center gap-6">
       {children}
       <span className="text-lg font-medium md:text-xl">{text}</span>
     </li>

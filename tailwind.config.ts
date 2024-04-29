@@ -6,6 +6,17 @@ export default {
   theme: {
     fontFamily: {
       sans: ["Rubik", "sans-serif"],
+      code: [
+        "Fira Code",
+        "UI Mono",
+        "SFMono-Regular",
+        "Menlo",
+        "Monaco",
+        "Consolas",
+        "Liberation Mono",
+        "Courier New",
+        "monospace",
+      ],
     },
     colors: {
       background: "var(--background)",

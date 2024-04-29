@@ -23,7 +23,7 @@ interface ProjectImagesProps {
 }
 
 const Project = ({ children }: ProjectProps) => {
-  return <li>{children}</li>;
+  return <li className="transition-all">{children}</li>;
 };
 
 Project.displayName = "Project";
@@ -54,20 +54,30 @@ const ProjectLink = ({ to, children }: ProjectLinkProps) => {
 ProjectLink.displayName = "ProjectLink";
 
 const ProjectDescription = ({ children }: ProjectDescriptionProps) => {
-  return <p className="mt-3">{children}</p>;
+  const text = typeof children === "string" ? children.trim() : "";
+
+  return <p dangerouslySetInnerHTML={{ __html: text }} />;
 };
 
 ProjectDescription.displayName = "ProjectDescription";
 
-const ProjectLaguages = ({ languages }: { languages: string[] }) => {
+const ProjectLaguages = ({
+  languages,
+}: {
+  languages: Array<{ name: string; link: string }>;
+}) => {
   return (
     <ul className="mt-3 flex flex-wrap gap-2">
       {languages.map((language, index) => (
-        <li
-          key={index}
-          className="rounded-2xl border border-secondary px-3 py-1.5 text-xs font-medium"
-        >
-          {language}
+        <li key={index}>
+          <a
+            href={language.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-2xl border border-secondary px-3 py-1.5 text-xs font-medium transition-all hover:border-primary hover:bg-text hover:text-background"
+          >
+            {language.name}
+          </a>
         </li>
       ))}
     </ul>

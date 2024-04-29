@@ -58,7 +58,9 @@ const ExxperienceDate = ({ children }: { children: ReactNode }) => {
 ExxperienceDate.displayName = "ExxperienceDate";
 
 const ExperienceDescription = ({ children }: { children: ReactNode }) => {
-  return <p>{children}</p>;
+  const text = typeof children === "string" ? children.trim() : "";
+
+  return <p dangerouslySetInnerHTML={{ __html: text }} />;
 };
 
 ExperienceDescription.displayName = "ExperienceDescription";
