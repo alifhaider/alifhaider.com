@@ -1,4 +1,4 @@
-import { json, type MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "@remix-run/node";
 import Github from "~/assets/icons/Github";
 import Twitter from "~/assets/icons/Twitter";
 import { SectionTitle } from "~/components/common";
@@ -19,8 +19,6 @@ import {
   ExxperienceDate,
 } from "~/components/experience";
 import { type ReactNode } from "react";
-import { getPosts } from "~/mdx.server";
-import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -114,7 +112,7 @@ const projects: Array<Project> = [
     name: "Hydepenthouse Airbnb",
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <pre><code>Remix.run</code></pre>. Previously I had no experience to work professionally using Remix. But I had a huge interest in Remix since when it Open Sourced. I watched and learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer">Epic Web Workshops</a>.`,
+    description: `Hydepnethouse is an Airbnb like website. This project is built with <pre><code>Remix.run</code></pre>. Previously I had no experience to work professionally using Remix. But I had a huge interest in Remix since when it Open Sourced. I watched and learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>.`,
     languages: [language.REMIX, language.TS, language.SCSS],
   },
   {
@@ -197,19 +195,7 @@ const experiences = [
   },
 ];
 
-export async function loader() {
-  const blogs = await getPosts();
-
-  return json(blogs.slice(0, 3), {
-    headers: {
-      "Cache-Control": "private, max-age=3600",
-      Vary: "Cookie",
-    },
-  });
-}
-
 export default function Index() {
-  const data = useLoaderData<typeof loader>();
   return (
     <div className="mx-auto mt-10 max-w-5xl space-y-20">
       <section>
@@ -266,7 +252,7 @@ export default function Index() {
         </div>
       </section>
 
-      <div className="border-border flex flex-col gap-10 md:flex-row">
+      <div className="border-border flex flex-col gap-20 md:flex-row md:gap-10">
         <div className="border-border space-y-20  md:sticky md:top-0 md:h-screen md:border-r md:pr-10">
           <section>
             <SectionTitle title="About" />
@@ -408,9 +394,17 @@ export default function Index() {
               playing video games either on phone or PC. I love to play games
               like{" "}
               <pre>
-                <code>DOTA2, FIFA Mobile, PUBG Mobile,</code>
-              </pre>{" "}
-              etc.
+                <code>DOTA2</code>
+              </pre>
+              ,{" "}
+              <pre>
+                <code>FIFA Mobile</code>
+              </pre>
+              ,{" "}
+              <pre>
+                <code>PUBG Mobile</code>
+              </pre>
+              and many more.
             </p>
           </li>
 
@@ -420,37 +414,23 @@ export default function Index() {
               I watch a lot of movies. A total movie freak. My favorite genres
               are Crime, Thriller, Romance, and Sci-Fi. My favorities are{" "}
               <pre>
-                <code>
-                  V for Vendetta, Shawshank Redemption, The Green Mile, and
-                  Titanic
-                </code>
+                <code>V for Vendetta</code>
+              </pre>
+              ,{" "}
+              <pre>
+                <code>Shawshank Redemption</code>
+              </pre>
+              ,{" "}
+              <pre>
+                <code>The Green Mile</code>
+              </pre>
+              , and
+              <pre>
+                <code>Titanic</code>
               </pre>
               .
             </p>
           </li>
-        </ul>
-      </section>
-
-      <section>
-        <SectionTitle title="Blogs" />
-
-        <ul>
-          {data.map((post) => (
-            <li key={post.slug} className="space-y-3">
-              <h3 className="text-3xl font-medium text-primary">
-                {post.title}
-              </h3>
-              <p>{post.description}</p>
-              <div>
-                <a
-                  className="border-b border-dashed text-sm text-secondary"
-                  href={`/blog/${post.slug}`}
-                >
-                  Read the article
-                </a>
-              </div>
-            </li>
-          ))}
         </ul>
       </section>
     </div>
@@ -463,7 +443,7 @@ function BioLink({ to, children }: { to: string; children: React.ReactNode }) {
       href={to}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-nowrap font-medium text-secondary hover:underline"
+      className="underlined text-nowrap font-medium text-secondary"
     >
       {children}
     </a>

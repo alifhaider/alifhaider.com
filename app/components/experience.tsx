@@ -37,7 +37,7 @@ const ExperienceCompany = ({
         href={to}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-semibold text-secondary underline-offset-2 transition-all hover:underline"
+        className="underlined font-semibold  text-secondary transition-all"
       >
         {children}
       </a>

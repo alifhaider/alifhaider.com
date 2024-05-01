@@ -14,12 +14,14 @@ import {
 import { themeSessionResolver } from "./sessions.server";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import Navbar from "./components/navbar";
-import stylesheet from "~/tailwind.css?url";
+import tailwindCSS from "~/tailwind.css?url";
+import appCSS from "~/app.css?url";
 import clsx from "clsx";
 import Footer from "./components/footer";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: tailwindCSS },
+  { rel: "stylesheet", href: appCSS },
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {

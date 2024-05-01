@@ -26,7 +26,7 @@ function Navbar() {
         </Link>
         <ul className="mb-[41px] flex items-end text-lg transition-colors">
           <li>
-            <NavLink to="/blog" className="hover:text-secondary">
+            <NavLink to="/blog" className="underlined hover:text-secondary">
               Blog
             </NavLink>
           </li>

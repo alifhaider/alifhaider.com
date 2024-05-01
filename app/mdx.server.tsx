@@ -1,10 +1,23 @@
+import parseFrontMatter from "front-matter";
+import { readFile, readdir } from "./fs.server";
+import path from "path";
 import { bundleMDX } from "mdx-bundler";
-import fs from "fs/promises";
 
-export async function parseMdx(path: string) {
-  const content = await fs.readFile(`blog/${path}`, "utf-8");
+// Docs: https://blacksheepcode.com/posts/adding_msw_bundler_to_remix_app
+
+export type Frontmatter = {
+  title: string;
+  date: string;
+  description: string;
+  categories: string[];
+};
+
+export async function getPost(slug: string) {
+  const filePath = path.join(process.cwd(), "blog", slug + ".mdx");
+
+  const [source] = await Promise.all([readFile(filePath, "utf-8")]);
   const { frontmatter, code } = await bundleMDX({
-    source: content,
+    source,
     mdxOptions(options) {
       options.remarkPlugins = [...(options.remarkPlugins ?? [])];
       options.rehypePlugins = [...(options.rehypePlugins ?? [])];
@@ -15,27 +28,26 @@ export async function parseMdx(path: string) {
   return { frontmatter, code };
 }
 
-export async function getPost(slug: string) {
-  const { frontmatter, code } = await parseMdx(`${slug}.mdx`);
-
-  return {
-    code,
-    frontmatter,
-  };
-}
-
 export async function getPosts() {
-  const files = await fs.readdir("blog");
-  const mdxFiles = files.filter((file) => file.endsWith(".mdx"));
+  const filePath = path.join(process.cwd(), "blog");
+  console.log(filePath);
+
+  const postsPath = await readdir(filePath, {
+    withFileTypes: true,
+  });
 
   const posts = await Promise.all(
-    mdxFiles.map(async (filename) => {
-      const { frontmatter } = await parseMdx(filename);
+    postsPath.map(async (dirent) => {
+      const fPath = path.join(filePath, dirent.name);
+      const [file] = await Promise.all([readFile(fPath)]);
+      const frontmatter = parseFrontMatter(file.toString());
+      const attributes = frontmatter.attributes as Frontmatter;
 
       return {
-        title: frontmatter.title,
-        description: frontmatter.description,
-        slug: filename.replace(/\.mdx$/, ""),
+        slug: dirent.name.replace(/\.mdx/, ""),
+        frontmatter: {
+          ...attributes,
+        },
       };
     }),
   );

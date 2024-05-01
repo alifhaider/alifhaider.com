@@ -43,7 +43,7 @@
   }
 
   p a {
-    @apply text-justify text-secondary transition-all group-hover:underline;
+    @apply text-justify text-secondary transition-all;
   }
 
   h6 {
@@ -51,6 +51,6 @@
   }
 
   pre {
-    @apply bg-gray font-code mx-1 inline-block text-nowrap rounded-lg px-1 text-base font-medium text-background;
+    @apply bg-gray font-code mx-1 inline-block rounded-lg px-1 text-base font-medium text-background;
   }
 }

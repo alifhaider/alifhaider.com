@@ -43,7 +43,7 @@ const ProjectLink = ({ to, children }: ProjectLinkProps) => {
         href={to}
         target="_blank"
         rel="noopener noreferrer"
-        className="transition-all group-hover:underline"
+        className="underlined transition-all"
       >
         {children}
       </a>
@@ -56,7 +56,7 @@ ProjectLink.displayName = "ProjectLink";
 const ProjectDescription = ({ children }: ProjectDescriptionProps) => {
   const text = typeof children === "string" ? children.trim() : "";
 
-  return <p dangerouslySetInnerHTML={{ __html: text }} />;
+  return <p className="mt-2" dangerouslySetInnerHTML={{ __html: text }} />;
 };
 
 ProjectDescription.displayName = "ProjectDescription";
