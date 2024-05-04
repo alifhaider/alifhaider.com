@@ -1,36 +1,16 @@
-# Welcome to Remix + Vite!
-
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+# Alif Haider
+My Personal Portfolio. Design and Developed by Me.
 
 ## Development
 
 Run the Vite dev server:
 
 ```shellscript
-npm run dev
+bun run dev
 ```
 
-## Deployment
+## Stack
 
-First, build your app for production:
-
-```sh
-npm run build
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
+Bun, Remix, Framer-Motion, TailwindCSS
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
