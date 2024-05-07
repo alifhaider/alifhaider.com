@@ -75,6 +75,7 @@ function App() {
       </head>
       <body className="min-h-screen w-full bg-background px-4 md:px-8">
         <Navbar />
+        <div className="scroll-watcher" />
         <Outlet />
         <Footer />
         <ScrollRestoration />

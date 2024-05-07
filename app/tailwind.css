@@ -39,7 +39,7 @@
   }
 
   p {
-    @apply text-gray text-pretty text-lg md:text-xl;
+    @apply text-pretty text-lg text-gray md:text-xl;
   }
 
   p a {
@@ -51,6 +51,44 @@
   }
 
   pre {
-    @apply bg-gray font-code mx-1 inline-block rounded-lg px-1 text-base font-medium text-background;
+    @apply mx-1 inline-block rounded-lg bg-gray px-1 font-code text-base font-medium text-background;
   }
+}
+
+.scroll-watcher {
+  @apply fixed bottom-0 left-0 z-50 h-1 w-full bg-primary;
+  animation: scroll-watcher linear;
+  animation-timeline: scroll();
+  scale: 0 1;
+  transform-origin: left;
+}
+
+@keyframes scroll-watcher {
+  to {
+    scale: 1 1;
+  }
+}
+
+.scroll-watcher {
+  animation: none;
+}
+
+.section {
+  scale: 0.8;
+  opacity: 0;
+  animation: fade-in linear forwards;
+  animation-timeline: view();
+  animation-range: entry 200px;
+}
+
+@keyframes fade-in {
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+::view-transition-new(blog-title),
+::view-transition-old(blog-title) {
+  @apply h-full;
 }

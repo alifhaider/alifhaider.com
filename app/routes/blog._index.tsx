@@ -1,5 +1,9 @@
 import { json, MetaFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import {
+  Link,
+  unstable_useViewTransitionState,
+  useLoaderData,
+} from "@remix-run/react";
 import { getPosts } from "~/mdx.server";
 
 export const meta: MetaFunction = () => {
@@ -42,22 +46,25 @@ export default function Blogs() {
       </p>
 
       <ul className="space-y-6">
-        {data.map((post) => (
-          <li key={post.slug} className="space-y-2">
-            <h3 className="text-3xl font-bold text-primary">
-              {post.frontmatter.title}
-            </h3>
-            <p>{post.frontmatter.description}</p>
-            <div>
+        {data.map((post) => {
+          const to = `/blog/${post.slug}`;
+          const vt = unstable_useViewTransitionState(to);
+          return (
+            <li key={post.slug} className="space-y-2">
               <Link
-                className="underlined text-sm text-secondary"
-                to={`/blog/${post.slug}`}
+                to={to}
+                style={{
+                  viewTransitionName: vt ? "blog-title" : "none",
+                }}
+                unstable_viewTransition
+                className="underlined text-3xl font-bold text-secondary"
               >
-                Read the article
+                {post.frontmatter.title}
               </Link>
-            </div>
-          </li>
-        ))}
+              <p>{post.frontmatter.description}</p>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

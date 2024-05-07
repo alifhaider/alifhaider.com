@@ -198,7 +198,7 @@ const experiences = [
 export default function Index() {
   return (
     <div className="mx-auto mt-10 max-w-5xl space-y-20">
-      <section>
+      <section className="section">
         <h2 className="mb-6 w-fit bg-secondary pl-2 pr-8 text-3xl font-semibold tracking-wide text-background">
           Hey, I&apos;m <span className="underline">Alif Haider</span>.
         </h2>
@@ -252,8 +252,8 @@ export default function Index() {
         </div>
       </section>
 
-      <div className="border-border flex flex-col gap-20 md:flex-row md:gap-10">
-        <div className="border-border space-y-20  md:sticky md:top-0 md:h-screen md:border-r md:pr-10">
+      <div className="flex flex-col gap-20 border-border md:flex-row md:gap-10">
+        <div className="space-y-20 border-border  md:sticky md:top-0 md:h-screen md:border-r md:pr-10">
           <section>
             <SectionTitle title="About" />
             <ul className="space-y-4">
@@ -326,7 +326,7 @@ export default function Index() {
             </ul>
           </section>
 
-          <section className="overflow-y-auto">
+          <section className=" overflow-y-auto">
             <SectionTitle title="Expertise" />
 
             <ul className="space-y-4">
@@ -360,7 +360,7 @@ export default function Index() {
         </div>
       </div>
 
-      <section>
+      <section className="section">
         <SectionTitle title="Experience" />
         <ul className="space-y-10 md:space-y-14">
           {experiences.map((experience, index) => (
@@ -383,7 +383,7 @@ export default function Index() {
         </ul>
       </section>
 
-      <section>
+      <section className="section">
         <SectionTitle title="Hobby" />
 
         <ul className="space-y-6">
@@ -481,7 +481,7 @@ function InfoItem({
 
 function BoxItem({ text }: { text: string }) {
   return (
-    <li className="border-border flex items-center justify-center rounded-sm border px-6 py-3 shadow-inner">
+    <li className="flex items-center justify-center rounded-sm border border-border px-6 py-3 shadow-inner">
       {text}
     </li>
   );

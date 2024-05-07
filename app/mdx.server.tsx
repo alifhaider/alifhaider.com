@@ -25,12 +25,17 @@ export async function getPost(slug: string) {
     },
   });
 
-  return { frontmatter, code };
+  const attributes = frontmatter as Frontmatter;
+  return {
+    frontmatter: {
+      ...attributes,
+    },
+    code,
+  };
 }
 
 export async function getPosts() {
   const filePath = path.join(process.cwd(), "blog");
-  console.log(filePath);
 
   const postsPath = await readdir(filePath, {
     withFileTypes: true,
