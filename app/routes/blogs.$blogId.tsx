@@ -24,8 +24,8 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: `Alif | ${data?.frontmatter.title}` },
-    { name: "description", content: "A Software Engineer" },
+    { title: "Blog / Alif" },
+    { name: "description", content: data?.frontmatter.description },
   ];
 };
 
@@ -35,10 +35,12 @@ export default function Blog() {
   const Component = useMemo(() => getMDXComponent(code), [code]);
   return (
     <div
-      className="mx-auto mt-10 max-w-5xl space-y-10"
+      className="mx-auto mt-10 w-full max-w-5xl space-y-10"
       style={{ viewTransitionName: "blog-title" }}
     >
-      <h1 className="text-6xl font-bold text-secondary">{frontmatter.title}</h1>
+      <h1 className="text-4xl font-bold text-secondary md:text-6xl">
+        {frontmatter.title}
+      </h1>
 
       <div className="space-y-3">
         <Component />

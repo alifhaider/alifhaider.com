@@ -1,6 +1,5 @@
+import { type ReactNode } from "react";
 import { type MetaFunction } from "@remix-run/node";
-import Github from "~/assets/icons/Github";
-import Twitter from "~/assets/icons/Twitter";
 import { SectionTitle } from "~/components/common";
 import {
   Project,
@@ -9,7 +8,6 @@ import {
   ProjectLink,
   ProjectTitle,
 } from "~/components/project";
-
 import {
   Experience,
   ExperienceCompany,
@@ -18,11 +16,12 @@ import {
   ExperienceTitle,
   ExxperienceDate,
 } from "~/components/experience";
-import { type ReactNode } from "react";
+import { FaFacebookSquare, FaGithubSquare } from "react-icons/fa";
+import { FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Alif | Home" },
+    { title: "Home / Alif" },
     { name: "description", content: "A Software Engineer" },
   ];
 };
@@ -99,27 +98,27 @@ const projects: Array<Project> = [
     name: "Nulandia Admin Dashboard",
     link: "https://admin.nulandia.com",
     linkText: "admin.nulandia.com",
-    description: `Nulandia Admin Dashboard is an interesting project for me. It actually is for updating game interface of Nulandia through web forms and backend team had the full control of which typeof form-fields(<pre><code>input field</code></pre> or <pre><code>select field</code></pre>) will be rendered where. I called it <pre><code>Dynamic Fonts</pre></code>`,
+    description: `Nulandia Admin Dashboard is an interesting project for me. It actually is for updating game interface of Nulandia through web forms and backend team had the full control of which typeof form-fields (<code>&#60;input /&#62;</code> or <code>&#60;select&#62;</code>) will be rendered where. I called it <code>Dynamic Fonts</code>`,
     languages: [language.REACT, language.TAILWIND],
   },
   {
     name: "Nulandia Game UI",
     description:
-      "Game UI for Nulandia. It is firstly built in with <pre><code>React.js</code></pre> but later they wanted to implement those within the game which was using <pre><code>Godot Gmae Engine</code></pre> and <pre><code>GDScript</code></pre>. This was a new programming language for me. Learning a different pattern to write code I thought would be way harder but worked out smoothly.",
+      "Game UI for Nulandia. It is firstly built in with <code>React.js</code> but later they wanted to implement those within the game which was using <code>Godot Gmae Engine</code> and <code>GDScript</code>. This was a new programming language for me. Learning a different pattern to write code I thought would be way harder but worked out smoothly.",
     languages: [language.GDENGINE, language.GDSCRIPT],
   },
   {
     name: "Hydepenthouse Airbnb",
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <pre><code>Remix.run</code></pre>. Previously I had no experience to work professionally using Remix. But I had a huge interest in Remix since when it Open Sourced. I watched and learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>.`,
+    description: `Hydepnethouse is an Airbnb like website. This project is built with <code>Remix.run</code>. Previously I had no experience to work professionally using Remix. But I had a huge interest in Remix since when it Open Sourced. I watched and learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>.`,
     languages: [language.REMIX, language.TS, language.SCSS],
   },
   {
     name: "Definya MMORPG Game",
     link: "https://play.definya.com/",
     linkText: "play.definya.com",
-    description: `Definya game is built with the MERN stack. This is also a first time for writing backend code. Intering part of this project is, it structured really well. <pre><code>PhaserJS</code></pre> was used for the game but everything else is handled by <pre><code>React.js</code></pre>.`,
+    description: `Definya game is built with the MERN stack. This is also a first time for writing backend code. Intering part of this project is, it structured really well. <code>PhaserJS</code> was used for the game but everything else is handled by <code>React.js</code>.`,
     languages: [
       language.REACT,
       language.TS,
@@ -142,7 +141,7 @@ const projects: Array<Project> = [
     link: "https://funcomp.com",
     linkText: "funcomp.com",
     description:
-      "Funcomp is a platform where people can find fun activities like video games, movies, etc. While I was building this I was mostly new to <pre><code>React.js</code></pre>. To manage CRUD here I used <pre><code>Redux</code></pre> and this is the last project I used Redux.",
+      "Funcomp is a platform where people can find fun activities like video games, movies, etc. While I was building this I was mostly new to <code>React.js</code>. To manage CRUD here I used <code>Redux</code> and this is the last project I used Redux.",
     languages: [language.REACT, language.REDUX, language.CSS],
   },
   {
@@ -150,7 +149,7 @@ const projects: Array<Project> = [
     link: "https://promenade.ai",
     linkText: "promenade.ai",
     description:
-      "Promenade is a military job application platform where veterans can find jobs and appoint to a training center. This is the first react project I have ever worked on. I was new to <pre><code>React.js</pre></code> and <pre><code>Redux</pre></code> at that time.",
+      "Promenade is a military job application platform where veterans can find jobs and appoint to a training center. This is the first react project I have ever worked on. I was new to <code>React.js</code> and <code>Redux</code> at that time.",
     languages: [language.REACT, language.REDUX, language.CSS],
   },
 ];
@@ -159,11 +158,10 @@ const experiences = [
   {
     title: "Software Engineer",
     company: "Impulse Communications",
-    to: "https://impulsecommunications.ai",
+    to: "https://impulsecorp.com/",
     location: "Remote, USA",
     date: "Feb'23 - Present",
-    description:
-      "Working on the Nulandia Admin Dashboard and Nulandia Game UI.",
+    description: "Worked on the Nulandia Admin Dashboard and Nulandia Game UI.",
   },
   {
     title: "Web Application Developer",
@@ -232,22 +230,24 @@ export default function Index() {
           <p>
             I am always interested in hearing about your project plans, in need
             of any suggestions, or just want to say
-            <pre>
-              <code>Hi 🙌</code>
-            </pre>
+            <code className="text-3xl font-bold">Hi 🙌</code>
             feel free to reach out to me.
           </p>
         </div>
 
-        <div className="mt-4 flex gap-4">
-          {/* <IconButton href="https://facebook.com/haider.alif">
-            <img className="h-8 w-8" src={facebook} alt="Facebook" />
-          </IconButton> */}
-          <IconButton href="https://twitter.com/haider_alif">
-            <Twitter />
-          </IconButton>
+        <div className="mt-6 flex gap-4">
           <IconButton href="https://github.com/alifhaider">
-            <Github />
+            <FaGithubSquare title="Github" className="h-8 w-8" />
+          </IconButton>
+          <IconButton href="https://twitter.com/haider_alif">
+            <FaSquareXTwitter title="Twitter" className="h-8 w-8" />
+          </IconButton>
+          <IconButton href="https://www.linkedin.com/in/alif-haider">
+            <FaLinkedin className="h-8 w-8" title="Linked-In" />
+          </IconButton>
+
+          <IconButton href="https://www.facebook.com/alif.haider.7927">
+            <FaFacebookSquare className="h-8 w-8" title="Facebook" />
           </IconButton>
         </div>
       </section>
@@ -392,18 +392,8 @@ export default function Index() {
             <p>
               I love to play video games. Most of my leisure time I spend
               playing video games either on phone or PC. I love to play games
-              like{" "}
-              <pre>
-                <code>DOTA2</code>
-              </pre>
-              ,{" "}
-              <pre>
-                <code>FIFA Mobile</code>
-              </pre>
-              ,{" "}
-              <pre>
-                <code>PUBG Mobile</code>
-              </pre>
+              like <CodeText>DOTA2</CodeText>, <CodeText>FIFA Mobile</CodeText>,{" "}
+              <CodeText>PUBG Mobile</CodeText>
               and many more.
             </p>
           </li>
@@ -413,28 +403,20 @@ export default function Index() {
             <p>
               I watch a lot of movies. A total movie freak. My favorite genres
               are Crime, Thriller, Romance, and Sci-Fi. My favorities are{" "}
-              <pre>
-                <code>V for Vendetta</code>
-              </pre>
-              ,{" "}
-              <pre>
-                <code>Shawshank Redemption</code>
-              </pre>
-              ,{" "}
-              <pre>
-                <code>The Green Mile</code>
-              </pre>
-              , and
-              <pre>
-                <code>Titanic</code>
-              </pre>
-              .
+              <CodeText>V for Vendetta</CodeText>,{" "}
+              <CodeText>Shawshank Redemption</CodeText>,{" "}
+              <CodeText>The Green Mile</CodeText>, and
+              <CodeText>Titanic</CodeText>.
             </p>
           </li>
         </ul>
       </section>
     </div>
   );
+}
+
+function CodeText({ children }: { children: React.ReactNode }) {
+  return <code>{children}</code>;
 }
 
 function BioLink({ to, children }: { to: string; children: React.ReactNode }) {

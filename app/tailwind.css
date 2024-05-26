@@ -50,8 +50,8 @@
     @apply text-xl font-medium text-primary md:text-3xl;
   }
 
-  pre {
-    @apply mx-1 inline-block rounded-lg bg-gray px-1 font-code text-base font-medium text-background;
+  code {
+    @apply mx-1 inline-block  px-1 font-code text-sm font-medium text-[#fcb32c];
   }
 }
 
@@ -66,6 +66,19 @@
 @keyframes scroll-watcher {
   to {
     scale: 1 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn linear forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    padding-top: 32px;
+  }
+  to {
+    padding-top: 0;
   }
 }
 

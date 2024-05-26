@@ -20,6 +20,29 @@ import clsx from "clsx";
 import Footer from "./components/footer";
 
 export const links: LinksFunction = () => [
+  {
+    rel: "apple-touch-icon",
+    sizes: "180x180",
+    href: "/apple-touch-icon.png",
+  },
+  {
+    rel: "icon",
+    type: "image/png",
+    sizes: "32x32",
+    href: "/favicon-32x32.png",
+  },
+  {
+    rel: "icon",
+    type: "image/png",
+    sizes: "16x16",
+    href: "/favicon-16x16.png",
+  },
+  {
+    rel: "icon",
+    type: "image/x-icon",
+    href: "/favicon.ico",
+  },
+  { rel: "manifest", href: "/site.webmanifest" },
   { rel: "stylesheet", href: tailwindCSS },
   { rel: "stylesheet", href: appCSS },
 ];
@@ -73,7 +96,7 @@ function App() {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen w-full bg-background px-4 md:px-8">
+      <body className="min-h-screen w-full overflow-x-hidden bg-background px-4 md:px-8">
         <Navbar />
         <div className="scroll-watcher" />
         <Outlet />

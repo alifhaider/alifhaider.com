@@ -7,7 +7,7 @@ function Navbar() {
   const [, setTheme] = useTheme();
 
   return (
-    <nav className="border-border mx-auto flex max-w-5xl items-end justify-between border-b font-bold ">
+    <nav className="mx-auto flex max-w-5xl items-end justify-between border-b border-border font-bold ">
       <div className="flex gap-4 md:gap-8">
         <Link to="/" className="group">
           <h4 className="m-0 flex p-0 md:scale-100">
@@ -26,22 +26,22 @@ function Navbar() {
         </Link>
         <ul className="mb-[41px] flex items-end text-lg transition-colors">
           <li>
-            <NavLink to="/blog" className="underlined hover:text-secondary">
-              Blog
+            <NavLink to="/blogs" className="underlined hover:text-secondary">
+              Blogs
             </NavLink>
           </li>
         </ul>
       </div>
-      <div className="border-border mb-12 flex items-center  rounded-md border shadow-md transition-all">
+      <div className="mb-12 flex items-center rounded-md  border border-border shadow-md transition-all">
         <button
-          className="dark:bg-border rounded-l-md bg-background px-3 py-2 dark:text-primary"
+          className="rounded-l-md bg-background px-3 py-2 dark:bg-[#f3eeea] dark:text-primary"
           onClick={() => setTheme(Theme.LIGHT)}
         >
           <LightIcon />
           <span className="sr-only">Light theme</span>
         </button>
         <button
-          className="bg-gray rounded-r-md px-3  py-2 text-primary dark:bg-background dark:text-text"
+          className="rounded-r-md bg-[#00224d] px-3  py-2 text-primary dark:bg-background dark:text-text"
           onClick={() => setTheme(Theme.DARK)}
         >
           <NightIcon />
