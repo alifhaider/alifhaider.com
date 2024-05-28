@@ -57,19 +57,10 @@ const ExxperienceDate = ({ children }: { children: ReactNode }) => {
 
 ExxperienceDate.displayName = "ExxperienceDate";
 
-const ExperienceDescription = ({ children }: { children: ReactNode }) => {
-  const text = typeof children === "string" ? children.trim() : "";
-
-  return <p dangerouslySetInnerHTML={{ __html: text }} />;
-};
-
-ExperienceDescription.displayName = "ExperienceDescription";
-
 export {
   Experience,
   ExperienceTitle,
   ExperienceInfo,
   ExperienceCompany,
   ExxperienceDate,
-  ExperienceDescription,
 };

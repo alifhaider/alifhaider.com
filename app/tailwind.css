@@ -51,7 +51,7 @@
   }
 
   code {
-    @apply mx-1 inline-block  px-1 font-code text-sm font-medium text-[#fcb32c];
+    @apply mx-1 inline-block  px-1 font-code text-sm font-semibold text-[#c678dd] dark:text-[#fcb32c];
   }
 }
 

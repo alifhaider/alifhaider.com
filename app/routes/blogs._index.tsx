@@ -31,8 +31,9 @@ export default function Blogs() {
     <div className="mx-auto mt-10 w-full max-w-5xl space-y-10">
       <p>
         One day I will write blogs and here will be the list of them. Since, I
-        have no blog post yet, I am adding a test post to test my ability of
-        rendering a blog post via <code>mdx-files</code>. Cause why not 🤣
+        have no blog post yet, I am adding a test article to test my ability of
+        rendering a blog post via <code>&#96;mdx-files&#96;</code>. Cause why
+        not 🤣
       </p>
 
       <ul className="space-y-6">

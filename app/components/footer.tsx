@@ -1,9 +1,9 @@
 function Footer() {
   return (
-    <footer className="border-border mx-auto mt-10 max-w-5xl border-t py-6">
-      <p>
+    <footer className="mx-auto mt-10 max-w-5xl border-t border-border py-6">
+      <p className="text-sm">
         Design and Developed by{" "}
-        <span className="text-primary">@alifhaider</span>
+        <span className="italic text-primary">@alifhaider</span>
       </p>
     </footer>
   );

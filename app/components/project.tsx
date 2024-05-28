@@ -14,10 +14,6 @@ interface ProjectLinkProps {
   children: ReactNode;
 }
 
-interface ProjectDescriptionProps {
-  children: ReactNode;
-}
-
 interface ProjectImagesProps {
   images: string[];
 }
@@ -52,14 +48,6 @@ const ProjectLink = ({ to, children }: ProjectLinkProps) => {
 };
 
 ProjectLink.displayName = "ProjectLink";
-
-const ProjectDescription = ({ children }: ProjectDescriptionProps) => {
-  const text = typeof children === "string" ? children.trim() : "";
-
-  return <p className="mt-2" dangerouslySetInnerHTML={{ __html: text }} />;
-};
-
-ProjectDescription.displayName = "ProjectDescription";
 
 const ProjectLaguages = ({
   languages,
@@ -98,10 +86,4 @@ const ProjectImages = ({ images }: ProjectImagesProps) => {
 
 ProjectImages.displayName = "ProjectImages";
 
-export {
-  Project,
-  ProjectTitle,
-  ProjectLink,
-  ProjectDescription,
-  ProjectLaguages,
-};
+export { Project, ProjectTitle, ProjectLink, ProjectLaguages };
