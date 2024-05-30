@@ -121,14 +121,14 @@ const projects: Array<Project> = [
     name: "Hydepenthouse Airbnb",
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <code>&#96;Remix.run&#96;</code> which also is a <code>&#96;React.js&#96;</code> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were using the same app. When a user visits x.com in server it gets the theme for that domain and uses that in rendering. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
+    description: `Hydepnethouse is an Airbnb like website. This project is built with <code>&#96;Remix.run&#96;</code> which also is a <code>&#96;React.js&#96;</code> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were pointing to the same app. When an user visits x.com, in server it gets the theme for that domain and uses that in rendering, so for each domains the color scheme and fonts are different. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
     languages: [language.REMIX, language.TS, language.SCSS],
   },
   {
     name: "Definya MMORPG Game",
     link: "https://play.definya.com/",
     linkText: "play.definya.com",
-    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <code>&#96;Redis&#96;</code> to manage cache through this app. <code>&#96;PhaserJS&#96;</code> and <code>&#96;React.js&#96;</code> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>`,
+    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <code>&#96;Redis&#96;</code> to manage cache through this app. <code>&#96;PhaserJS&#96;</code> and <code>&#96;React.js&#96;</code> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>.`,
     languages: [
       language.REACT,
       language.TS,
@@ -175,7 +175,7 @@ const experiences = [
   {
     title: "Web Application Developer",
     company: "Upwork - Upwork Profile",
-    to: "https://upwork.com",
+    to: "https://www.upwork.com/freelancers/~014066482556c551be",
     location: "Remote, Freelancer",
     date: "Feb'21 - Present",
     description:
@@ -262,10 +262,10 @@ export default function Index() {
         </div>
       </section>
 
-      <div className="flex flex-col gap-20 border-border md:flex-row md:gap-10">
-        <div className="space-y-20 border-border  md:sticky md:top-0 md:h-screen md:border-r md:pr-10">
+      <div className="flex flex-col gap-20 border-border lg:flex-row lg:gap-10">
+        <div className="space-y-20 border-border  lg:sticky lg:top-0 lg:h-screen lg:border-r lg:pr-10">
           <section>
-            <SectionTitle title="About" />
+            <SectionTitle>About</SectionTitle>
             <ul className="space-y-4">
               <InfoItem text="Alif Haider">
                 <FaRegUser className="h-6 w-6" />
@@ -279,8 +279,8 @@ export default function Index() {
             </ul>
           </section>
 
-          <section className=" overflow-y-auto">
-            <SectionTitle title="Expertise" />
+          <section className="overflow-y-auto">
+            <SectionTitle>Expertise</SectionTitle>
 
             <ul className="space-y-4">
               <BoxItem text="TypeScript" />
@@ -293,7 +293,7 @@ export default function Index() {
         </div>
 
         <div className="flex-grow">
-          <SectionTitle title="Projects" />
+          <SectionTitle>Projects</SectionTitle>
 
           <ul className="space-y-10 md:space-y-14">
             {projects.map((project, index) => (
@@ -316,7 +316,8 @@ export default function Index() {
 
             <p className="inline text-sm italic">
               Without these I also have contributed on various projects by
-              building a component or building fucntionalities for a component.
+              building a component from scratch or update fucntionalities for a
+              component.
             </p>
             <FaQuoteRight className="mb-3 ml-0.5 inline w-2" />
           </div>
@@ -324,7 +325,7 @@ export default function Index() {
       </div>
 
       <section className="section">
-        <SectionTitle title="Experience" />
+        <SectionTitle>Experiences</SectionTitle>
         <ul className="space-y-10 md:space-y-14">
           {experiences.map((experience, index) => (
             <Experience key={index}>
@@ -345,7 +346,7 @@ export default function Index() {
       </section>
 
       <section className="section">
-        <SectionTitle title="Hobby" />
+        <SectionTitle>Hobbies</SectionTitle>
 
         <ul className="space-y-6">
           <li>
@@ -355,8 +356,8 @@ export default function Index() {
               playing video games either on phone or PC. Most of the games I
               play are <CodeText>DOTA2</CodeText>,{" "}
               <CodeText>FIFA Mobile</CodeText>. I also have played{" "}
-              <CodeText>PUBG Mobile</CodeText> while I was studing at{" "}
-              <strong>North South University</strong>.
+              <CodeText>PUBG Mobile</CodeText> while I was studing at
+              university.
             </p>
           </li>
 
@@ -365,7 +366,7 @@ export default function Index() {
             <p>
               I watch a lot of movies. A total movie freak, you can say. My
               favorite genres are Crime, Thriller, Romance, and a few Sci-Fi. My
-              favorite movies are <CodeText>V for Vendetta</CodeText>,{" "}
+              favorite movies are <CodeText>3 Idiots</CodeText>,{" "}
               <CodeText>Shawshank Redemption</CodeText>,{" "}
               <CodeText>The Green Mile</CodeText>, and
               <CodeText>Titanic</CodeText>.
