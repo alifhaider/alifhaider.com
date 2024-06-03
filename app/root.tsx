@@ -18,6 +18,7 @@ import tailwindCSS from "~/tailwind.css?url";
 import appCSS from "~/app.css?url";
 import clsx from "clsx";
 import Footer from "./components/footer";
+import { Notification } from "./components/Notification";
 
 export const links: LinksFunction = () => [
   {
@@ -97,6 +98,7 @@ function App() {
         />
       </head>
       <body className="min-h-screen w-full overflow-x-hidden bg-background px-4 md:px-8">
+        <Notification />
         <Navbar />
         <div className="scroll-watcher" />
         <Outlet />

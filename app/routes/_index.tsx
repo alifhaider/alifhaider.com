@@ -179,7 +179,7 @@ const experiences = [
     location: "Remote, Freelancer",
     date: "Feb'21 - Present",
     description:
-      "I have been working as a freelancer on Upwork. Most of the jobs I took were via Upwork. Most of the experience I gathered are from Upwork Projects.",
+      "I am working as a freelancer on Upwork. Most of the jobs I took were via Upwork. And also, most of the experience I gathered are from Upwork Projects.",
   },
   {
     title: "Frontend Dev",
@@ -188,7 +188,7 @@ const experiences = [
     location: "Remote, USA",
     date: "Jun'22 - Mar'23",
     description:
-      "A part-time job where I contributed in building and maintaining the SPORFORYA Admin Dashboard and I also have built several landing pages, which were pixel perfect implementation of designs.",
+      "In this part-time job I contributed in building and maintaining the SPORFORYA Admin Dashboard and I also have built several landing pages, which were pixel perfect implementation from designs.",
   },
 
   {
@@ -198,7 +198,7 @@ const experiences = [
     location: "Remote, USA",
     date: "Mar'22 - Dec'22",
     description:
-      "First full-time job of my career, where I worked in a 16 members team. I was responsible for building Funcomp and Fryends app.",
+      "First full-time job of my career, and I worked as a Front-End Dev. I have built the Funcomp and Promenade from scratch for this company.",
   },
 ];
 
