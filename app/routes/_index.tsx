@@ -222,11 +222,10 @@ export default function Index() {
             frameworks of React.js (
             <BioLink to="https://nextjs.org">Next.js</BioLink> or{" "}
             <BioLink to="https://remix.run">Remix.run</BioLink>), however, I
-            also learned to use{" "}
-            <BioLink to="https://www.rust-lang.org/">Rust</BioLink> to build CLI
-            tools or{" "}
+            also am interested to build a{" "}
+            <BioLink to="https://www.rust-lang.org/">Rust</BioLink> CLI tool or{" "}
             <BioLink to="https://www.geeksforgeeks.org/cpp-for-game-development/">
-              C++,{" "}
+              C++ OpneGL game,{" "}
             </BioLink>
             and with <BioLink to="https://godotengine.org/">Godot</BioLink> I
             already have contributed in building a game.
@@ -247,17 +246,29 @@ export default function Index() {
 
         <div className="mt-6 flex gap-4">
           <IconButton href="https://github.com/alifhaider">
-            <FaGithubSquare title="Github" className="h-8 w-8" />
+            <FaGithubSquare
+              title="Github"
+              className="h-8 w-8 transition-all hover:-rotate-12"
+            />
           </IconButton>
           <IconButton href="https://twitter.com/haider_alif">
-            <FaSquareXTwitter title="Twitter" className="h-8 w-8" />
+            <FaSquareXTwitter
+              title="Twitter"
+              className="h-8 w-8 transition-all hover:-rotate-12"
+            />
           </IconButton>
           <IconButton href="https://www.linkedin.com/in/alif-haider">
-            <FaLinkedin className="h-8 w-8" title="Linked-In" />
+            <FaLinkedin
+              className="h-8 w-8 transition-all hover:-rotate-12"
+              title="Linked-In"
+            />
           </IconButton>
 
           <IconButton href="https://www.facebook.com/alif.haider.7927">
-            <FaFacebookSquare className="h-8 w-8" title="Facebook" />
+            <FaFacebookSquare
+              className="h-8 w-8 transition-all hover:-rotate-12"
+              title="Facebook"
+            />
           </IconButton>
         </div>
       </section>
