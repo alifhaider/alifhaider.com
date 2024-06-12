@@ -385,6 +385,35 @@ export default function Index() {
           </li>
         </ul>
       </section>
+
+      <section className="section">
+        <SectionTitle>FAQs</SectionTitle>
+
+        <ul className="space-y-6">
+          <li>
+            <h6>How can you contact me?</h6>
+            <p>
+              - You can contact me through sending
+              <BioLink to="mailto:alifhaider57@gmail.com"> an email </BioLink>to
+              me. I always check my email.
+            </p>
+          </li>
+          <li>
+            <h6>What am I currently working on?</h6>
+            <p>
+              - I am currently working on <strong>Nulandia Game UI</strong> and
+              also on <strong>Hydepenthouses Airbnb project</strong>.
+            </p>
+          </li>
+          <li>
+            <h6>Am I currently taking new project?</h6>
+            <p>
+              - Yes, I always love to work on new projects. If you have any
+              project idea, feel free to reach out to me.
+            </p>
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
