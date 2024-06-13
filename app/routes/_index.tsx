@@ -240,7 +240,7 @@ export default function Index() {
             I am always interested in hearing about your project plans, in need
             of any suggestions, or if you just want to say
             <code className="text-3xl font-bold">&#96;Hi 🙌&#96;</code>
-            feel free to reach out to me.
+            don&apos;t hesitate to reach out to me.
           </p>
         </div>
 
@@ -395,7 +395,7 @@ export default function Index() {
             <p>
               - You can contact me through sending
               <BioLink to="mailto:alifhaider57@gmail.com"> an email </BioLink>to
-              me. I always check my email.
+              me. Everyday I check my email.
             </p>
           </li>
           <li>
@@ -406,7 +406,7 @@ export default function Index() {
             </p>
           </li>
           <li>
-            <h6>Am I currently taking new project?</h6>
+            <h6>Am I currently taking any new project?</h6>
             <p>
               - Yes, I always love to work on new projects. If you have any
               project idea, feel free to reach out to me.

@@ -8,10 +8,15 @@ export function Notification() {
 
   return (
     <div className="text-bg animate-all fixed bottom-10 left-1/2 z-50 mx-auto -translate-x-1/2 cursor-pointer py-2 text-background md:px-6 md:py-4">
-      <div className="w-full space-y-4 rounded-md bg-[#00224d] p-4 lg:max-w-[420px] dark:bg-[#f3eeea]">
-        <div className="flex items-start justify-end">
-          <p className="text-background">
-            Star this repo on{" "}
+      <div className="w-full space-y-4 rounded-md bg-[#00224d] p-4 lg:max-w-[480px] dark:bg-[#f3eeea]">
+        <div className="hidden items-center justify-end gap-10 md:flex">
+          <div>
+            <p className="text-background">
+              Star this repo on{" "}
+              <span className="text-xs italic">
+                &#40;if you have a github account&#41;
+              </span>
+            </p>
             <a
               href="https://github.com/alifhaider/alifhaider.com"
               target="_blank"
@@ -20,7 +25,7 @@ export function Notification() {
             >
               @github.com/alifhaider/alifhaider.com
             </a>
-          </p>
+          </div>
           <button onClick={() => setIsOpen(false)} className="">
             <IoMdCloseCircle className="h-6 w-6" />
           </button>
