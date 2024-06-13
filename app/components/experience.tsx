@@ -23,18 +23,18 @@ const ExperienceInfo = ({ children }: { children: ReactNode }) => {
 ExperienceInfo.displayName = "ExperienceInfo";
 
 const ExperienceCompany = ({
-  to,
+  href,
   children,
   location,
 }: {
-  to: string;
+  href: string;
   children: ReactNode;
   location: string;
 }) => {
   return (
     <div className="flex flex-col md:flex-row md:items-center">
       <a
-        href={to}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="underlined font-semibold  text-secondary transition-all"

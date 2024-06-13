@@ -10,7 +10,7 @@ interface ProjectTitleProps {
 }
 
 interface ProjectLinkProps {
-  to: string;
+  href: string;
   children: ReactNode;
 }
 
@@ -30,13 +30,13 @@ const ProjectTitle = ({ children }: ProjectTitleProps) => {
 
 ProjectTitle.displayName = "ProjectTitle";
 
-const ProjectLink = ({ to, children }: ProjectLinkProps) => {
+const ProjectLink = ({ href, children }: ProjectLinkProps) => {
   return (
     <div className="group mt-1 flex items-center gap-3 text-sm text-secondary transition-all ">
       <LinkIcon className="transition-all group-hover:mb-2" />
 
       <a
-        href={to}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="underlined transition-all"

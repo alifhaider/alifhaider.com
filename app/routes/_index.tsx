@@ -218,23 +218,27 @@ export default function Index() {
           <p>
             I am also a tech enthusiast, I always love to learn new
             technologies. The majority of the apps I built with{" "}
-            <BioLink to="https://react.dev">React.js</BioLink> and modern
-            frameworks of React.js (
-            <BioLink to="https://nextjs.org">Next.js</BioLink> or{" "}
-            <BioLink to="https://remix.run">Remix.run</BioLink>), however, I
-            also am interested to build a{" "}
-            <BioLink to="https://www.rust-lang.org/">Rust</BioLink> CLI tool or{" "}
-            <BioLink to="https://www.geeksforgeeks.org/cpp-for-game-development/">
+            <ExternalLink href="https://react.dev">React.js</ExternalLink> and
+            modern frameworks of React.js (
+            <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> or{" "}
+            <ExternalLink href="https://remix.run">Remix.run</ExternalLink>),
+            however, I also am interested to build a{" "}
+            <ExternalLink href="https://www.rust-lang.org/">Rust</ExternalLink>{" "}
+            CLI tool or{" "}
+            <ExternalLink href="https://www.geeksforgeeks.org/cpp-for-game-development/">
               C++ OpneGL game,{" "}
-            </BioLink>
-            and with <BioLink to="https://godotengine.org/">Godot</BioLink> I
+            </ExternalLink>
+            and with{" "}
+            <ExternalLink href="https://godotengine.org/">Godot</ExternalLink> I
             already have contributed in building a game.
           </p>
           <p>
             I have completed my graduation in{""}
             <strong> Computer Science and Engineering</strong> from{" "}
-            <strong>North South University</strong> which is located in{" "}
-            <strong>Dhaka, Bangladesh</strong>.
+            <ExternalLink href="https://www.northsouth.edu/">
+              <strong>North South University</strong>
+            </ExternalLink>
+            .
           </p>
           <p>
             I am always interested in hearing about your project plans, in need
@@ -245,31 +249,31 @@ export default function Index() {
         </div>
 
         <div className="mt-6 flex gap-4">
-          <IconButton href="https://github.com/alifhaider">
+          <IconExternalLink href="https://github.com/alifhaider">
             <FaGithubSquare
               title="Github"
               className="h-8 w-8 transition-all hover:-rotate-12"
             />
-          </IconButton>
-          <IconButton href="https://twitter.com/haider_alif">
+          </IconExternalLink>
+          <IconExternalLink href="https://twitter.com/haider_alif">
             <FaSquareXTwitter
               title="Twitter"
               className="h-8 w-8 transition-all hover:-rotate-12"
             />
-          </IconButton>
-          <IconButton href="https://www.linkedin.com/in/alif-haider">
+          </IconExternalLink>
+          <IconExternalLink href="https://www.linkedin.com/in/alif-haider">
             <FaLinkedin
               className="h-8 w-8 transition-all hover:-rotate-12"
               title="Linked-In"
             />
-          </IconButton>
+          </IconExternalLink>
 
-          <IconButton href="https://www.facebook.com/alif.haider.7927">
+          <IconExternalLink href="https://www.facebook.com/alif.haider.7927">
             <FaFacebookSquare
               className="h-8 w-8 transition-all hover:-rotate-12"
               title="Facebook"
             />
-          </IconButton>
+          </IconExternalLink>
         </div>
       </section>
 
@@ -311,7 +315,7 @@ export default function Index() {
               <Project key={index}>
                 <ProjectTitle>{project.name}</ProjectTitle>
                 {project.link && (
-                  <ProjectLink to={project.link}>
+                  <ProjectLink href={project.link}>
                     {project.linkText}
                   </ProjectLink>
                 )}
@@ -343,7 +347,7 @@ export default function Index() {
               <ExperienceTitle text={experience.title} />
               <ExperienceInfo>
                 <ExperienceCompany
-                  to={experience.to}
+                  href={experience.to}
                   location={experience.location}
                 >
                   {experience.company}
@@ -394,8 +398,11 @@ export default function Index() {
             <h6>How can you contact me?</h6>
             <p>
               - You can contact me through sending
-              <BioLink to="mailto:alifhaider57@gmail.com"> an email </BioLink>to
-              me. Everyday I check my email.
+              <ExternalLink href="mailto:alifhaider57@gmail.com">
+                {" "}
+                an email{" "}
+              </ExternalLink>
+              to me. Everyday I check my email.
             </p>
           </li>
           <li>
@@ -422,10 +429,16 @@ function CodeText({ children }: { children: React.ReactNode }) {
   return <code>&#96;{children}&#96;</code>;
 }
 
-function BioLink({ to, children }: { to: string; children: React.ReactNode }) {
+function ExternalLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <a
-      href={to}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="underlined text-nowrap font-medium text-secondary"
@@ -435,7 +448,7 @@ function BioLink({ to, children }: { to: string; children: React.ReactNode }) {
   );
 }
 
-function IconButton({
+function IconExternalLink({
   children,
   href,
 }: {

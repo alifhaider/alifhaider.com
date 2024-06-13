@@ -27,6 +27,14 @@ export async function loader() {
 export default function Blogs() {
   const data = useLoaderData<typeof loader>();
 
+  function formatDate(date: string) {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  }
+
   return (
     <div className="mx-auto mt-10 w-full max-w-5xl space-y-10">
       <p>
@@ -42,16 +50,21 @@ export default function Blogs() {
           const vt = unstable_useViewTransitionState(to);
           return (
             <li key={post.slug} className="space-y-2">
-              <Link
-                to={to}
-                style={{
-                  viewTransitionName: vt ? "blog-title" : "none",
-                }}
-                unstable_viewTransition
-                className="underlined text-3xl font-bold text-secondary"
-              >
-                {post.frontmatter.title}
-              </Link>
+              <div className="flex items-center justify-between">
+                <Link
+                  to={to}
+                  style={{
+                    viewTransitionName: vt ? "blog-title" : "none",
+                  }}
+                  unstable_viewTransition
+                  className="underlined text-3xl font-bold text-secondary"
+                >
+                  {post.frontmatter.title}
+                </Link>
+                <span className="text-gray-500 text-sm">
+                  {formatDate(post.frontmatter.date)}
+                </span>
+              </div>
               <p>{post.frontmatter.description}</p>
             </li>
           );
