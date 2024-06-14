@@ -4,6 +4,8 @@ My Personal Portfolio. Design and Developed by Me.
 
 ## Development
 
+Add .env file first
+
 Run the Vite dev server:
 
 ```shellscript
