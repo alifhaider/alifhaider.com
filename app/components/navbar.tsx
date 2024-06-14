@@ -11,20 +11,20 @@ function Navbar() {
       <div className="flex gap-4 md:gap-8">
         <Link to="/" className="group">
           <h4 className="m-0 flex p-0 md:scale-100">
-            <span className="text-[120px] text-primary transition-all group-hover:text-text">
+            <span className="text-[80px] text-primary transition-all group-hover:text-text md:text-[120px]">
               A
             </span>
             <span className="flex flex-col justify-center">
-              <span className="text-7xl tracking-wider text-primary transition-all group-hover:text-text">
+              <span className="text-4xl tracking-wider text-primary transition-all group-hover:text-text md:text-7xl">
                 lif
               </span>
-              <span className="-mt-4 ml-[2px] text-4xl tracking-tighter transition-all group-hover:text-primary">
+              <span className="-mt-2 ml-[2px] text-3xl tracking-tighter transition-all group-hover:text-primary md:-mt-4 md:text-4xl">
                 Haider
               </span>
             </span>
           </h4>
         </Link>
-        <ul className="mb-[41px] flex items-end text-lg transition-colors">
+        <ul className="mb-[26px] flex items-end text-lg transition-colors md:mb-[41px]">
           <li>
             <NavLink to="/blogs" className="underlined hover:text-secondary">
               Blogs
