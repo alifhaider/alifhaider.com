@@ -1,4 +1,5 @@
 # Alif Haider
+
 My Personal Portfolio. Design and Developed by Me.
 
 ## Development
@@ -12,5 +13,5 @@ bun run dev
 ## Stack
 
 ```
-Bun, Remix, Framer-Motion, TailwindCSS
+Bun, Remix, TailwindCSS
 ```
