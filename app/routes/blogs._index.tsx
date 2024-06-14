@@ -61,7 +61,7 @@ export default function Blogs() {
                 >
                   {post.frontmatter.title}
                 </Link>
-                <span className="text-gray-500 text-sm">
+                <span className="text-gray-500 text-xs md:text-sm">
                   {formatDate(post.frontmatter.date)}
                 </span>
               </div>
