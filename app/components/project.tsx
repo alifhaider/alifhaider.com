@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 import LinkIcon from "~/assets/icons/Link";
 
 interface ProjectProps {
@@ -18,9 +18,13 @@ interface ProjectImagesProps {
   images: string[];
 }
 
-const Project = ({ children }: ProjectProps) => {
-  return <li className="transition-all">{children}</li>;
-};
+const Project = forwardRef<HTMLLIElement, ProjectProps>(({ children }, ref) => {
+  return (
+    <li className="transition-all" ref={ref}>
+      {children}
+    </li>
+  );
+});
 
 Project.displayName = "Project";
 

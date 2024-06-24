@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { type MetaFunction } from "@remix-run/node";
 import { Description, SectionTitle } from "~/components/common";
 import {
@@ -108,27 +108,27 @@ const projects: Array<Project> = [
     link: "https://admin.nulandia.com",
     linkText: "admin.nulandia.com",
     description:
-      "Nulandia Admin Dashboard was an interesting project for me. It was made for updating game interface of Nulandia like change building name or create a new neighborhood in the game through web forms. This changes reflects into the game. The interesting part of this project is backend team had the full control of which type of form fields like (<code>&#96;&#60;input /&#62;&#96;</code> or <code>&#96;&#60;select&#62;&#96;</code>) will be rendered in which. All I was getting from API, JSON format form-configs and I had to render those fields into the UI using react. I used to call a form <code>&#96;&#60;DynamicForm formConfigs={formConfigs} /&#62;&#96;</code>.",
+      "Nulandia Admin Dashboard was an interesting project for me. It was made for updating game interface of Nulandia like change building name or create a new neighborhood in the game through web forms. This changes reflects into the game. The interesting part of this project is backend team had the full control of which type of form fields like (<span class='code'>&#96;&#60;input /&#62;&#96;</span> or <span class='code'>&#96;&#60;select&#62;&#96;</span>) will be rendered in which. All I was getting from API, JSON format form-configs and I had to render those fields into the UI using react. I used to call a form <span class='code'>&#96;&#60;DynamicForm formConfigs={formConfigs} /&#62;&#96;</span>.",
     languages: [language.REACT, language.TAILWIND],
   },
   {
     name: "Nulandia Game User Interface",
     description:
-      "Game UI for Nulandia. It was firstly built with <code>&#96;React.js&#96;</code> but later the whole app re-implemented within the game which was using <code>&#96;Godot Gmae Engine&#96;</code> and <code>&#96;GDScript&#96;</code>. That was a whole new journey for me because the programming language was totally new to me, and I had to use the same JSON format form configs but using <code>&#96;GDScript&#96;</code>. Adopting a different language pattern I thought would be way harder but worked out smoothly.",
+      "Game UI for Nulandia. It was firstly built with <span class='code'>&#96;React.js&#96;</span> but later the whole app re-implemented within the game which was using <span class='code'>&#96;Godot Gmae Engine&#96;</span> and <span class='code'>&#96;GDScript&#96;</span>. That was a whole new journey for me because the programming language was totally new to me, and I had to use the same JSON format form configs but using <span class='code'>&#96;GDScript&#96;</span>. Adopting a different language pattern I thought would be way harder but worked out smoothly.",
     languages: [language.GDENGINE, language.GDSCRIPT],
   },
   {
     name: "Hydepenthouse Airbnb",
     link: "https://hydepenthouse.com",
     linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <code>&#96;Remix.run&#96;</code> which also is a <code>&#96;React.js&#96;</code> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were pointing to the same app. When an user visits x.com, in server it gets the theme for that domain and uses that in rendering, so for each domains the color scheme and fonts are different. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
+    description: `Hydepnethouse is an Airbnb like website. This project is built with <span class="code">&#96;Remix.run&#96;</span> which also is a <span class="code">&#96;React.js&#96;</span> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were pointing to the same app. When an user visits x.com, in server it gets the theme for that domain and uses that in rendering, so for each domains the color scheme and fonts are different. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
     languages: [language.REMIX, language.TS, language.SCSS],
   },
   {
     name: "Definya MMORPG Game",
     link: "https://play.definya.com/",
     linkText: "play.definya.com",
-    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <code>&#96;Redis&#96;</code> to manage cache through this app. <code>&#96;PhaserJS&#96;</code> and <code>&#96;React.js&#96;</code> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>.`,
+    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <span class="code">&#96;Redis&#96;</span> to manage cache through this app. <span class="code">&#96;PhaserJS&#96;</span> and <span class="code">&#96;React.js&#96;</span> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>.`,
     languages: [
       language.REACT,
       language.TS,
@@ -150,7 +150,7 @@ const projects: Array<Project> = [
     link: "https://funcomp.com",
     linkText: "funcomp.com",
     description:
-      "Funcomp is a platform where people can find fun activities program like suggesting video games, movies, etc through an application. While I was building this app I was almost new in using <code>&#96;React.js&#96;</code>. To manage CRUD for this app, I used <code>&#96;Redux&#96;</code> and this is the last project I used Redux.",
+      "Funcomp is a platform where people can find fun activities program like suggesting video games, movies, etc through an application. While I was building this app I was almost new in using <span class='code'>&#96;React.js&#96;</span>. To manage CRUD for this app, I used <span class='code'>&#96;Redux&#96;</span> and this is the last project I used Redux.",
     languages: [language.REACT, language.REDUX, language.CSS],
   },
   {
@@ -158,7 +158,7 @@ const projects: Array<Project> = [
     link: "https://promenade.ai",
     linkText: "promenade.ai",
     description:
-      "Promenade is a military job application platform where veterans can find jobs and can appoint to a training center. This is the first <code>&#96;React.js&#96;</code>  project I have ever worked on. ",
+      "Promenade is a military job application platform where veterans can find jobs and can appoint to a training center. This is the first <span class='code'>&#96;React.js&#96;</span>  project I have ever worked on. ",
     languages: [language.REACT, language.REDUX, language.CSS],
   },
 ];
@@ -203,6 +203,16 @@ const experiences = [
 ];
 
 export default function Index() {
+  const sectionRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  const focusProject = (index: number) => {
+    if (!sectionRefs.current[index]) return;
+    sectionRefs.current[index].scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div className="mx-auto mt-10 max-w-5xl space-y-20">
       <section className="section">
@@ -243,7 +253,7 @@ export default function Index() {
           <p>
             I am always interested in hearing about your project plans, in need
             of any suggestions, or if you just want to say
-            <code className="text-3xl font-bold">&#96;Hi 🙌&#96;</code>
+            <span className="code text-3xl font-bold">&#96;Hi 🙌&#96;</span>
             don&apos;t hesitate to reach out to me.
           </p>
         </div>
@@ -312,7 +322,10 @@ export default function Index() {
 
           <ul className="space-y-10 md:space-y-14">
             {projects.map((project, index) => (
-              <Project key={index}>
+              <Project
+                key={index}
+                ref={(el) => (sectionRefs.current[index] = el)}
+              >
                 <ProjectTitle>{project.name}</ProjectTitle>
                 {project.link && (
                   <ProjectLink href={project.link}>
@@ -408,8 +421,23 @@ export default function Index() {
           <li>
             <h6>What am I currently working on?</h6>
             <p>
-              - I am currently working on <strong>Nulandia Game UI</strong> and
-              also on <strong>Hydepenthouses Airbnb project</strong>.
+              - I am currently working on{" "}
+              <button
+                onClick={() => focusProject(0)}
+                aria-label="Nulandia Admin Dashboard"
+                className="underlined"
+              >
+                <strong>Nulandia Game UI</strong>
+              </button>{" "}
+              and also on{" "}
+              <button
+                onClick={() => focusProject(2)}
+                aria-label="Hydepenthouses Airbnb project"
+                className="underlined"
+              >
+                <strong>Hydepenthouses Airbnb project</strong>
+              </button>
+              .
             </p>
           </li>
           <li>
@@ -426,7 +454,7 @@ export default function Index() {
 }
 
 function CodeText({ children }: { children: React.ReactNode }) {
-  return <code>&#96;{children}&#96;</code>;
+  return <span className="code">&#96;{children}&#96;</span>;
 }
 
 function ExternalLink({

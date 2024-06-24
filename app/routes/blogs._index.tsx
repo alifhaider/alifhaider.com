@@ -40,8 +40,8 @@ export default function Blogs() {
       <p>
         One day I will write blogs and here will be the list of them. Since, I
         have no blog post yet, I am adding a test article to test my ability of
-        rendering a blog post via <code>&#96;mdx-files&#96;</code>. Cause why
-        not 🤣
+        rendering a blog post via{" "}
+        <span className="code">&#96;mdx-files&#96;</span>. Cause why not 🤣
       </p>
 
       <ul className="space-y-6">

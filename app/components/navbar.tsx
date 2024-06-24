@@ -34,6 +34,7 @@ function Navbar() {
       </div>
       <div className="mb-12 flex items-center rounded-md  border border-border shadow-md transition-all">
         <button
+          aria-label="Light theme"
           className="rounded-l-md bg-background px-3 py-2 dark:bg-[#f3eeea] dark:text-primary"
           onClick={() => setTheme(Theme.LIGHT)}
         >
@@ -41,6 +42,7 @@ function Navbar() {
           <span className="sr-only">Light theme</span>
         </button>
         <button
+          aria-label="Dark theme"
           className="rounded-r-md bg-[#00224d] px-3  py-2 text-primary dark:bg-background dark:text-text"
           onClick={() => setTheme(Theme.DARK)}
         >

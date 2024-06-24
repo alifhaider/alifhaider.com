@@ -38,6 +38,10 @@
     @apply inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md border bg-background px-4 py-2 text-sm  font-medium ring-offset-background transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
 
+  .code {
+    @apply mx-1 inline-block  px-1 font-code text-sm font-semibold text-[#c678dd] dark:text-[#fcb32c];
+  }
+
   p {
     @apply text-pretty text-lg text-gray md:text-xl;
   }
@@ -48,10 +52,6 @@
 
   h6 {
     @apply text-xl font-medium text-primary md:text-3xl;
-  }
-
-  code {
-    @apply mx-1 inline-block  px-1 font-code text-sm font-semibold text-[#c678dd] dark:text-[#fcb32c];
   }
 }
 
