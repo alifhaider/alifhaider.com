@@ -37,7 +37,8 @@ export default function Blogs() {
 
   return (
     <div className="mx-auto mt-10 w-full max-w-5xl space-y-10">
-      <p>
+      <h1 className="text-7xl font-bold text-white">Blogs</h1>
+      <p className="text-gray-300">
         One day I will write blogs and here will be the list of them. Since, I
         have no blog post yet, I am adding a test article to test my ability of
         rendering a blog post via{" "}
@@ -57,15 +58,15 @@ export default function Blogs() {
                     viewTransitionName: vt ? "blog-title" : "none",
                   }}
                   unstable_viewTransition
-                  className="underlined text-3xl font-bold text-secondary"
+                  className="underlined text-3xl font-bold text-gray-300"
                 >
                   {post.frontmatter.title}
                 </Link>
-                <span className="text-gray-500 text-xs md:text-sm">
+                <span className="text-xs text-gray-500 md:text-sm">
                   {formatDate(post.frontmatter.date)}
                 </span>
               </div>
-              <p>{post.frontmatter.description}</p>
+              <p className="text-gray-500">{post.frontmatter.description}</p>
             </li>
           );
         })}

@@ -30,12 +30,20 @@ export async function action({ request }: ActionFunctionArgs) {
       output: {
         cmd: "blog",
         title: "Blog Posts",
-        contents: blogs.map((blog) => ({
-          link: {
-            href: `/blogs/${blog.slug}`,
-            text: `- ${blog.frontmatter.title}`,
+        contents: [
+          ...blogs.map((blog) => ({
+            link: {
+              href: `/blogs/${blog.slug}`,
+              text: `- ${blog.frontmatter.title}`,
+            },
+          })),
+          {
+            link: {
+              href: "/blogs",
+              text: "- blogs",
+            },
           },
-        })),
+        ],
       },
     });
   }
