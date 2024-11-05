@@ -1,514 +1,143 @@
-import { useRef, type ReactNode } from "react";
-import { type MetaFunction } from "@remix-run/node";
-import { Description, SectionTitle } from "~/components/common";
+import { useState, useRef, useEffect } from "react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 import {
-  Project,
-  ProjectLaguages,
-  ProjectLink,
-  ProjectTitle,
-} from "~/components/project";
+  json,
+  type ActionFunctionArgs,
+  type MetaFunction,
+} from "@remix-run/node";
 import {
-  Experience,
-  ExperienceCompany,
-  ExperienceInfo,
-  ExperienceTitle,
-  ExxperienceDate,
-} from "~/components/experience";
-import {
-  FaFacebookSquare,
-  FaGithubSquare,
-  FaQuoteLeft,
-  FaQuoteRight,
-  FaRegUser,
-} from "react-icons/fa";
-import { FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
-import { GrPersonalComputer } from "react-icons/gr";
-import { MdOutlinePinDrop } from "react-icons/md";
+  CommandResponse,
+  Content,
+  initialState,
+  processCommand,
+} from "~/utils/command";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Home / Alif" },
+    { title: "Alif" },
     { name: "description", content: "A Software Engineer" },
   ];
 };
 
-type Project = {
-  name: string;
-  link?: string;
-  linkText?: string;
-  description: ReactNode;
-  languages: Array<{ name: string; link: string }>;
-};
+// Action function for processing commands
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const command = formData.get("command") as string;
+  const output = processCommand(command);
+  return json({ output });
+}
 
-const language = {
-  TS: {
-    name: "TypeScript",
-    link: "https://www.typescriptlang.org",
-  },
-  JS: {
-    name: "JavaScript",
-    link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  },
-  REACT: {
-    name: "React",
-    link: "https://react.dev",
-  },
-  REMIX: {
-    name: "Remix.run",
-    link: "https://remix.run",
-  },
-  GDSCRIPT: {
-    name: "Godot Script",
-    link: "https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html",
-  },
-  GDENGINE: {
-    name: "Godot Engine",
-    link: "https://godotengine.org/",
-  },
-  MONGO: {
-    name: "MongoDB",
-    link: "https://www.mongodb.com/",
-  },
-  WS: {
-    name: "WebSocket",
-    link: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
-  },
-  REDIS: {
-    name: "Redis",
-    link: "https://redis.io/",
-  },
-  STYLED: {
-    name: "Styled Components",
-    link: "https://styled-components.com/",
-  },
-  CSS: {
-    name: "CSS",
-    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-  },
-  SCSS: {
-    name: "SCSS",
-    link: "https://sass-lang.com/",
-  },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    link: "https://tailwindcss.com/",
-  },
-  REDUX: {
-    name: "Redux",
-    link: "https://redux.js.org/",
-  },
-};
+// Terminal component
+export default function Terminal() {
+  const actionData = useActionData<typeof action>();
+  const navigation = useNavigation();
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const outputRef = useRef<HTMLDivElement>(null);
 
-// ` in html code
-// &#96; or `
+  const isSubmitting = navigation.state === "submitting";
 
-const projects: Array<Project> = [
-  {
-    name: "Nulandia Admin Dashboard",
-    link: "https://admin.nulandia.com",
-    linkText: "admin.nulandia.com",
-    description:
-      "Nulandia Admin Dashboard was an interesting project for me. It was made for updating game interface of Nulandia like change building name or create a new neighborhood in the game through web forms. This changes reflects into the game. The interesting part of this project is backend team had the full control of which type of form fields like (<span class='code'>&#96;&#60;input /&#62;&#96;</span> or <span class='code'>&#96;&#60;select&#62;&#96;</span>) will be rendered in which. All I was getting from API, JSON format form-configs and I had to render those fields into the UI using react. I used to call a form <span class='code'>&#96;&#60;DynamicForm formConfigs={formConfigs} /&#62;&#96;</span>.",
-    languages: [language.REACT, language.TAILWIND],
-  },
-  {
-    name: "Nulandia Game User Interface",
-    description:
-      "Game UI for Nulandia. It was firstly built with <span class='code'>&#96;React.js&#96;</span> but later the whole app re-implemented within the game which was using <span class='code'>&#96;Godot Gmae Engine&#96;</span> and <span class='code'>&#96;GDScript&#96;</span>. That was a whole new journey for me because the programming language was totally new to me, and I had to use the same JSON format form configs but using <span class='code'>&#96;GDScript&#96;</span>. Adopting a different language pattern I thought would be way harder but worked out smoothly.",
-    languages: [language.GDENGINE, language.GDSCRIPT],
-  },
-  {
-    name: "Hydepenthouse Airbnb",
-    link: "https://hydepenthouse.com",
-    linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <span class="code">&#96;Remix.run&#96;</span> which also is a <span class="code">&#96;React.js&#96;</span> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were pointing to the same app. When an user visits x.com, in server it gets the theme for that domain and uses that in rendering, so for each domains the color scheme and fonts are different. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
-    languages: [language.REMIX, language.TS, language.SCSS],
-  },
-  {
-    name: "Definya MMORPG Game",
-    link: "https://play.definya.com/",
-    linkText: "play.definya.com",
-    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <span class="code">&#96;Redis&#96;</span> to manage cache through this app. <span class="code">&#96;PhaserJS&#96;</span> and <span class="code">&#96;React.js&#96;</span> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>.`,
-    languages: [
-      language.REACT,
-      language.TS,
-      language.MONGO,
-      language.WS,
-      language.REDIS,
-      language.STYLED,
-    ],
-  },
-  {
-    name: "SPORFORYA Admin Dashboard",
-    link: "https://admin.sporforya.com/",
-    linkText: "admin.sporforya.com",
-    description: `SPORFORYA is a sports activities managing platform. Managing events, managing students through an application was the goal of this project. The main app is in <a href="https://apps.apple.com/us/app/sporti-app/id1628232729" target="_blank" rel="noopener noreferrer" class="underlined">IOS App Store</a> and also in <a href="https://play.google.com/store/apps/details/SPORFORYA?id=com.sporforya" target="_blank" rel="noopener noreferrer" class="underlined">Google Play store</a>.`,
-    languages: [language.REACT, language.TS, language.CSS],
-  },
-  {
-    name: "Funcomp",
-    link: "https://funcomp.com",
-    linkText: "funcomp.com",
-    description:
-      "Funcomp is a platform where people can find fun activities program like suggesting video games, movies, etc through an application. While I was building this app I was almost new in using <span class='code'>&#96;React.js&#96;</span>. To manage CRUD for this app, I used <span class='code'>&#96;Redux&#96;</span> and this is the last project I used Redux.",
-    languages: [language.REACT, language.REDUX, language.CSS],
-  },
-  {
-    name: "Promenade",
-    link: "https://promenade.ai",
-    linkText: "promenade.ai",
-    description:
-      "Promenade is a military job application platform where veterans can find jobs and can appoint to a training center. This is the first <span class='code'>&#96;React.js&#96;</span>  project I have ever worked on. ",
-    languages: [language.REACT, language.REDUX, language.CSS],
-  },
-];
+  const [history, setHistory] = useState<CommandResponse[]>([initialState]);
 
-const experiences = [
-  {
-    title: "Software Engineer",
-    company: "Impulse Communications",
-    to: "https://impulsecorp.com/",
-    location: "Remote, USA",
-    date: "Feb'23 - Present",
-    description: "Worked on the Nulandia Admin Dashboard and Nulandia Game UI.",
-  },
-  {
-    title: "Web Application Developer",
-    company: "Upwork - Upwork Profile",
-    to: "https://www.upwork.com/freelancers/~014066482556c551be",
-    location: "Remote, Freelancer",
-    date: "Feb'21 - Present",
-    description:
-      "I am working as a freelancer on Upwork. Most of the jobs I took were via Upwork. And also, most of the experience I gathered are from Upwork Projects.",
-  },
-  {
-    title: "Frontend Dev",
-    company: "SPORFORYA",
-    to: "https://sporforya.com",
-    location: "Remote, USA",
-    date: "Jun'22 - Mar'23",
-    description:
-      "In this part-time job I contributed in building and maintaining the SPORFORYA Admin Dashboard and I also have built several landing pages, which were pixel perfect implementation from designs.",
-  },
+  useEffect(() => {
+    if (!actionData || !actionData.output) return;
+    if (actionData.output.cmd === "clear") {
+      setHistory([
+        {
+          cmd: "clear",
+          title: "Terminal Cleared",
+          contents: [{ text: "" }],
+        },
+      ]);
+      if (outputRef.current) {
+        outputRef.current.scrollTop = 0;
+      }
+    } else if (actionData.output.cmd === "reset") {
+      setHistory([initialState]);
+    } else {
+      setHistory((prev) => [...prev, actionData.output]);
+    }
+  }, [actionData]);
 
-  {
-    title: "Frontend Dev",
-    company: "MBAKOP LLC",
-    to: "https://mbakop.com",
-    location: "Remote, USA",
-    date: "Mar'22 - Dec'22",
-    description:
-      "First full-time job of my career, and I worked as a Front-End Dev. I have built the Funcomp and Promenade from scratch for this company.",
-  },
-];
+  useEffect(() => {
+    if (outputRef.current) {
+      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+    }
+  }, [history]);
 
-export default function Index() {
-  const sectionRefs = useRef<(HTMLLIElement | null)[]>([]);
+  useEffect(() => {
+    if (!isSubmitting) {
+      formRef.current?.reset();
+      inputRef.current?.focus();
+    }
+  }, [isSubmitting]);
 
-  const focusProject = (index: number) => {
-    if (!sectionRefs.current[index]) return;
-    sectionRefs.current[index].scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  const getContent = (content: Content) => {
+    if ("text" in content) {
+      return content.text;
+    }
+    return (
+      <a
+        href={content.link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        {content.link.text}
+      </a>
+    );
   };
 
   return (
-    <div className="mx-auto mt-10 max-w-5xl space-y-20">
-      <section className="section">
-        <h2 className="mb-6 w-fit bg-secondary pl-2 pr-8 text-3xl font-semibold tracking-wide text-background">
-          Hey, I&apos;m <span className="underline">Alif Haider</span>.
-        </h2>
-        <div className="space-y-3">
-          <p className="mt-4 text-lg md:text-xl">
-            I am a software engineer. I have been building web applications and
-            solving problems for web
-            <strong> over two years</strong>.
-          </p>
-          <p>
-            I am also a tech enthusiast, I always love to learn new
-            technologies. The majority of the apps I built with{" "}
-            <ExternalLink href="https://react.dev">React.js</ExternalLink> and
-            modern frameworks of React.js (
-            <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> or{" "}
-            <ExternalLink href="https://remix.run">Remix.run</ExternalLink>),
-            however, I also am interested to build a{" "}
-            <ExternalLink href="https://www.rust-lang.org/">Rust</ExternalLink>{" "}
-            CLI tool or{" "}
-            <ExternalLink href="https://www.geeksforgeeks.org/cpp-for-game-development/">
-              C++ OpneGL game,{" "}
-            </ExternalLink>
-            and with{" "}
-            <ExternalLink href="https://godotengine.org/">Godot</ExternalLink> I
-            already have contributed in building a game.
-          </p>
-          <p>
-            I have completed my graduation in{""}
-            <strong> Computer Science and Engineering</strong> from{" "}
-            <ExternalLink href="https://www.northsouth.edu/">
-              <strong>North South University</strong>
-            </ExternalLink>
-            .
-          </p>
-          <p>
-            I am always interested in hearing about your project plans, in need
-            of any suggestions, or if you just want to say
-            <span className="code text-3xl font-bold">&#96;Hi 🙌&#96;</span>
-            don&apos;t hesitate to reach out to me.
-          </p>
-        </div>
+    <div className="mx-auto flex h-screen max-w-4xl flex-col rounded-md border-4 border-gray-800 bg-black p-4 font-mono text-green-500 shadow-lg">
+      <div
+        ref={outputRef}
+        className="mb-4 flex-grow overflow-y-auto rounded-lg border border-gray-700 bg-black p-4 text-sm  sm:text-base"
+        aria-live="polite"
+      >
+        {history.map((line, index) => (
+          <div key={index} className="mb-1">
+            {index > 0 && <div className="text-white">&gt; {line.cmd}</div>}
+            <div className="text-green-500"> {line.title}</div>
 
-        <div className="mt-6 flex gap-4">
-          <IconExternalLink href="https://github.com/alifhaider">
-            <FaGithubSquare
-              title="Github"
-              className="h-8 w-8 transition-all hover:-rotate-12"
-            />
-          </IconExternalLink>
-          <IconExternalLink href="https://twitter.com/haider_alif">
-            <FaSquareXTwitter
-              title="Twitter"
-              className="h-8 w-8 transition-all hover:-rotate-12"
-            />
-          </IconExternalLink>
-          <IconExternalLink href="https://www.linkedin.com/in/alif-haider">
-            <FaLinkedin
-              className="h-8 w-8 transition-all hover:-rotate-12"
-              title="Linked-In"
-            />
-          </IconExternalLink>
-
-          <IconExternalLink href="https://www.facebook.com/alif.haider.7927">
-            <FaFacebookSquare
-              className="h-8 w-8 transition-all hover:-rotate-12"
-              title="Facebook"
-            />
-          </IconExternalLink>
-        </div>
-      </section>
-
-      <div className="flex flex-col gap-20 border-border lg:flex-row lg:gap-10">
-        <div className="space-y-20 border-border  lg:sticky lg:top-0 lg:h-screen lg:border-r lg:pr-10">
-          <section>
-            <SectionTitle>About</SectionTitle>
-            <ul className="space-y-4">
-              <InfoItem text="Alif Haider">
-                <FaRegUser className="h-6 w-6" />
-              </InfoItem>
-              <InfoItem text="Software Engineer">
-                <GrPersonalComputer className="h-6 w-6" />
-              </InfoItem>
-              <InfoItem text="Dhaka, Bangladesh">
-                <MdOutlinePinDrop className="h-6 w-6" />
-              </InfoItem>
-            </ul>
-          </section>
-
-          <section className="overflow-y-auto">
-            <SectionTitle>Expertise</SectionTitle>
-
-            <ul className="space-y-4">
-              <BoxItem text="TypeScript" />
-              <BoxItem text="JavaScript" />
-              <BoxItem text="React" />
-              <BoxItem text="Remix.run" />
-              <BoxItem text="GDScript" />
-            </ul>
-          </section>
-        </div>
-
-        <div className="flex-grow">
-          <SectionTitle>Projects</SectionTitle>
-
-          <ul className="space-y-10 md:space-y-14">
-            {projects.map((project, index) => (
-              <Project
-                key={index}
-                ref={(el) => (sectionRefs.current[index] = el)}
-              >
-                <ProjectTitle>{project.name}</ProjectTitle>
-                {project.link && (
-                  <ProjectLink href={project.link}>
-                    {project.linkText}
-                  </ProjectLink>
-                )}
-                <Description>{project.description}</Description>
-                {project.languages && (
-                  <ProjectLaguages languages={project.languages} />
-                )}
-              </Project>
+            {line.contents.map((content, i) => (
+              <div key={i} className="ml-4">
+                {getContent(content)}
+              </div>
             ))}
-          </ul>
-          <div className="mt-10 text-gray">
-            <FaQuoteLeft className="mb-3 mr-0.5 inline w-2" />
-
-            <p className="inline text-sm italic">
-              Without these I also have contributed on various projects by
-              building a component from scratch or update fucntionalities for a
-              component.
-            </p>
-            <FaQuoteRight className="mb-3 ml-0.5 inline w-2" />
           </div>
-        </div>
+        ))}
       </div>
+      <Form
+        ref={formRef}
+        method="post"
+        className="flex items-center rounded-md bg-gray-900 p-2"
+      >
+        <label htmlFor="command" className="sr-only">
+          Enter command
+        </label>
+        <span className="mr-2" aria-hidden="true">
+          {">"}
+        </span>
+        <input
+          ref={inputRef}
+          type="text"
+          id="command"
+          name="command"
+          className="relative flex-grow border-none bg-transparent text-sm text-white outline-none sm:text-base"
+          aria-label="Enter command"
+          autoComplete="off"
+          disabled={isSubmitting}
+        />
 
-      <section className="section">
-        <SectionTitle>Experiences</SectionTitle>
-        <ul className="space-y-10 md:space-y-14">
-          {experiences.map((experience, index) => (
-            <Experience key={index}>
-              <ExperienceTitle text={experience.title} />
-              <ExperienceInfo>
-                <ExperienceCompany
-                  href={experience.to}
-                  location={experience.location}
-                >
-                  {experience.company}
-                </ExperienceCompany>
-                <ExxperienceDate>{experience.date}</ExxperienceDate>
-              </ExperienceInfo>
-              <Description>{experience.description}</Description>
-            </Experience>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section">
-        <SectionTitle>Hobbies</SectionTitle>
-
-        <ul className="space-y-6">
-          <li>
-            <h6>Video Games</h6>
-            <p>
-              I love to play video games. Most of my leisure time I spend
-              playing video games either on phone or PC. Most of the games I
-              play are <CodeText>DOTA2</CodeText>,{" "}
-              <CodeText>FIFA Mobile</CodeText>. I also have played{" "}
-              <CodeText>PUBG Mobile</CodeText> while I was studing at
-              university.
-            </p>
-          </li>
-
-          <li>
-            <h6>Movies</h6>
-            <p>
-              I watch a lot of movies. A total movie freak, you can say. My
-              favorite genres are Crime, Thriller, Romance, and a few Sci-Fi. My
-              favorite movies are <CodeText>3 Idiots</CodeText>,{" "}
-              <CodeText>Shawshank Redemption</CodeText>,{" "}
-              <CodeText>The Green Mile</CodeText>, and
-              <CodeText>Titanic</CodeText>.
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section className="section">
-        <SectionTitle>FAQs</SectionTitle>
-
-        <ul className="space-y-6">
-          <li>
-            <h6>How can you contact me?</h6>
-            <p>
-              - You can contact me through sending
-              <ExternalLink href="mailto:alifhaider57@gmail.com">
-                {" "}
-                an email{" "}
-              </ExternalLink>
-              to me. Everyday I check my email.
-            </p>
-          </li>
-          <li>
-            <h6>What am I currently working on?</h6>
-            <p>
-              - I am currently working on{" "}
-              <button
-                onClick={() => focusProject(0)}
-                aria-label="Nulandia Admin Dashboard"
-                className="underlined"
-              >
-                <strong>Nulandia Game UI</strong>
-              </button>{" "}
-              and also on{" "}
-              <button
-                onClick={() => focusProject(2)}
-                aria-label="Hydepenthouses Airbnb project"
-                className="underlined"
-              >
-                <strong>Hydepenthouses Airbnb project</strong>
-              </button>
-              .
-            </p>
-          </li>
-          <li>
-            <h6>Am I currently taking any new project?</h6>
-            <p>
-              - Yes, I always love to work on new projects. If you have any
-              project idea, feel free to reach out to me.
-            </p>
-          </li>
-        </ul>
-      </section>
+        <button
+          type="submit"
+          className="ml-2 rounded-md bg-green-500 px-4 py-1 text-sm font-bold text-black sm:text-base"
+          disabled={isSubmitting}
+        >
+          Run
+        </button>
+      </Form>
     </div>
-  );
-}
-
-function CodeText({ children }: { children: React.ReactNode }) {
-  return <span className="code">&#96;{children}&#96;</span>;
-}
-
-function ExternalLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underlined text-nowrap font-medium text-secondary"
-    >
-      {children}
-    </a>
-  );
-}
-
-function IconExternalLink({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  );
-}
-
-function InfoItem({
-  children,
-  text,
-}: {
-  children: React.ReactNode;
-  text: string;
-}) {
-  return (
-    <li title={text} className="flex items-center gap-6">
-      {children}
-      <span className="text-lg font-medium md:text-xl">{text}</span>
-    </li>
-  );
-}
-
-function BoxItem({ text }: { text: string }) {
-  return (
-    <li className="flex items-center justify-center rounded-sm border border-border px-6 py-3 shadow-inner">
-      {text}
-    </li>
   );
 }

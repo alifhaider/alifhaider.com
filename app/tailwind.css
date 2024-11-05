@@ -3,105 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: #f3eeea;
-    --text: #1f2421;
-    --gray: #4d5061;
-    --primary: #49a078;
-    --secondary: #ff204e;
-    --warning: #2a9d8f;
-    --border: #dce1de;
+  input::before {
+    content: ""; /* Create a pseudo-element */
+    position: absolute;
+    width: 1ch; /* Width of the caret */
+    height: 1.2em; /* Height of the caret */
+    background-color: white; /* Color of the caret */
+    left: 0; /* Position it at the start of the input */
+    top: 0; /* Align it with the input */
+    animation: blink 1s step-end infinite; /* Blinking effect */
   }
 
-  .dark,
-  :root[class~="dark"] {
-    --background: #00224d;
-    --text: #dff5ff;
-    --primary: #ff204e;
-    --secondary: #5debd7;
-    --warning: #fff455;
-    --gray: #83858c;
-    --border: #83858c; /* remove this line */
+  /* Blinking animation */
+  @keyframes blink {
+    50% {
+      background-color: transparent; /* Make it transparent halfway */
+    }
   }
-}
-
-@layer base {
-  body {
-    @apply bg-background font-sans text-text antialiased;
-  }
-
-  .container {
-    @apply mx-auto max-w-6xl;
-  }
-
-  .btn {
-    @apply inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md border bg-background px-4 py-2 text-sm  font-medium ring-offset-background transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-  }
-
-  .code {
-    @apply mx-1 inline-block  px-1 font-code text-sm font-semibold text-[#c678dd] dark:text-[#fcb32c];
-  }
-
-  p {
-    @apply text-pretty text-lg text-gray md:text-xl;
-  }
-
-  p a {
-    @apply text-justify text-secondary transition-all;
-  }
-
-  h6 {
-    @apply text-xl font-medium text-primary md:text-3xl;
-  }
-}
-
-.scroll-watcher {
-  @apply fixed bottom-0 left-0 z-50 h-1 w-full bg-primary;
-  animation: scroll-watcher linear;
-  animation-timeline: scroll();
-  scale: 0 1;
-  transform-origin: left;
-}
-
-@keyframes scroll-watcher {
-  to {
-    scale: 1 1;
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn linear forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    padding-top: 32px;
-  }
-  to {
-    padding-top: 0;
-  }
-}
-
-.scroll-watcher {
-  animation: none;
-}
-
-.section {
-  scale: 0.8;
-  opacity: 0;
-  animation: fade-in linear forwards;
-  animation-timeline: view();
-  animation-range: entry 200px;
-}
-
-@keyframes fade-in {
-  to {
-    scale: 1;
-    opacity: 1;
-  }
-}
-
-::view-transition-new(blog-title),
-::view-transition-old(blog-title) {
-  @apply h-full;
 }
