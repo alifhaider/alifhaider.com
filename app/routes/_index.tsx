@@ -116,7 +116,7 @@ export default function Terminal() {
     <div className="mx-auto flex h-screen max-w-4xl flex-col rounded-md border-4 border-gray-800 bg-black p-4 font-mono text-green-500 shadow-lg">
       <div
         ref={outputRef}
-        className="mb-4 flex-grow overflow-y-auto rounded-lg border border-gray-700 bg-black p-4 text-sm  sm:text-base"
+        className="mb-4 flex-1 overflow-y-auto rounded-lg border border-gray-700 bg-black p-4 text-sm  sm:text-base"
         aria-live="polite"
       >
         {history.map((line, index) => (
@@ -148,7 +148,7 @@ export default function Terminal() {
           type="text"
           id="command"
           name="command"
-          className="relative flex-grow border-none bg-transparent text-sm text-white outline-none sm:text-base"
+          className="relative flex-grow border-none bg-transparent text-lg text-white outline-none sm:text-base"
           aria-label="Enter command"
           autoComplete="off"
           disabled={isSubmitting}
