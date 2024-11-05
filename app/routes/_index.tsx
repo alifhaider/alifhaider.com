@@ -24,7 +24,7 @@ export const meta: MetaFunction = () => {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const command = formData.get("command") as string;
-  if (command === "blog") {
+  if (command === "blog" || command === "Blog") {
     const blogs = await getPosts();
     return json({
       output: {
