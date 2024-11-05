@@ -5,8 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { themeSessionResolver } from "./sessions.server";
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import tailwindCSS from "~/tailwind.css?url";
 import appCSS from "~/app.css?url";
 
@@ -37,13 +36,6 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindCSS },
   { rel: "stylesheet", href: appCSS },
 ];
-
-export const loader: LoaderFunction = async ({ request }) => {
-  const { getTheme } = await themeSessionResolver(request);
-  return {
-    theme: getTheme(),
-  };
-};
 
 export default function AppWithProviders() {
   return <App />;

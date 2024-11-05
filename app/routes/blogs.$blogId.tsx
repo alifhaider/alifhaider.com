@@ -38,11 +38,11 @@ export default function Blog() {
       className="mx-auto mt-10 w-full max-w-5xl space-y-10"
       style={{ viewTransitionName: "blog-title" }}
     >
-      <h1 className="text-4xl font-bold text-secondary md:text-6xl">
+      <h1 className="text-4xl font-bold text-white md:text-6xl">
         {frontmatter.title}
       </h1>
 
-      <div className="space-y-3">
+      <div className="space-y-3 text-gray-400">
         <Component />
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
   initialState,
   processCommand,
 } from "~/utils/command";
+import { getPosts } from "~/mdx.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -23,6 +24,21 @@ export const meta: MetaFunction = () => {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const command = formData.get("command") as string;
+  if (command === "blog") {
+    const blogs = await getPosts();
+    return json({
+      output: {
+        cmd: "blog",
+        title: "Blog Posts",
+        contents: blogs.map((blog) => ({
+          link: {
+            href: `/blogs/${blog.slug}`,
+            text: `- ${blog.frontmatter.title}`,
+          },
+        })),
+      },
+    });
+  }
   const output = processCommand(command);
   return json({ output });
 }

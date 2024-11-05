@@ -52,6 +52,7 @@ export function processCommand(cmd: string): CommandResponse {
           { text: "  contact - Get my contact information" },
           { text: "  clear - Clear the terminal" },
           { text: "reset - Reset the terminal" },
+          { text: "blog - View my blog posts" },
         ],
       };
     case "about":
