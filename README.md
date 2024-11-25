@@ -17,3 +17,4 @@ bun run dev
 ```
 Bun, Remix, TailwindCSS
 ```
+Thanks!
