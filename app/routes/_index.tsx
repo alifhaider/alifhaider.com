@@ -244,7 +244,7 @@ export default function Index() {
           >
             <h1 className="mb-4 text-balance text-5xl font-bold md:text-7xl">
               Hey, I&apos;m{" "}
-              <span className="via-accent text-transparent animate-gradient bg-gradient-to-r from-primary to-primary bg-clip-text">
+              <span className="via-accent text-transparent animate-gradient bg-linear-to-r from-primary to-primary bg-clip-text">
                 <TypewriterText text="Alif Haider" delay={100} />
               </span>
             </h1>
@@ -334,7 +334,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: aboutTitleY }}
-              className="from-foreground to-accent text-transparent mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent text-transparent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
             >
               About
             </motion.h2>
@@ -378,7 +378,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: skillsTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
             >
               Expertise
             </motion.h2>
@@ -421,7 +421,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: projectsTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
             >
               Projects
             </motion.h2>
@@ -497,7 +497,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: experienceTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
             >
               Experience
             </motion.h2>
@@ -541,7 +541,7 @@ export default function Index() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
           >
-            <h2 className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+            <h2 className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl">
               Beyond Code
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
@@ -575,7 +575,7 @@ export default function Index() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
           >
-            <h2 className="from-foreground to-accent text-transparent mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+            <h2 className="from-foreground to-accent text-transparent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl">
               Let&apos;s Connect
             </h2>
             <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-balance text-lg leading-relaxed">
