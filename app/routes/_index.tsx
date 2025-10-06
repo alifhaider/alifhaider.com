@@ -15,8 +15,8 @@ import { Theme, useTheme } from "remix-themes";
 import { Link } from "@remix-run/react";
 import { AnimatedBackground } from "~/components/animated-background";
 import { Button } from "~/components/ui/button";
-import { TypewriterText } from "~/components/typewriter-text";
 import { Card } from "~/components/ui/card";
+import { TypewriterText } from "~/components/typewriter-text";
 
 export const meta: MetaFunction = () => {
   return [
@@ -61,7 +61,7 @@ const projects = [
   },
   {
     title: "Hydepenthouse Airbnb",
-    url: "hydepenthouse.com",
+    url: "hydepenthouses.com",
     description:
       "Multi-domain Airbnb platform built with Remix.run. Dynamic theming system where each domain gets unique color schemes and fonts based on server-side detection.",
     tags: ["Remix.run", "TypeScript", "SCSS", "Multi-tenant"],
@@ -181,16 +181,16 @@ export default function Index() {
   );
 
   return (
-    <main className="text-foreground min-h-screen bg-background transition-colors duration-300">
+    <main className="text-foreground bg-background min-h-screen transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed right-6 top-6 z-50"
+        className="fixed top-6 right-6 z-50"
       >
         <Button
           variant="outline"
           size="icon"
-          className="bg-card/80 hover:bg-card rounded-full border-border backdrop-blur-sm"
+          className="bg-card/80 hover:bg-card border-border rounded-full backdrop-blur-sm"
           onClick={() =>
             setTheme(theme === Theme.DARK ? Theme.LIGHT : Theme.DARK)
           }
@@ -206,13 +206,13 @@ export default function Index() {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed left-6 top-6 z-50"
+        className="fixed top-6 left-6 z-50"
       >
-        <Link to="/blog">
+        <Link to="/blogs">
           <Button
             variant="outline"
             size="sm"
-            className="bg-card/80 hover:bg-card rounded-full border-border backdrop-blur-sm"
+            className="bg-card/80 hover:bg-card border-border rounded-full backdrop-blur-sm"
           >
             <BookOpen className="mr-2 h-4 w-4" />
             Blog
@@ -229,9 +229,9 @@ export default function Index() {
 
         {/* Floating geometric shapes */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="bg-accent/10 animate-float absolute left-1/4 top-1/4 h-64 w-64 rounded-full blur-3xl" />
+          <div className="bg-accent/10 animate-float absolute top-1/4 left-1/4 h-64 w-64 rounded-full blur-3xl" />
           <div
-            className="bg-accent/5 animate-float absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full blur-3xl"
+            className="bg-accent/5 animate-float absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full blur-3xl"
             style={{ animationDelay: "2s" }}
           />
         </div>
@@ -242,9 +242,9 @@ export default function Index() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="mb-4 text-balance text-5xl font-bold md:text-7xl">
+            <h1 className="mb-4 text-5xl font-bold text-balance md:text-7xl">
               Hey, I&apos;m{" "}
-              <span className="via-accent text-transparent animate-gradient bg-linear-to-r from-primary to-primary bg-clip-text">
+              <span className="from-primary via-accent to-primary animate-gradient bg-gradient-to-r bg-clip-text text-transparent">
                 <TypewriterText text="Alif Haider" delay={100} />
               </span>
             </h1>
@@ -254,7 +254,7 @@ export default function Index() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-muted-foreground mb-6 text-balance text-lg leading-relaxed md:text-xl"
+            className="text-muted-foreground mb-6 text-lg leading-relaxed text-balance md:text-xl"
           >
             A software engineer crafting web applications and solving problems
             for the web. Building with React, TypeScript, and modern frameworks.
@@ -334,7 +334,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: aboutTitleY }}
-              className="from-foreground to-accent text-transparent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
             >
               About
             </motion.h2>
@@ -378,7 +378,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: skillsTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
             >
               Expertise
             </motion.h2>
@@ -397,7 +397,7 @@ export default function Index() {
                     scale: 1.05,
                     borderColor: "hsl(var(--color-accent))",
                   }}
-                  className="bg-card hover:border-accent cursor-default rounded-full border border-border px-4 py-2 text-sm font-medium transition-all"
+                  className="bg-card hover:border-accent border-border cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all"
                 >
                   {skill}
                 </motion.div>
@@ -421,7 +421,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: projectsTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
             >
               Projects
             </motion.h2>
@@ -455,7 +455,7 @@ export default function Index() {
                       )}
                     </div>
                     {project.url && (
-                      <p className="text-accent font-mono mb-3 text-sm">
+                      <p className="text-accent mb-3 font-mono text-sm">
                         {project.url}
                       </p>
                     )}
@@ -497,7 +497,7 @@ export default function Index() {
           >
             <motion.h2
               style={{ y: experienceTitleY }}
-              className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
             >
               Experience
             </motion.h2>
@@ -511,7 +511,7 @@ export default function Index() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="border-accent relative border-l-2 pb-6 pl-6 last:pb-0"
                 >
-                  <div className="bg-accent animate-pulse-glow absolute -left-[9px] top-0 h-4 w-4 rounded-full" />
+                  <div className="bg-accent animate-pulse-glow absolute top-0 -left-[9px] h-4 w-4 rounded-full" />
                   <div className="mb-2 flex flex-col md:flex-row md:items-center md:justify-between">
                     <h3 className="text-lg font-bold">{exp.role}</h3>
                     <span className="text-muted-foreground font-mono text-sm">
@@ -539,9 +539,9 @@ export default function Index() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
+            className="rounded-2xl border border-transparent p-8 transition-all duration-500"
           >
-            <h2 className="from-foreground to-accent text-transparent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+            <h2 className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Beyond Code
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
@@ -573,18 +573,18 @@ export default function Index() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
+            className="rounded-2xl border border-transparent p-8 transition-all duration-500"
           >
-            <h2 className="from-foreground to-accent text-transparent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+            <h2 className="from-foreground to-accent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Let&apos;s Connect
             </h2>
-            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-balance text-lg leading-relaxed">
+            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-balance">
               I&apos;m always interested in hearing about your project plans,
               need suggestions, or if you just want to say hi — don&apos;t
               hesitate to reach out!
             </p>
             <Button size="lg" className="group" asChild>
-              <a href="mailto:hello@alifhaider.com">
+              <a href="mailto:alifhaider57@gmail.com">
                 <Mail className="mr-2 h-5 w-5" />
                 Send me an email
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -595,7 +595,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border px-6 py-8">
+      <footer className="border-border border-t px-6 py-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-muted-foreground text-sm">
