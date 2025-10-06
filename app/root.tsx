@@ -13,11 +13,9 @@ import {
 } from "remix-themes";
 import { themeSessionResolver } from "./sessions.server";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import Navbar from "./components/navbar";
 import tailwindCSS from "~/tailwind.css?url";
 import appCSS from "~/app.css?url";
 import clsx from "clsx";
-import Footer from "./components/footer";
 
 export const links: LinksFunction = () => [
   {
@@ -97,10 +95,8 @@ function App() {
         />
       </head>
       <body className="min-h-screen w-full overflow-x-hidden bg-background px-4 md:px-8">
-        <Navbar />
         <div className="scroll-watcher" />
         <Outlet />
-        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>

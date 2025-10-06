@@ -1,514 +1,633 @@
-import { useRef, type ReactNode } from "react";
+import { useRef } from "react";
 import { type MetaFunction } from "@remix-run/node";
-import { Description, SectionTitle } from "~/components/common";
+import { useScroll, useTransform, motion } from "framer-motion";
 import {
-  Project,
-  ProjectLaguages,
-  ProjectLink,
-  ProjectTitle,
-} from "~/components/project";
-import {
-  Experience,
-  ExperienceCompany,
-  ExperienceInfo,
-  ExperienceTitle,
-  ExxperienceDate,
-} from "~/components/experience";
-import {
-  FaFacebookSquare,
-  FaGithubSquare,
-  FaQuoteLeft,
-  FaQuoteRight,
-  FaRegUser,
-} from "react-icons/fa";
-import { FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
-import { GrPersonalComputer } from "react-icons/gr";
-import { MdOutlinePinDrop } from "react-icons/md";
+  Moon,
+  Sun,
+  Mail,
+  Github,
+  Linkedin,
+  ExternalLink,
+  ArrowRight,
+  BookOpen,
+} from "lucide-react";
+import { Theme, useTheme } from "remix-themes";
+import { Link } from "@remix-run/react";
+import { AnimatedBackground } from "~/components/animated-background";
+import { Button } from "~/components/ui/button";
+import { TypewriterText } from "~/components/typewriter-text";
+import { Card } from "~/components/ui/card";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Home / Alif" },
+    { title: "Alif Haider | Full Stack Developer" },
     { name: "description", content: "A Software Engineer" },
   ];
 };
 
-type Project = {
-  name: string;
-  link?: string;
-  linkText?: string;
-  description: ReactNode;
-  languages: Array<{ name: string; link: string }>;
-};
+const skills = [
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "Next.js",
+  "Remix.run",
+  "Node.js",
+  "MongoDB",
+  "Redis",
+  "WebSocket",
+  "Tailwind CSS",
+  "SCSS",
+  "GDScript",
+  "Godot Engine",
+  "Redux",
+  "Git",
+];
 
-const language = {
-  TS: {
-    name: "TypeScript",
-    link: "https://www.typescriptlang.org",
-  },
-  JS: {
-    name: "JavaScript",
-    link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  },
-  REACT: {
-    name: "React",
-    link: "https://react.dev",
-  },
-  REMIX: {
-    name: "Remix.run",
-    link: "https://remix.run",
-  },
-  GDSCRIPT: {
-    name: "Godot Script",
-    link: "https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html",
-  },
-  GDENGINE: {
-    name: "Godot Engine",
-    link: "https://godotengine.org/",
-  },
-  MONGO: {
-    name: "MongoDB",
-    link: "https://www.mongodb.com/",
-  },
-  WS: {
-    name: "WebSocket",
-    link: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
-  },
-  REDIS: {
-    name: "Redis",
-    link: "https://redis.io/",
-  },
-  STYLED: {
-    name: "Styled Components",
-    link: "https://styled-components.com/",
-  },
-  CSS: {
-    name: "CSS",
-    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-  },
-  SCSS: {
-    name: "SCSS",
-    link: "https://sass-lang.com/",
-  },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    link: "https://tailwindcss.com/",
-  },
-  REDUX: {
-    name: "Redux",
-    link: "https://redux.js.org/",
-  },
-};
-
-// ` in html code
-// &#96; or `
-
-const projects: Array<Project> = [
+const projects = [
   {
-    name: "Nulandia Admin Dashboard",
-    link: "https://admin.nulandia.com",
-    linkText: "admin.nulandia.com",
+    title: "Nulandia Admin Dashboard",
+    url: "admin.nulandia.com",
     description:
-      "Nulandia Admin Dashboard was an interesting project for me. It was made for updating game interface of Nulandia like change building name or create a new neighborhood in the game through web forms. This changes reflects into the game. The interesting part of this project is backend team had the full control of which type of form fields like (<span class='code'>&#96;&#60;input /&#62;&#96;</span> or <span class='code'>&#96;&#60;select&#62;&#96;</span>) will be rendered in which. All I was getting from API, JSON format form-configs and I had to render those fields into the UI using react. I used to call a form <span class='code'>&#96;&#60;DynamicForm formConfigs={formConfigs} /&#62;&#96;</span>.",
-    languages: [language.REACT, language.TAILWIND],
+      "Dynamic form rendering system for game interface management. Built with React and JSON-driven form configs that render different field types dynamically.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Dynamic Forms"],
+    company: "Impulse Communications",
   },
   {
-    name: "Nulandia Game User Interface",
+    title: "Nulandia Game UI",
     description:
-      "Game UI for Nulandia. It was firstly built with <span class='code'>&#96;React.js&#96;</span> but later the whole app re-implemented within the game which was using <span class='code'>&#96;Godot Gmae Engine&#96;</span> and <span class='code'>&#96;GDScript&#96;</span>. That was a whole new journey for me because the programming language was totally new to me, and I had to use the same JSON format form configs but using <span class='code'>&#96;GDScript&#96;</span>. Adopting a different language pattern I thought would be way harder but worked out smoothly.",
-    languages: [language.GDENGINE, language.GDSCRIPT],
+      "Game interface built initially with React.js, then reimplemented in Godot Engine using GDScript. Adapted JSON form configs to a new programming paradigm.",
+    tags: ["Godot Engine", "GDScript", "Game Development"],
+    company: "Impulse Communications",
   },
   {
-    name: "Hydepenthouse Airbnb",
-    link: "https://hydepenthouse.com",
-    linkText: "hydepenthouse.com",
-    description: `Hydepnethouse is an Airbnb like website. This project is built with <span class="code">&#96;Remix.run&#96;</span> which also is a <span class="code">&#96;React.js&#96;</span> framework. I had used Remix for lots of my side-project but in production level this was the first one. But I had a huge interest in Remix since when Remix been Open Sourced. This project structure was quite a bit different than usual. Because a few domains were pointing to the same app. When an user visits x.com, in server it gets the theme for that domain and uses that in rendering, so for each domains the color scheme and fonts are different. \nI learned Remix patterns from <a href="https://kentcdodds.com" target="_blank" rel="noopener noreferrer" class="underlined">Kent C Dodds</a> and his <a href="https://epicweb.dev"target="_blank" rel="noopener noreferrer" class="underlined">Epic Web Workshops</a>. Huge shoutout to him 📣 for open-sourcing the learning materials.`,
-    languages: [language.REMIX, language.TS, language.SCSS],
-  },
-  {
-    name: "Definya MMORPG Game",
-    link: "https://play.definya.com/",
-    linkText: "play.definya.com",
-    description: `Definya is an MMORPG game, built with the MERN stack. This is the first time I worked as a full-stack developer. The project structured really well, adopting this large codebase was too much simple. I learned <span class="code">&#96;Redis&#96;</span> to manage cache through this app. <span class="code">&#96;PhaserJS&#96;</span> and <span class="code">&#96;React.js&#96;</span> was used to build the game. This game is also availabe in <a href="https://play.google.com/store/apps/details?id=com.definya.app" target="_blank" rel="noopener noreferrer" class="underlined">Google Play Store</a>.`,
-    languages: [
-      language.REACT,
-      language.TS,
-      language.MONGO,
-      language.WS,
-      language.REDIS,
-      language.STYLED,
-    ],
-  },
-  {
-    name: "SPORFORYA Admin Dashboard",
-    link: "https://admin.sporforya.com/",
-    linkText: "admin.sporforya.com",
-    description: `SPORFORYA is a sports activities managing platform. Managing events, managing students through an application was the goal of this project. The main app is in <a href="https://apps.apple.com/us/app/sporti-app/id1628232729" target="_blank" rel="noopener noreferrer" class="underlined">IOS App Store</a> and also in <a href="https://play.google.com/store/apps/details/SPORFORYA?id=com.sporforya" target="_blank" rel="noopener noreferrer" class="underlined">Google Play store</a>.`,
-    languages: [language.REACT, language.TS, language.CSS],
-  },
-  {
-    name: "Funcomp",
-    link: "https://funcomp.com",
-    linkText: "funcomp.com",
+    title: "Hydepenthouse Airbnb",
+    url: "hydepenthouse.com",
     description:
-      "Funcomp is a platform where people can find fun activities program like suggesting video games, movies, etc through an application. While I was building this app I was almost new in using <span class='code'>&#96;React.js&#96;</span>. To manage CRUD for this app, I used <span class='code'>&#96;Redux&#96;</span> and this is the last project I used Redux.",
-    languages: [language.REACT, language.REDUX, language.CSS],
+      "Multi-domain Airbnb platform built with Remix.run. Dynamic theming system where each domain gets unique color schemes and fonts based on server-side detection.",
+    tags: ["Remix.run", "TypeScript", "SCSS", "Multi-tenant"],
+    company: "Freelance",
   },
   {
-    name: "Promenade",
-    link: "https://promenade.ai",
-    linkText: "promenade.ai",
+    title: "Definya MMORPG",
+    url: "play.definya.com",
     description:
-      "Promenade is a military job application platform where veterans can find jobs and can appoint to a training center. This is the first <span class='code'>&#96;React.js&#96;</span>  project I have ever worked on. ",
-    languages: [language.REACT, language.REDUX, language.CSS],
+      "Full-stack MMORPG game using MERN stack. Implemented Redis caching, WebSocket real-time communication, and PhaserJS game engine integration.",
+    tags: ["React", "Node.js", "MongoDB", "Redis", "WebSocket", "PhaserJS"],
+    company: "Freelance",
+  },
+  {
+    title: "SPORFORYA Admin",
+    url: "admin.sporforya.com",
+    description:
+      "Sports activities management platform for managing events and students. Admin dashboard with comprehensive CRUD operations.",
+    tags: ["React", "TypeScript", "CSS"],
+    company: "SPORFORYA",
+  },
+  {
+    title: "Funcomp",
+    url: "funcomp.com",
+    description:
+      "Platform for discovering fun activities including video games and movies. Built with React and Redux for state management.",
+    tags: ["React", "Redux", "CSS"],
+    company: "MBAKOP LLC",
   },
 ];
 
 const experiences = [
   {
-    title: "Software Engineer",
+    role: "Software Engineer",
     company: "Impulse Communications",
     to: "https://impulsecorp.com/",
     location: "Remote, USA",
-    date: "Feb'23 - Present",
+    period: "Feb'23 - Present",
     description: "Worked on the Nulandia Admin Dashboard and Nulandia Game UI.",
   },
   {
-    title: "Web Application Developer",
+    role: "Web Application Developer",
     company: "Upwork - Upwork Profile",
     to: "https://www.upwork.com/freelancers/~014066482556c551be",
     location: "Remote, Freelancer",
-    date: "Feb'21 - Present",
+    period: "Feb'21 - Present",
     description:
       "I am working as a freelancer on Upwork. Most of the jobs I took were via Upwork. And also, most of the experience I gathered are from Upwork Projects.",
   },
   {
-    title: "Frontend Dev",
+    role: "Frontend Dev",
     company: "SPORFORYA",
     to: "https://sporforya.com",
     location: "Remote, USA",
-    date: "Jun'22 - Mar'23",
+    period: "Jun'22 - Mar'23",
     description:
       "In this part-time job I contributed in building and maintaining the SPORFORYA Admin Dashboard and I also have built several landing pages, which were pixel perfect implementation from designs.",
   },
 
   {
-    title: "Frontend Dev",
+    role: "Frontend Dev",
     company: "MBAKOP LLC",
     to: "https://mbakop.com",
     location: "Remote, USA",
-    date: "Mar'22 - Dec'22",
+    period: "Mar'22 - Dec'22",
     description:
       "First full-time job of my career, and I worked as a Front-End Dev. I have built the Funcomp and Promenade from scratch for this company.",
   },
 ];
 
 export default function Index() {
-  const sectionRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const { scrollYProgress } = useScroll();
+  const [theme, setTheme] = useTheme();
 
-  const focusProject = (index: number) => {
-    if (!sectionRefs.current[index]) return;
-    sectionRefs.current[index].scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+  const aboutRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress: aboutProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"],
+  });
+  const aboutTitleY = useTransform(aboutProgress, [0, 1], [100, -100]);
+  const aboutContentY = useTransform(aboutProgress, [0, 1], [50, -50]);
+
+  const { scrollYProgress: skillsProgress } = useScroll({
+    target: skillsRef,
+    offset: ["start end", "end start"],
+  });
+  const skillsTitleY = useTransform(skillsProgress, [0, 1], [120, -120]);
+  const skillsContentY = useTransform(skillsProgress, [0, 1], [60, -60]);
+
+  const { scrollYProgress: projectsProgress } = useScroll({
+    target: projectsRef,
+    offset: ["start end", "end start"],
+  });
+  const projectsTitleY = useTransform(projectsProgress, [0, 1], [100, -100]);
+  const projectsContentY = useTransform(projectsProgress, [0, 1], [50, -50]);
+
+  const { scrollYProgress: experienceProgress } = useScroll({
+    target: experienceRef,
+    offset: ["start end", "end start"],
+  });
+  const experienceTitleY = useTransform(
+    experienceProgress,
+    [0, 1],
+    [110, -110],
+  );
+  const experienceContentY = useTransform(
+    experienceProgress,
+    [0, 1],
+    [55, -55],
+  );
 
   return (
-    <div className="mx-auto mt-10 max-w-5xl space-y-20">
-      <section className="section">
-        <h2 className="mb-6 w-fit bg-secondary pl-2 pr-8 text-3xl font-semibold tracking-wide text-background">
-          Hey, I&apos;m <span className="underline">Alif Haider</span>.
-        </h2>
-        <div className="space-y-3">
-          <p className="mt-4 text-lg md:text-xl">
-            I am a software engineer. I have been building web applications and
-            solving problems for web
-            <strong> over two years</strong>.
-          </p>
-          <p>
-            I am also a tech enthusiast, I always love to learn new
-            technologies. The majority of the apps I built with{" "}
-            <ExternalLink href="https://react.dev">React.js</ExternalLink> and
-            modern frameworks of React.js (
-            <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> or{" "}
-            <ExternalLink href="https://remix.run">Remix.run</ExternalLink>),
-            however, I also am interested to build a{" "}
-            <ExternalLink href="https://www.rust-lang.org/">Rust</ExternalLink>{" "}
-            CLI tool or{" "}
-            <ExternalLink href="https://www.geeksforgeeks.org/cpp-for-game-development/">
-              C++ OpneGL game,{" "}
-            </ExternalLink>
-            and with{" "}
-            <ExternalLink href="https://godotengine.org/">Godot</ExternalLink> I
-            already have contributed in building a game.
-          </p>
-          <p>
-            I have completed my graduation in{""}
-            <strong> Computer Science and Engineering</strong> from{" "}
-            <ExternalLink href="https://www.northsouth.edu/">
-              <strong>North South University</strong>
-            </ExternalLink>
-            .
-          </p>
-          <p>
-            I am always interested in hearing about your project plans, in need
-            of any suggestions, or if you just want to say
-            <span className="code text-3xl font-bold">&#96;Hi 🙌&#96;</span>
-            don&apos;t hesitate to reach out to me.
-          </p>
+    <main className="text-foreground min-h-screen bg-background transition-colors duration-300">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="fixed right-6 top-6 z-50"
+      >
+        <Button
+          variant="outline"
+          size="icon"
+          className="bg-card/80 hover:bg-card rounded-full border-border backdrop-blur-sm"
+          onClick={() =>
+            setTheme(theme === Theme.DARK ? Theme.LIGHT : Theme.DARK)
+          }
+        >
+          {theme === Theme.LIGHT ? (
+            <Moon className="h-5 w-5" />
+          ) : (
+            <Sun className="h-5 w-5" />
+          )}
+        </Button>
+      </motion.div>
+
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="fixed left-6 top-6 z-50"
+      >
+        <Link to="/blog">
+          <Button
+            variant="outline"
+            size="sm"
+            className="bg-card/80 hover:bg-card rounded-full border-border backdrop-blur-sm"
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Blog
+          </Button>
+        </Link>
+      </motion.nav>
+
+      <motion.section
+        style={{ opacity, scale }}
+        className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
+      >
+        {/* Animated background */}
+        <AnimatedBackground />
+
+        {/* Floating geometric shapes */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="bg-accent/10 animate-float absolute left-1/4 top-1/4 h-64 w-64 rounded-full blur-3xl" />
+          <div
+            className="bg-accent/5 animate-float absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full blur-3xl"
+            style={{ animationDelay: "2s" }}
+          />
         </div>
 
-        <div className="mt-6 flex gap-4">
-          <IconExternalLink href="https://github.com/alifhaider">
-            <FaGithubSquare
-              title="Github"
-              className="h-8 w-8 transition-all hover:-rotate-12"
-            />
-          </IconExternalLink>
-          <IconExternalLink href="https://twitter.com/haider_alif">
-            <FaSquareXTwitter
-              title="Twitter"
-              className="h-8 w-8 transition-all hover:-rotate-12"
-            />
-          </IconExternalLink>
-          <IconExternalLink href="https://www.linkedin.com/in/alif-haider">
-            <FaLinkedin
-              className="h-8 w-8 transition-all hover:-rotate-12"
-              title="Linked-In"
-            />
-          </IconExternalLink>
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="mb-4 text-balance text-5xl font-bold md:text-7xl">
+              Hey, I&apos;m{" "}
+              <span className="via-accent text-transparent animate-gradient bg-gradient-to-r from-primary to-primary bg-clip-text">
+                <TypewriterText text="Alif Haider" delay={100} />
+              </span>
+            </h1>
+          </motion.div>
 
-          <IconExternalLink href="https://www.facebook.com/alif.haider.7927">
-            <FaFacebookSquare
-              className="h-8 w-8 transition-all hover:-rotate-12"
-              title="Facebook"
-            />
-          </IconExternalLink>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-muted-foreground mb-6 text-balance text-lg leading-relaxed md:text-xl"
+          >
+            A software engineer crafting web applications and solving problems
+            for the web. Building with React, TypeScript, and modern frameworks.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-muted-foreground mx-auto mb-8 max-w-2xl text-base leading-relaxed"
+          >
+            Tech enthusiast with 2+ years of experience. From dynamic admin
+            dashboards to MMORPG games, I love exploring new technologies and
+            building innovative solutions.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <Button size="lg" className="group" asChild>
+              <a href="#projects">
+                View Projects
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="#contact">Get in Touch</a>
+            </Button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-8 flex justify-center gap-4"
+          >
+            <a
+              href="https://github.com/alifhaider"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-accent transition-colors"
+            >
+              <Github className="h-6 w-6" />
+            </a>
+            <a
+              href="https://linkedin.com/in/alifhaider"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-accent transition-colors"
+            >
+              <Linkedin className="h-6 w-6" />
+            </a>
+            <a
+              href="mailto:hello@alifhaider.com"
+              className="text-muted-foreground hover:text-accent transition-colors"
+            >
+              <Mail className="h-6 w-6" />
+            </a>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <section
+        id="about"
+        ref={aboutRef}
+        className="relative overflow-hidden px-6 py-16"
+      >
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2
+              style={{ y: aboutTitleY }}
+              className="from-foreground to-accent text-transparent mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+            >
+              About
+            </motion.h2>
+            <motion.div
+              style={{ y: aboutContentY }}
+              className="text-muted-foreground space-y-4 text-base leading-relaxed"
+            >
+              <p>
+                I&apos;m a software engineer passionate about building web
+                applications that solve real problems. With over two years of
+                experience, I&apos;ve worked on everything from dynamic admin
+                dashboards to full-stack MMORPG games.
+              </p>
+              <p>
+                I&apos;m a tech enthusiast who loves learning new technologies.
+                While most of my work involves React.js and modern frameworks
+                like Next.js and Remix.run, I&apos;m also interested in
+                exploring Rust CLI tools and C++ OpenGL games. I&apos;ve even
+                contributed to game development using Godot Engine.
+              </p>
+              <p>
+                I completed my graduation in Computer Science and Engineering
+                from North South University. Currently based in Dhaka,
+                Bangladesh, working remotely with teams across the globe.
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      <div className="flex flex-col gap-20 border-border lg:flex-row lg:gap-10">
-        <div className="space-y-20 border-border  lg:sticky lg:top-0 lg:h-screen lg:border-r lg:pr-10">
-          <section>
-            <SectionTitle>About</SectionTitle>
-            <ul className="space-y-4">
-              <InfoItem text="Alif Haider">
-                <FaRegUser className="h-6 w-6" />
-              </InfoItem>
-              <InfoItem text="Software Engineer">
-                <GrPersonalComputer className="h-6 w-6" />
-              </InfoItem>
-              <InfoItem text="Dhaka, Bangladesh">
-                <MdOutlinePinDrop className="h-6 w-6" />
-              </InfoItem>
-            </ul>
-          </section>
-
-          <section className="overflow-y-auto">
-            <SectionTitle>Expertise</SectionTitle>
-
-            <ul className="space-y-4">
-              <BoxItem text="TypeScript" />
-              <BoxItem text="JavaScript" />
-              <BoxItem text="React" />
-              <BoxItem text="Remix.run" />
-              <BoxItem text="GDScript" />
-            </ul>
-          </section>
+      <section
+        ref={skillsRef}
+        className="bg-muted/30 relative overflow-hidden px-6 py-16"
+      >
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2
+              style={{ y: skillsTitleY }}
+              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+            >
+              Expertise
+            </motion.h2>
+            <motion.div
+              style={{ y: skillsContentY }}
+              className="flex flex-wrap gap-3"
+            >
+              {skills.map((skill, index) => (
+                <motion.div
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  whileHover={{
+                    scale: 1.05,
+                    borderColor: "hsl(var(--color-accent))",
+                  }}
+                  className="bg-card hover:border-accent cursor-default rounded-full border border-border px-4 py-2 text-sm font-medium transition-all"
+                >
+                  {skill}
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
+      </section>
 
-        <div className="flex-grow">
-          <SectionTitle>Projects</SectionTitle>
+      <section
+        id="projects"
+        ref={projectsRef}
+        className="relative overflow-hidden px-6 py-16"
+      >
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2
+              style={{ y: projectsTitleY }}
+              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+            >
+              Projects
+            </motion.h2>
+            <motion.div
+              style={{ y: projectsContentY }}
+              className="grid gap-6 md:grid-cols-2"
+            >
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="hover:border-accent bg-card hover:shadow-accent/10 group h-full cursor-pointer p-6 transition-all duration-300 hover:shadow-lg">
+                    <div className="mb-4 flex items-start justify-between">
+                      <h3 className="group-hover:text-accent text-xl font-bold transition-colors">
+                        {project.title}
+                      </h3>
+                      {project.url && (
+                        <a
+                          href={`https://${project.url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-accent transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ExternalLink className="h-5 w-5" />
+                        </a>
+                      )}
+                    </div>
+                    {project.url && (
+                      <p className="text-accent font-mono mb-3 text-sm">
+                        {project.url}
+                      </p>
+                    )}
+                    <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="bg-muted text-muted-foreground rounded px-2 py-1 text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground text-sm font-medium">
+                      {project.company}
+                    </p>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-          <ul className="space-y-10 md:space-y-14">
-            {projects.map((project, index) => (
-              <Project
-                key={index}
-                ref={(el) => (sectionRefs.current[index] = el)}
-              >
-                <ProjectTitle>{project.name}</ProjectTitle>
-                {project.link && (
-                  <ProjectLink href={project.link}>
-                    {project.linkText}
-                  </ProjectLink>
-                )}
-                <Description>{project.description}</Description>
-                {project.languages && (
-                  <ProjectLaguages languages={project.languages} />
-                )}
-              </Project>
-            ))}
-          </ul>
-          <div className="mt-10 text-gray">
-            <FaQuoteLeft className="mb-3 mr-0.5 inline w-2" />
+      <section
+        id="experience"
+        ref={experienceRef}
+        className="bg-muted/30 relative overflow-hidden px-6 py-16"
+      >
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2
+              style={{ y: experienceTitleY }}
+              className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl"
+            >
+              Experience
+            </motion.h2>
+            <motion.div style={{ y: experienceContentY }} className="space-y-6">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={exp.company}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="border-accent relative border-l-2 pb-6 pl-6 last:pb-0"
+                >
+                  <div className="bg-accent animate-pulse-glow absolute -left-[9px] top-0 h-4 w-4 rounded-full" />
+                  <div className="mb-2 flex flex-col md:flex-row md:items-center md:justify-between">
+                    <h3 className="text-lg font-bold">{exp.role}</h3>
+                    <span className="text-muted-foreground font-mono text-sm">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-accent mb-1 font-medium">{exp.company}</p>
+                  <p className="text-muted-foreground mb-2 text-sm">
+                    {exp.location}
+                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {exp.description}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-            <p className="inline text-sm italic">
-              Without these I also have contributed on various projects by
-              building a component from scratch or update fucntionalities for a
-              component.
+      <section className="px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
+          >
+            <h2 className="from-foreground to-accent text-transparent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+              Beyond Code
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="bg-card hover:border-accent p-6 transition-all duration-300">
+                <h3 className="mb-3 text-xl font-bold">🎮 Video Games</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  I love playing video games in my leisure time. My go-to games
+                  are DOTA2 and FIFA Mobile. I also enjoyed PUBG Mobile during
+                  my university days.
+                </p>
+              </Card>
+              <Card className="bg-card hover:border-accent p-6 transition-all duration-300">
+                <h3 className="mb-3 text-xl font-bold">🎬 Movies</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Total movie freak! I love Crime, Thriller, Romance, and Sci-Fi
+                  genres. Favorites include 3 Idioms, Shawshank Redemption, The
+                  Green Mile, and Titanic.
+                </p>
+              </Card>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="contact" className="bg-muted/30 px-6 py-16">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="border-transparent hover:border-accent/50 hover:shadow-accent/10 rounded-2xl border p-8 transition-all duration-500 hover:shadow-2xl"
+          >
+            <h2 className="from-foreground to-accent text-transparent mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold md:text-4xl">
+              Let&apos;s Connect
+            </h2>
+            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-balance text-lg leading-relaxed">
+              I&apos;m always interested in hearing about your project plans,
+              need suggestions, or if you just want to say hi — don&apos;t
+              hesitate to reach out!
             </p>
-            <FaQuoteRight className="mb-3 ml-0.5 inline w-2" />
+            <Button size="lg" className="group" asChild>
+              <a href="mailto:hello@alifhaider.com">
+                <Mail className="mr-2 h-5 w-5" />
+                Send me an email
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border px-6 py-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-muted-foreground text-sm">
+              © 2025 Alif Haider. Built with Next.js & Tailwind CSS.
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="https://github.com/alifhaider"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-accent text-sm transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/alifhaider"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-accent text-sm transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:hello@alifhaider.com"
+                className="text-muted-foreground hover:text-accent text-sm transition-colors"
+              >
+                Email
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <section className="section">
-        <SectionTitle>Experiences</SectionTitle>
-        <ul className="space-y-10 md:space-y-14">
-          {experiences.map((experience, index) => (
-            <Experience key={index}>
-              <ExperienceTitle text={experience.title} />
-              <ExperienceInfo>
-                <ExperienceCompany
-                  href={experience.to}
-                  location={experience.location}
-                >
-                  {experience.company}
-                </ExperienceCompany>
-                <ExxperienceDate>{experience.date}</ExxperienceDate>
-              </ExperienceInfo>
-              <Description>{experience.description}</Description>
-            </Experience>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section">
-        <SectionTitle>Hobbies</SectionTitle>
-
-        <ul className="space-y-6">
-          <li>
-            <h6>Video Games</h6>
-            <p>
-              I love to play video games. Most of my leisure time I spend
-              playing video games either on phone or PC. Most of the games I
-              play are <CodeText>DOTA2</CodeText>,{" "}
-              <CodeText>FIFA Mobile</CodeText>. I also have played{" "}
-              <CodeText>PUBG Mobile</CodeText> while I was studing at
-              university.
-            </p>
-          </li>
-
-          <li>
-            <h6>Movies</h6>
-            <p>
-              I watch a lot of movies. A total movie freak, you can say. My
-              favorite genres are Crime, Thriller, Romance, and a few Sci-Fi. My
-              favorite movies are <CodeText>3 Idiots</CodeText>,{" "}
-              <CodeText>Shawshank Redemption</CodeText>,{" "}
-              <CodeText>The Green Mile</CodeText>, and
-              <CodeText>Titanic</CodeText>.
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section className="section">
-        <SectionTitle>FAQs</SectionTitle>
-
-        <ul className="space-y-6">
-          <li>
-            <h6>How can you contact me?</h6>
-            <p>
-              - You can contact me through sending
-              <ExternalLink href="mailto:alifhaider57@gmail.com">
-                {" "}
-                an email{" "}
-              </ExternalLink>
-              to me. Everyday I check my email.
-            </p>
-          </li>
-          <li>
-            <h6>What am I currently working on?</h6>
-            <p>
-              - I am currently working on{" "}
-              <button
-                onClick={() => focusProject(0)}
-                aria-label="Nulandia Admin Dashboard"
-                className="underlined"
-              >
-                <strong>Nulandia Game UI</strong>
-              </button>{" "}
-              and also on{" "}
-              <button
-                onClick={() => focusProject(2)}
-                aria-label="Hydepenthouses Airbnb project"
-                className="underlined"
-              >
-                <strong>Hydepenthouses Airbnb project</strong>
-              </button>
-              .
-            </p>
-          </li>
-          <li>
-            <h6>Am I currently taking any new project?</h6>
-            <p>
-              - Yes, I always love to work on new projects. If you have any
-              project idea, feel free to reach out to me.
-            </p>
-          </li>
-        </ul>
-      </section>
-    </div>
-  );
-}
-
-function CodeText({ children }: { children: React.ReactNode }) {
-  return <span className="code">&#96;{children}&#96;</span>;
-}
-
-function ExternalLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underlined text-nowrap font-medium text-secondary"
-    >
-      {children}
-    </a>
-  );
-}
-
-function IconExternalLink({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  );
-}
-
-function InfoItem({
-  children,
-  text,
-}: {
-  children: React.ReactNode;
-  text: string;
-}) {
-  return (
-    <li title={text} className="flex items-center gap-6">
-      {children}
-      <span className="text-lg font-medium md:text-xl">{text}</span>
-    </li>
-  );
-}
-
-function BoxItem({ text }: { text: string }) {
-  return (
-    <li className="flex items-center justify-center rounded-sm border border-border px-6 py-3 shadow-inner">
-      {text}
-    </li>
+      </footer>
+    </main>
   );
 }
