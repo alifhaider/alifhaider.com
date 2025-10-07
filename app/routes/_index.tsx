@@ -437,7 +437,7 @@ export default function Index() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="hover:border-accent bg-card hover:shadow-accent/10 group h-full cursor-pointer p-6 transition-all duration-300 hover:shadow-lg">
+                  <Card className="hover:border-accent bg-card hover:shadow-accent/10 group h-full p-6 transition-all duration-300 hover:shadow-lg">
                     <div className="mb-4 flex items-start justify-between">
                       <h3 className="group-hover:text-accent text-xl font-bold transition-colors">
                         {project.title}
@@ -599,7 +599,7 @@ export default function Index() {
         <div className="mx-auto max-w-4xl">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-muted-foreground text-sm">
-              © 2025 Alif Haider. Built with Next.js & Tailwind CSS.
+              © 2025 Alif Haider. Built with Remix.run & Tailwind CSS.
             </p>
             <div className="flex gap-6">
               <a

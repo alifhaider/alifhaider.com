@@ -73,7 +73,7 @@ function App() {
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
-      <body className="bg-background min-h-screen w-full overflow-x-hidden px-4 md:px-8">
+      <body className="bg-background min-h-screen w-full overflow-x-hidden md:px-8">
         <div className="scroll-watcher" />
         <Outlet />
         <ScrollRestoration />
