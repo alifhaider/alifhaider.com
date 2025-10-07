@@ -4,7 +4,11 @@ import {
   unstable_useViewTransitionState,
   useLoaderData,
 } from "@remix-run/react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { Button } from "~/components/ui/button";
 import { getPosts } from "~/mdx.server";
+import { motion } from "framer-motion";
+import { Card } from "~/components/ui/card";
 
 export const meta: MetaFunction = () => {
   return [
@@ -36,40 +40,99 @@ export default function Blogs() {
   }
 
   return (
-    <div className="mx-auto mt-10 w-full max-w-5xl space-y-10">
-      <p>
-        One day I will write blogs and here will be the list of them. Since, I
-        have no blog post yet, I am adding a test article to test my ability of
-        rendering a blog post via{" "}
-        <span className="code">&#96;mdx-files&#96;</span>. Cause why not 🤣
-      </p>
+    <main className="bg-background text-foreground min-h-screen">
+      <header className="border-border border-b">
+        <div className="mx-auto max-w-4xl px-6 py-6">
+          <Link to="/">
+            <Button variant="ghost" size="sm" className="group">
+              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+      </header>
 
-      <ul className="space-y-6">
-        {data.map((post) => {
-          const to = `/blogs/${post.slug}`;
-          const vt = unstable_useViewTransitionState(to);
-          return (
-            <li key={post.slug} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Link
-                  to={to}
-                  style={{
-                    viewTransitionName: vt ? "blog-title" : "none",
-                  }}
-                  unstable_viewTransition
-                  className="underlined text-3xl font-bold text-secondary"
+      <section className="px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="from-foreground to-accent mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-6xl">
+              Blog
+            </h1>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              Thoughts on web development, game development, and everything in
+              between.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+      <section className="px-6 py-8 pb-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="space-y-6">
+            {data.map((post, index) => {
+              const to = `/blogs/${post.slug}`;
+              const vt = unstable_useViewTransitionState(to);
+              return (
+                <motion.div
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
                 >
-                  {post.frontmatter.title}
-                </Link>
-                <span className="text-gray-500 text-xs md:text-sm">
-                  {formatDate(post.frontmatter.date)}
-                </span>
-              </div>
-              <p>{post.frontmatter.description}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+                  <Link to={`/blogs/${post.slug}`} unstable_viewTransition>
+                    <Card className="hover:border-accent/50 group bg-card/50 hover:shadow-accent/10 border-border/50 cursor-pointer p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
+                      <div className="mb-3 flex flex-wrap gap-2">
+                        {post.frontmatter.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="bg-accent/10 border-accent/20 text-accent rounded border px-2 py-1 text-xs"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h2
+                        className="group-hover:text-accent mb-3 text-2xl font-bold transition-colors"
+                        style={{
+                          viewTransitionName: vt ? "blog-title" : "none",
+                        }}
+                      >
+                        {post.frontmatter.title}
+                      </h2>
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                        {post.frontmatter.description}
+                      </p>
+                      <div className="text-muted-foreground flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>
+                            {new Date(post.frontmatter.date).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              },
+                            )}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          <span>{post.frontmatter.readTime}</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

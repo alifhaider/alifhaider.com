@@ -10,6 +10,8 @@ export type Frontmatter = {
   date: string;
   description: string;
   categories: string[];
+  tags: string[];
+  readTime: string;
 };
 
 export async function getPost(slug: string) {
