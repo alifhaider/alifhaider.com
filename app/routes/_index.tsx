@@ -151,32 +151,26 @@ export default function Index() {
     target: aboutRef,
     offset: ["start end", "end start"],
   });
-  const aboutTitleY = useTransform(aboutProgress, [0, 1], [100, -100]);
   const aboutContentY = useTransform(aboutProgress, [0, 1], [50, -50]);
 
   const { scrollYProgress: skillsProgress } = useScroll({
     target: skillsRef,
     offset: ["start end", "end start"],
   });
-  const skillsTitleY = useTransform(skillsProgress, [0, 1], [120, -120]);
   const skillsContentY = useTransform(skillsProgress, [0, 1], [60, -60]);
 
   const { scrollYProgress: projectsProgress } = useScroll({
     target: projectsRef,
     offset: ["start end", "end start"],
   });
-  const projectsTitleY = useTransform(projectsProgress, [0, 1], [100, -100]);
+
   const projectsContentY = useTransform(projectsProgress, [0, 1], [50, -50]);
 
   const { scrollYProgress: experienceProgress } = useScroll({
     target: experienceRef,
     offset: ["start end", "end start"],
   });
-  const experienceTitleY = useTransform(
-    experienceProgress,
-    [0, 1],
-    [110, -110],
-  );
+
   const experienceContentY = useTransform(
     experienceProgress,
     [0, 1],
@@ -333,12 +327,9 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.h2
-              style={{ y: aboutTitleY }}
-              className="from-foreground to-accent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
-            >
+            <h2 className="from-foreground to-accent mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               About
-            </motion.h2>
+            </h2>
             <motion.div
               style={{ y: aboutContentY }}
               className="text-muted-foreground space-y-4 text-base leading-relaxed"
@@ -377,12 +368,9 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.h2
-              style={{ y: skillsTitleY }}
-              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
-            >
+            <h2 className="from-foreground to-accent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Expertise
-            </motion.h2>
+            </h2>
             <motion.div
               style={{ y: skillsContentY }}
               className="flex flex-wrap gap-3"
@@ -420,12 +408,9 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.h2
-              style={{ y: projectsTitleY }}
-              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
-            >
+            <h2 className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Projects
-            </motion.h2>
+            </h2>
             <motion.div
               style={{ y: projectsContentY }}
               className="grid gap-6 md:grid-cols-2"
@@ -489,19 +474,16 @@ export default function Index() {
         ref={experienceRef}
         className="bg-muted/30 relative overflow-hidden px-6 py-16"
       >
-        <div className="relative z-10 mx-auto max-w-4xl">
+        <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.h2
-              style={{ y: experienceTitleY }}
-              className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
-            >
+            <h2 className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Experience
-            </motion.h2>
+            </h2>
             <motion.div style={{ y: experienceContentY }} className="space-y-6">
               {experiences.map((exp, index) => (
                 <motion.div
