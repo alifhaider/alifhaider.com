@@ -72,29 +72,8 @@ function App() {
         <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-          rel="stylesheet"
-        />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="min-h-screen w-full overflow-x-hidden bg-background px-4 md:px-8">
+      <body className="bg-background min-h-screen w-full overflow-x-hidden px-4 md:px-8">
         <div className="scroll-watcher" />
         <Outlet />
         <ScrollRestoration />
