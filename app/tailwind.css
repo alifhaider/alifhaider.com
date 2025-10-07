@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @plugin 'tailwindcss-animate';
 
@@ -10,8 +10,7 @@
 @theme {
   --font-*: initial;
   --font-sans: Rubik, sans-serif;
-  --font-code:
-    Fira Code, UI Mono, SFMono-Regular, Menlo, Monaco, Consolas,
+  --font-code: Fira Code, UI Mono, SFMono-Regular, Menlo, Monaco, Consolas,
     Liberation Mono, Courier New, monospace;
 
   --color-*: initial;
@@ -83,7 +82,6 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

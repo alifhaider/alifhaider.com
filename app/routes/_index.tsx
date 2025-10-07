@@ -61,7 +61,7 @@ const projects = [
   },
   {
     title: "Hydepenthouse Airbnb",
-    url: "hydepenthouses.com",
+    url: "https://hydepenthouses.abodems.com/",
     description:
       "Multi-domain Airbnb platform built with Remix.run. Dynamic theming system where each domain gets unique color schemes and fonts based on server-side detection.",
     tags: ["Remix.run", "TypeScript", "SCSS", "Multi-tenant"],
@@ -104,12 +104,12 @@ const experiences = [
   },
   {
     role: "Web Application Developer",
-    company: "Upwork - Upwork Profile",
+    company: "Upwork - Upwork Freelancer",
     to: "https://www.upwork.com/freelancers/~014066482556c551be",
-    location: "Remote, Freelancer",
+    location: "Remote",
     period: "Feb'21 - Present",
     description:
-      "I am working as a freelancer on Upwork. Most of the jobs I took were via Upwork. And also, most of the experience I gathered are from Upwork Projects.",
+      "As a freelance web developer, I have built several web applications for clients, with a focus on React.js and modern frameworks like Next.js and Remix.run.",
   },
   {
     role: "Frontend Dev",
@@ -143,6 +143,9 @@ export default function Index() {
   const skillsRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
+
+  const currentYear = new Date().getFullYear();
+  const yearOfExperience = currentYear - 2021;
 
   const { scrollYProgress: aboutProgress } = useScroll({
     target: aboutRef,
@@ -224,10 +227,8 @@ export default function Index() {
         style={{ opacity, scale }}
         className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
       >
-        {/* Animated background */}
         <AnimatedBackground />
 
-        {/* Floating geometric shapes */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="bg-accent/10 animate-float absolute top-1/4 left-1/4 h-64 w-64 rounded-full blur-3xl" />
           <div
@@ -266,9 +267,9 @@ export default function Index() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-muted-foreground mx-auto mb-8 max-w-2xl text-base leading-relaxed"
           >
-            Tech enthusiast with 2+ years of experience. From dynamic admin
-            dashboards to MMORPG games, I love exploring new technologies and
-            building innovative solutions.
+            Tech enthusiast with {yearOfExperience}+ years of experience. From
+            dynamic admin dashboards to MMORPG games, I love exploring new
+            technologies and building innovative solutions.
           </motion.p>
 
           <motion.div
@@ -344,21 +345,21 @@ export default function Index() {
             >
               <p>
                 I&apos;m a software engineer passionate about building web
-                applications that solve real problems. With over two years of
-                experience, I&apos;ve worked on everything from dynamic admin
-                dashboards to full-stack MMORPG games.
+                applications that solve real problems. I&apos;ve worked on
+                everything from dynamic admin dashboards to full-stack MMORPG
+                games.
               </p>
               <p>
                 I&apos;m a tech enthusiast who loves learning new technologies.
                 While most of my work involves React.js and modern frameworks
-                like Next.js and Remix.run, I&apos;m also interested in
+                like Next.js and Remix.run, but I&apos;m also interested in
                 exploring Rust CLI tools and C++ OpenGL games. I&apos;ve even
                 contributed to game development using Godot Engine.
               </p>
               <p>
                 I completed my graduation in Computer Science and Engineering
-                from North South University. Currently based in Dhaka,
-                Bangladesh, working remotely with teams across the globe.
+                from North South University (Bangladesh), working remotely with
+                teams across the globe.
               </p>
             </motion.div>
           </motion.div>
@@ -599,7 +600,8 @@ export default function Index() {
         <div className="mx-auto max-w-4xl">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-muted-foreground text-sm">
-              © 2025 Alif Haider. Built with Remix.run & Tailwind CSS.
+              © 2022-{currentYear} Alif Haider. Built with Remix.run & Tailwind
+              CSS.
             </p>
             <div className="flex gap-6">
               <a
@@ -619,7 +621,7 @@ export default function Index() {
                 LinkedIn
               </a>
               <a
-                href="mailto:hello@alifhaider.com"
+                href="mailto:alifhaider57@gmail.com"
                 className="text-muted-foreground hover:text-accent text-sm transition-colors"
               >
                 Email
