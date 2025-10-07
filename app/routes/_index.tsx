@@ -306,7 +306,7 @@ export default function Index() {
               <Linkedin className="h-6 w-6" />
             </a>
             <a
-              href="mailto:hello@alifhaider.com"
+              href="mailto:alifhaider57@gmail.com"
               className="text-muted-foreground hover:text-accent transition-colors"
             >
               <Mail className="h-6 w-6" />
