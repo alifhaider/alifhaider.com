@@ -31,14 +31,6 @@ export async function loader() {
 export default function Blogs() {
   const data = useLoaderData<typeof loader>();
 
-  function formatDate(date: string) {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  }
-
   return (
     <main className="bg-background text-foreground min-h-screen">
       <header className="border-border border-b">
