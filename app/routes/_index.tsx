@@ -326,13 +326,13 @@ export default function Index() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="mb-1"
+            className="text-muted-foreground group flex flex-col items-center gap-0.5 text-center"
           >
             <ChevronDown className="h-6 w-6" />
+            <span className="text-xs opacity-80 transition-opacity group-hover:opacity-100">
+              Scroll Down
+            </span>
           </motion.div>
-          <span className="text-sm font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            Scroll Down
-          </span>
         </motion.div>
       </motion.section>
 
