@@ -115,7 +115,7 @@ export default function Blog() {
             viewport={{ once: true }}
             className="border-border/50 mt-16 border-t pt-8 text-center"
           >
-            <Link to="/blogs" unstable_viewTransition>
+            <Link to="/blogs">
               <Button size="lg" className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Back to All Posts
