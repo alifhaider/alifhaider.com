@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { type MetaFunction } from "@remix-run/node";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, stagger } from "framer-motion";
 import {
   Moon,
   Sun,
@@ -141,7 +141,6 @@ export default function Index() {
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   const aboutRef = useRef<HTMLElement>(null);
-  const skillsRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
 
@@ -153,12 +152,6 @@ export default function Index() {
     offset: ["start end", "end start"],
   });
   const aboutContentY = useTransform(aboutProgress, [0, 1], [50, -50]);
-
-  const { scrollYProgress: skillsProgress } = useScroll({
-    target: skillsRef,
-    offset: ["start end", "end start"],
-  });
-  const skillsContentY = useTransform(skillsProgress, [0, 1], [60, -60]);
 
   const { scrollYProgress: projectsProgress } = useScroll({
     target: projectsRef,
@@ -378,41 +371,31 @@ export default function Index() {
         </div>
       </section>
 
-      <section
-        ref={skillsRef}
-        className="bg-muted/30 relative overflow-hidden px-6 py-16"
-      >
+      <section className="bg-muted/30 relative overflow-hidden px-6 py-16">
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            initial={{ opacity: 0, scale: 0.95, y: 100 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h2 className="from-foreground to-accent mb-8 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Expertise
             </h2>
-            <motion.div
-              style={{ y: skillsContentY }}
-              className="flex flex-wrap gap-3"
-            >
+            <ul className="flex flex-wrap gap-3">
               {skills.map((skill, index) => (
-                <motion.div
-                  key={skill}
+                <motion.li
+                  key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  whileHover={{
-                    scale: 1.05,
-                    borderColor: "hsl(var(--color-accent))",
-                  }}
-                  className="bg-card hover:border-accent border-border cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all"
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  className="bg-card hover:border-accent border-border cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105"
                 >
                   {skill}
-                </motion.div>
+                </motion.li>
               ))}
-            </motion.div>
+            </ul>
           </motion.div>
         </div>
       </section>
@@ -444,7 +427,7 @@ export default function Index() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="hover:border-accent bg-card hover:shadow-accent/10 group h-full p-6 transition-all duration-300 hover:shadow-lg">
+                  <Card className="hover:border-accent bg-card hover:shadow-accent/10 group h-full p-6 transition-[border-color,box-shadow] duration-300 hover:shadow-lg">
                     <div className="mb-4 flex items-start justify-between">
                       <h3 className="group-hover:text-accent text-xl font-bold transition-colors">
                         {project.title}
@@ -543,13 +526,13 @@ export default function Index() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl border border-transparent p-8 transition-all duration-500"
+            className="rounded-2xl border border-transparent p-8 transition-[border-color] duration-500"
           >
             <h2 className="from-foreground to-accent mb-8 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Beyond Code
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
-              <Card className="bg-card hover:border-accent p-6 transition-all duration-300">
+              <Card className="bg-card hover:border-accent p-6 transition-[border-color,box-shadow] duration-300">
                 <h3 className="mb-3 text-xl font-bold">🎮 Video Games</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   I love playing video games in my leisure time. My go-to games
@@ -557,7 +540,7 @@ export default function Index() {
                   my university days.
                 </p>
               </Card>
-              <Card className="bg-card hover:border-accent p-6 transition-all duration-300">
+              <Card className="bg-card hover:border-accent p-6 transition-[border-color,box-shadow] duration-300">
                 <h3 className="mb-3 text-xl font-bold">🎬 Movies</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Total movie freak! I love Crime, Thriller, Romance, and Sci-Fi
@@ -577,7 +560,7 @@ export default function Index() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl border border-transparent p-8 transition-all duration-500"
+            className="rounded-2xl border border-transparent p-8 transition-[border-color] duration-500"
           >
             <h2 className="from-foreground to-accent mb-6 bg-linear-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
               Let&apos;s Connect
