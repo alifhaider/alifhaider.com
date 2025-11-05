@@ -10,6 +10,7 @@ import {
   ExternalLink,
   ArrowRight,
   BookOpen,
+  ChevronDown,
 } from "lucide-react";
 import { Theme, useTheme } from "remix-themes";
 import { Link } from "@remix-run/react";
@@ -292,6 +293,7 @@ export default function Index() {
             <a
               href="https://github.com/alifhaider"
               target="_blank"
+              title="Github"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-accent transition-colors"
             >
@@ -300,12 +302,14 @@ export default function Index() {
             <a
               href="https://linkedin.com/in/alifhaider"
               target="_blank"
+              title="Linked-In"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-accent transition-colors"
             >
               <Linkedin className="h-6 w-6" />
             </a>
             <a
+              title="Gmail"
               href="mailto:alifhaider57@gmail.com"
               className="text-muted-foreground hover:text-accent transition-colors"
             >
@@ -313,6 +317,23 @@ export default function Index() {
             </a>
           </motion.div>
         </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 transform"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="mb-1"
+          >
+            <ChevronDown className="h-6 w-6" />
+          </motion.div>
+          <span className="text-sm font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            Scroll Down
+          </span>
+        </motion.div>
       </motion.section>
 
       <section
