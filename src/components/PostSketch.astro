@@ -1,0 +1,39 @@
+---
+interface Props {
+  type: "flow" | "columns" | "queue";
+}
+
+const { type } = Astro.props;
+
+const base =
+  "relative flex h-[118px] items-center gap-[7px] overflow-hidden border-l border-line-strong pl-[22px] text-muted max-[760px]:h-[74px] max-[760px]:border-l-0 max-[760px]:border-t max-[760px]:border-line max-[760px]:pl-0 max-[760px]:pt-[16px]";
+const span = "text-[10px]";
+const tick = "block h-px w-[26px] bg-line-strong";
+---
+
+{
+  type === "flow" && (
+    <div
+      class={`${base} flex-wrap content-center after:absolute after:bottom-[5px] after:right-[8px] after:block after:h-[50px] after:w-[50px] after:rounded-full after:border after:border-line after:content-['']`}
+      aria-hidden="true"
+    >
+      <span class={span}>UI</span><i class={tick}></i><span class={span}>route</span><i class={tick}></i><span class={span}>data</span><i class={tick}></i><span class={span}>db</span>
+    </div>
+  )
+}
+{
+  type === "columns" && (
+    <div class={`${base} items-end justify-between`} aria-hidden="true">
+      <b class="block h-[42px] w-[28px] border-t border-text"></b>
+      <b class="block h-[74px] w-[28px] border-t border-text"></b>
+      <b class="block h-[57px] w-[28px] border-t border-text"></b>
+    </div>
+  )
+}
+{
+  type === "queue" && (
+    <div class={`${base} flex-col items-start justify-center`} aria-hidden="true">
+      <span class={span}>request</span><i class="block h-[17px] w-px bg-line-strong"></i><span class={span}>queue</span><i class="block h-[17px] w-px bg-line-strong"></i><span class={span}>worker</span>
+    </div>
+  )
+}

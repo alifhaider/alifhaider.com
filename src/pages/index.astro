@@ -1,11 +1,200 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <div class="mx-auto grid w-[min(1180px,calc(100%-56px))] grid-cols-[230px_minmax(0,1fr)] gap-18 max-md:block max-md:w-[min(100%-32px,700px)] max-sm:w-[min(100%-24px,680px)]">
+    <aside class="sticky top-0 flex h-screen flex-col py-8.5 pb-7 max-md:static max-md:grid max-md:h-auto max-md:grid-cols-[1fr_auto] max-md:gap-5 max-md:border-b max-md:border-line max-md:py-6 max-md:pb-4.5 max-sm:grid-cols-1">
+      <div>
+        <a class="inline-block font-serif text-[28px] tracking-[-0.035em]" href="#top">Alif Haider</a>
+        <p class="mt-1.75 text-sm leading-normal text-muted max-sm:mt-0.75">Software engineer<br />from Bangladesh.</p>
+      </div>
+
+      <div class="mt-15.5 pr-3.5 max-md:hidden">
+        <p class="text-[13px] leading-[1.75] text-muted">I build web applications across the stack — from React interfaces and routing to APIs, data, realtime services, and the infrastructure around them.</p>
+      </div>
+
+      <nav class="mt-[38px] grid gap-[9px] text-[13px] max-md:col-span-2 max-md:mt-[10px] max-md:flex max-md:gap-[18px] max-sm:order-2 max-sm:mt-[2px]" aria-label="Primary navigation">
+        <a class="w-fit underline-offset-[3px] hover:underline" href="#work">Work</a>
+        <a class="w-fit underline-offset-[3px] hover:underline" href="#about">About</a>
+        <a class="w-fit underline-offset-[3px] hover:underline" href="/blog/">Blog</a>
+      </nav>
+
+      <div class="mt-auto max-md:col-span-2 max-md:m-0 max-md:flex max-md:items-center max-md:justify-between max-md:gap-[20px] max-sm:order-3">
+        <div class="flex max-w-[205px] flex-wrap gap-x-[13px] gap-y-[7px] max-md:max-w-none max-sm:gap-x-[11px] max-sm:gap-y-[6px]">
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://github.com/alifhaider" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://linkedin.com/in/alifhaider" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://x.com/" target="_blank" rel="noreferrer">X</a>
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline" href="https://wa.me/" target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+        <div class="mt-[19px] flex items-center justify-between gap-[12px] border-t border-line pt-[16px] max-md:m-0 max-md:border-0 max-md:p-0">
+          <a class="text-[12px] text-muted underline-offset-[3px] hover:underline max-md:hidden" href="mailto:hello@alifhaider.dev">Email me ↗</a>
+          <ThemeToggle />
+        </div>
+      </div>
+    </aside>
+
+    <main id="top" class="min-w-0">
+      <section class="border-b border-line pt-[72px] pb-[78px] max-md:pt-[58px] max-md:pb-[58px]">
+        <p class="mb-[20px] text-[12px] tracking-[0.02em] text-soft">Hello, I'm Alif.</p>
+        <h1 class="max-w-[700px] font-serif text-[clamp(48px,7vw,78px)] font-normal leading-[0.98] tracking-[-0.05em] max-sm:text-[48px]">I make software for the web.</h1>
+        <div class="mt-[31px] grid grid-cols-[minmax(0,1fr)_240px] items-start gap-[52px] max-md:grid-cols-1 max-md:gap-[26px]">
+          <p class="max-w-[620px] text-[14px] leading-[1.75] text-muted">Most of my work is with React and TypeScript, but I enjoy the parts that sit around the UI just as much: application architecture, APIs, databases, background jobs, realtime systems, and deployment.</p>
+          <div class="border-l border-line-strong pl-[17px] max-md:max-w-[420px]">
+            <p class="mb-[16px] text-[12px] leading-[1.7] text-muted"><span class="mb-[3px] block text-[10px] uppercase tracking-[0.09em] text-text">Currently</span> building products, learning Astro, and exploring Go and Rust.</p>
+            <p class="text-[12px] leading-[1.7] text-muted"><span class="mb-[3px] block text-[10px] uppercase tracking-[0.09em] text-text">Usually</span> working remotely with small teams and clients.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="pt-[64px]">
+        <div class="flex items-baseline justify-between gap-[20px] border-b border-line-strong pb-[13px] max-sm:pb-[10px]">
+          <h2 class="text-[13px] font-semibold tracking-[0.01em]">Selected work</h2>
+          <span class="text-[11px] text-soft">2023—2026</span>
+        </div>
+
+        <div class="border-b border-line">
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="https://admin.nulandia.com/" target="_blank" rel="noreferrer">
+            <div class="text-[11px] text-soft">2025</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">Nulandia</h3>
+              <p class="text-[12px] text-muted">Game administration & content tooling</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">React · TypeScript</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="relative grid grid-cols-2 gap-[7px] overflow-hidden p-[16px] text-text">
+                <b class="col-span-2 text-[11px] font-bold">Nulandia</b>
+                <span class="border border-line p-[8px] text-[9px] text-muted">Content</span>
+                <span class="border border-line p-[8px] text-[9px] text-muted">Weapons</span>
+                <span class="border border-line p-[8px] text-[9px] text-muted">Quests</span>
+                <i class="absolute right-[15px] top-[15px] h-[2px] w-[18px] bg-line-strong"></i>
+              </div>
+            </div>
+          </a>
+
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="https://hydepenthouses.abodems.com/" target="_blank" rel="noreferrer">
+            <div class="text-[11px] text-soft">2024</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">Hyde Penthouse</h3>
+              <p class="text-[12px] text-muted">Multi-domain booking platform</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">Remix · Prisma</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="p-[15px]">
+                <div class="h-[76px] border border-line-strong bg-[repeating-linear-gradient(135deg,transparent_0_12px,var(--line)_13px_14px)]"></div>
+                <span class="mt-[11px] block font-serif text-[14px]">Reserve your stay</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="https://play.definya.com/" target="_blank" rel="noreferrer">
+            <div class="text-[11px] text-soft">2024</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">Definya</h3>
+              <p class="text-[12px] text-muted">Full-stack MMORPG & realtime game systems</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">React · Node · Redis · WebSockets</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="relative bg-text p-[17px] text-bg">
+                <span class="font-serif text-[18px]">DEF</span>
+                <i class="absolute right-[25px] top-[25px] h-[14px] w-[14px] rounded-full border border-current opacity-70"></i>
+                <i class="absolute right-[52px] top-[57px] h-[14px] w-[14px] rounded-full border border-current opacity-70"></i>
+                <i class="absolute bottom-[20px] left-[65px] h-[14px] w-[14px] rounded-full border border-current opacity-70"></i>
+              </div>
+            </div>
+          </a>
+
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="#" data-preview="carehub">
+            <div class="text-[11px] text-soft">2023</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">CareHub</h3>
+              <p class="text-[12px] text-muted">Appointments, scheduling & reservation logic</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">React · Remix · Prisma</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="grid grid-cols-5 gap-[6px] p-[16px]">
+                <b class="col-span-5 mb-[3px] font-serif text-[14px] font-normal">June</b>
+                <span class="text-center text-[7px] text-soft">Mon</span>
+                <span class="text-center text-[7px] text-soft">Tue</span>
+                <span class="text-center text-[7px] text-soft">Wed</span>
+                <span class="text-center text-[7px] text-soft">Thu</span>
+                <span class="text-center text-[7px] text-soft">Fri</span>
+                <i class="mx-auto mt-[5px] block h-[18px] w-[18px] border border-text"></i>
+              </div>
+            </div>
+          </a>
+
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="#" data-preview="websec">
+            <div class="text-[11px] text-soft">2023</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">WebSec</h3>
+              <p class="text-[12px] text-muted">Subscription SaaS, billing & account workflows</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">React · TypeScript · Stripe</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="p-[16px]">
+                <b class="mb-[12px] block text-[11px] font-medium">Overview</b>
+                <i class="mb-[8px] block h-[6px] w-[76%] bg-line"></i>
+                <i class="mb-[8px] block h-[6px] w-[48%] bg-line"></i>
+                <i class="block h-[6px] w-[64%] bg-line"></i>
+              </div>
+            </div>
+          </a>
+
+          <a class="group relative grid min-h-[84px] grid-cols-[55px_minmax(0,1fr)_195px_20px] items-center gap-[20px] border-b border-line transition-[padding-left] duration-[0.18s] motion-reduce:transition-none hover:pl-[7px] max-md:min-h-[78px] max-md:grid-cols-[48px_minmax(0,1fr)_18px] max-md:gap-[14px] max-sm:hover:pl-0" href="#" data-preview="studio">
+            <div class="text-[11px] text-soft">2026</div>
+            <div class="min-w-0">
+              <h3 class="mb-1 text-[16px] font-medium tracking-[-0.015em]">Generative Studio</h3>
+              <p class="text-[12px] text-muted">Image & video generation workflows</p>
+            </div>
+            <div class="text-right text-[11px] leading-[1.5] text-soft max-md:hidden">Next.js · Prisma · Postgres</div>
+            <span class="text-right text-[14px] text-soft">↗</span>
+            <div class="pointer-events-none absolute right-[34px] top-1/2 z-[4] h-[145px] w-[225px] -translate-y-1/2 scale-[0.97] border border-line-strong bg-bg opacity-0 shadow-[0_14px_30px_rgba(0,0,0,0.09)] transition-[opacity,scale,translate] duration-[0.18s] motion-reduce:transition-none group-hover:-translate-x-[8px] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:-translate-x-[8px] group-focus-visible:scale-100 group-focus-visible:opacity-100 max-md:hidden" aria-hidden="true">
+              <div class="p-[15px]">
+                <span class="mb-[14px] block font-serif text-[18px]">Generate</span>
+                <i class="mb-[8px] block h-[5px] w-[72%] bg-line"></i>
+                <i class="block h-[5px] w-[51%] bg-line"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+        <p class="mt-[15px] text-[12px] text-soft">More work is available on <a class="text-text underline-offset-[3px] hover:underline" href="https://github.com/alifhaider" target="_blank" rel="noreferrer">GitHub ↗</a>.</p>
+      </section>
+
+      <section id="about" class="border-t border-line pt-[64px]">
+        <div class="flex items-baseline justify-between gap-[20px] border-b border-line-strong pb-[13px] max-sm:pb-[10px]">
+          <h2 class="text-[13px] font-semibold tracking-[0.01em]">About</h2>
+          <span class="text-[11px] text-soft">A little context</span>
+        </div>
+        <div class="grid grid-cols-[1.08fr_0.92fr] gap-[64px] pt-[24px] max-md:grid-cols-1 max-md:gap-[28px]">
+          <p class="max-w-[560px] text-[14px] leading-[1.75] text-muted">I started as a frontend developer and gradually found myself wanting to understand the whole system. These days I am happiest when I can take a feature from an empty screen through data modeling, implementation, deployment, and the less-obvious edge cases.</p>
+          <div class="grid gap-[15px]">
+            <p class="text-[12px] leading-[1.75] text-muted"><b class="font-medium text-text">Stack</b> React, TypeScript, Next.js, React Router, Node.js, Prisma</p>
+            <p class="text-[12px] leading-[1.75] text-muted"><b class="font-medium text-text">Experience</b> 5+ years · freelance & remote teams</p>
+            <p class="text-[12px] leading-[1.75] text-muted"><b class="font-medium text-text">Interested in</b> Astro, Go, Rust, developer tools, games</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-[25px] border-b border-line pt-[64px] pb-[74px]">
+        <p class="mb-[20px] text-[12px] tracking-[0.02em] text-soft">Have a project in mind?</p>
+        <h2 class="mb-[22px] font-serif text-[clamp(34px,5vw,52px)] font-normal leading-[1] tracking-[-0.045em]">Let's make something useful.</h2>
+        <a class="text-[13px] underline-offset-[3px] hover:underline" href="mailto:hello@alifhaider.dev">hello@alifhaider.dev ↗</a>
+      </section>
+
+      <footer class="flex justify-between pt-[22px] pb-[30px] text-[11px] text-soft">
+        <span>© 2026 Alif Haider</span>
+        <span class="max-sm:hidden">Built for the web.</span>
+        <a href="#top">↑</a>
+      </footer>
+    </main>
+  </div>
 </Layout>

@@ -1,46 +1,40 @@
-# Astro Starter Kit: Basics
+# Alif Haider
 
-```sh
-bun create astro@latest -- --template basics
+Personal portfolio and blog built with Astro.
+
+## Development
+
+Start the dev server in background mode:
+
+```
+astro dev --background
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Manage it with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command             | Action                                   |
+| :------------------ | :--------------------------------------- |
+| `bun install`       | Installs dependencies                    |
+| `bun dev`           | Starts local dev server at `localhost:4321` |
+| `bun build`         | Build your production site to `./dist/`  |
+| `bun preview`       | Preview your build locally               |
+| `bun check`         | Type-check with `astro check`            |
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Structure
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- `src/pages/index.astro` — portfolio home (two-column editorial layout)
+- `src/pages/blog/index.astro` — blog journal
+- `src/pages/blog/[slug].astro` — individual notes
+- `src/content/blog/*.mdx` — blog posts (content collection)
+- `src/styles/global.css` — design tokens, themes, and layout styles
+- `src/components/ThemeToggle.astro` — dark/light mode toggle
 
-## 🧞 Commands
+Blog post frontmatter fields: `title`, `description`, `date`, `tags`, `readTime`, `stack`, `sketch` (`flow` | `columns` | `queue`).
 
-All commands are run from the root of the project, from a terminal:
+## Notes
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Theme (light/dark) is stored in `localStorage` and set before paint to avoid flashes.
+- Fonts: Inter + Newsreader via Google Fonts.
+- Social links and project hrefs in `src/pages/index.astro` are placeholders where real URLs were not provided — replace them.
