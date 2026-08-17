@@ -1,3 +1,9 @@
+===============================================================================
+HOMEPAGE BACKUP
+Original file: app/routes/_index.tsx (Remix project)
+Saved for reference when rebuilding the Astro homepage.
+===============================================================================
+
 import { useRef } from "react";
 import { type MetaFunction } from "@remix-run/node";
 import { useScroll, useTransform, motion, stagger } from "framer-motion";
@@ -121,7 +127,6 @@ const experiences = [
     description:
       "In this part-time job I contributed in building and maintaining the SPORFORYA Admin Dashboard and I also have built several landing pages, which were pixel perfect implementation from designs.",
   },
-
   {
     role: "Frontend Dev",
     company: "MBAKOP LLC",
