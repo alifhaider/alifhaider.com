@@ -1,48 +1,73 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import ThemeToggle from "../../components/ThemeToggle.astro";
-import PostSketch from "../../components/PostSketch.astro";
 import { getCollection } from "astro:content";
+import PostSketch from "../../components/PostSketch.astro";
+import ThemeToggle from "../../components/ThemeToggle.astro";
+import Layout from "../../layouts/Layout.astro";
 
-const posts = (
-  await getCollection("blog")
-).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 
 const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+	date.toLocaleDateString("en-US", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
+	});
 ---
 
 <Layout
-  title="Blog — Alif Haider"
-  description="Writing and notes by Alif Haider about web development, React, TypeScript and building full-stack products."
+	title="Blog — Alif Haider"
+	description="Writing and notes by Alif Haider about web development, React, TypeScript and building full-stack products."
 >
-  <main class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]">
-    <header class="flex min-h-[72px] items-center justify-between gap-[20px] border-b border-line max-[500px]:min-h-[62px]">
-      <a class="font-serif text-[23px] tracking-[-0.03em]" href="/">Alif Haider</a>
-      <div class="flex items-center gap-[22px] max-[500px]:gap-[13px]">
-        <a class="text-[12px] text-muted underline-offset-[3px] hover:text-text hover:underline" href="/">Home</a>
-        <ThemeToggle />
-      </div>
-    </header>
+	<main
+		class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]"
+	>
+		<header
+			class="flex min-h-[72px] items-center justify-between gap-[20px] border-b border-line max-[500px]:min-h-[62px]"
+		>
+			<a class="font-serif text-[23px] tracking-[-0.03em]" href="/"
+				>Alif Haider</a
+			>
+			<div class="flex items-center gap-[22px] max-[500px]:gap-[13px]">
+				<a
+					class="text-[12px] text-muted underline-offset-[3px] hover:text-text hover:underline"
+					href="/"
+					>Home</a
+				>
+				<ThemeToggle />
+			</div>
+		</header>
 
-    <section class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-[80px] py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-[24px] max-[760px]:py-[58px_42px]">
-      <div>
-        <p class="mb-[13px] text-[11px] uppercase tracking-[0.08em] text-soft">Notes / field journal</p>
-        <h1 class="max-w-[680px] font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]">Things I learn while building software.</h1>
-      </div>
-      <p class="mb-[5px] max-w-[320px] text-[13px] leading-[1.75] text-muted">A small collection of practical notes on React, TypeScript, routing, databases, product work, and the odd problem that takes longer than it should.</p>
-    </section>
+		<section
+			class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-[80px] py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-[24px] max-[760px]:py-[58px_42px]"
+		>
+			<div>
+				<p class="mb-[13px] text-[11px] uppercase tracking-[0.08em] text-soft">
+					Notes / field journal
+				</p>
+				<h1
+					class="max-w-[680px] font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]"
+				>
+					Things I learn while building software.
+				</h1>
+			</div>
+			<p class="mb-[5px] max-w-[320px] text-[13px] leading-[1.75] text-muted">
+				A small collection of practical notes on React, TypeScript, routing,
+				databases, product work, and the odd problem that takes longer than it
+				should.
+			</p>
+		</section>
 
-    <section class="border-t border-line-strong" aria-label="Blog posts">
-      <div class="flex justify-between py-[12px] text-[10px] uppercase tracking-[0.08em] text-soft">
-        <span>Writing</span><span>01—{String(posts.length).padStart(2, "0")}</span>
-      </div>
+		<section class="border-t border-line-strong" aria-label="Blog posts">
+			<div
+				class="flex justify-between py-[12px] text-[10px] uppercase tracking-[0.08em] text-soft"
+			>
+				<span>Writing</span
+				><span>01—{String(posts.length).padStart(2, "0")}</span>
+			</div>
 
-      {posts.map((post, index) => (
+			{posts.map((post, index) => (
         <a
           class="block border-t border-line py-[28px_30px] transition-[padding-left] duration-[0.2s] motion-reduce:transition-none hover:pl-[12px] max-[760px]:hover:pl-0"
           href={`/blog/${post.id}/`}
@@ -63,14 +88,25 @@ const formatDate = (date: Date) =>
           </div>
         </a>
       ))}
-    </section>
+		</section>
 
-    <section class="mt-[32px] border-y border-line py-[22px] text-[12px] leading-[1.7] text-muted">
-      <p class="max-w-[520px]"><span class="mr-[9px] text-text">More coming</span> I'd rather publish a few useful notes than keep a calendar full of posts.</p>
-    </section>
+		<section
+			class="mt-[32px] border-y border-line py-[22px] text-[12px] leading-[1.7] text-muted"
+		>
+			<p class="max-w-[520px]">
+				<span class="mr-[9px] text-text">More coming</span>
+				I'd rather publish a few useful notes than keep a calendar full of
+				posts.
+			</p>
+		</section>
 
-    <footer class="flex justify-between py-[22px_30px] text-[11px] text-soft">
-      <span>© 2026 Alif Haider</span><a class="underline-offset-[3px] hover:text-text hover:underline" href="/">Back to portfolio ↑</a>
-    </footer>
-  </main>
+		<footer class="flex justify-between py-[22px_30px] text-[11px] text-soft">
+			<span>© 2026 Alif Haider</span
+			><a
+				class="underline-offset-[3px] hover:text-text hover:underline"
+				href="/"
+				>Back to portfolio ↑</a
+			>
+		</footer>
+	</main>
 </Layout>
