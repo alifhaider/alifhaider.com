@@ -1,28 +1,31 @@
 {
-  "name": "alifhaider.com",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "check": "astro check",
-    "typecheck": "astro check"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^7.0.5",
-    "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource-variable/newsreader": "^5.3.0",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.2",
-    "tailwindcss": "^4.3.3"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "typescript": "^5"
-  }
+	"name": "alifhaider.com",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"check": "astro check",
+		"typecheck": "astro check",
+		"format": "biome check --fix --unsafe"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^7.0.5",
+		"@astrojs/sitemap": "^3.7.3",
+		"@fontsource-variable/inter": "^5.3.0",
+		"@fontsource-variable/newsreader": "^5.3.0",
+		"@tailwindcss/vite": "^4.3.3",
+		"astro": "^7.2.2",
+		"tailwindcss": "^4.3.3"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.10",
+		"@biomejs/biome": "2.5.9",
+		"typescript": "^5"
+	}
 }
