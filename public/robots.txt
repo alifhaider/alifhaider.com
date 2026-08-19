@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alifhaider.vercel.com/sitemap-index.xml
