@@ -3,26 +3,26 @@
 ---
 
 <button
-  class="theme-toggle inline-flex cursor-pointer items-center gap-[6px] border-0 bg-transparent p-0 text-[12px] text-muted"
-  type="button"
-  aria-label="Toggle color theme"
+	class="theme-toggle inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent p-0 text-xs text-muted"
+	type="button"
+	aria-label="Toggle color theme"
 >
-  <span class="text-[13px]">◐</span><span>Theme</span>
+	<span class="text-[13px]">◐</span><span>Theme</span>
 </button>
 
 <script>
-  const root = document.documentElement;
-  const button = document.querySelector<HTMLButtonElement>(".theme-toggle");
-  const setLabel = () => {
-    button?.setAttribute(
-      "aria-label",
-      `Switch to ${root.dataset.theme === "dark" ? "light" : "dark"} mode`,
-    );
-  };
-  button?.addEventListener("click", () => {
-    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
-    localStorage.setItem("theme", root.dataset.theme);
-    setLabel();
-  });
-  setLabel();
+const root = document.documentElement;
+const button = document.querySelector<HTMLButtonElement>(".theme-toggle");
+const setLabel = () => {
+	button?.setAttribute(
+		"aria-label",
+		`Switch to ${root.dataset.theme === "dark" ? "light" : "dark"} mode`,
+	);
+};
+button?.addEventListener("click", () => {
+	root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+	localStorage.setItem("theme", root.dataset.theme);
+	setLabel();
+});
+setLabel();
 </script>
