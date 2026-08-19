@@ -3,213 +3,96 @@
 
 <button
 	type="button"
-	class="theme-toggle"
+	class="group flex w-24 flex-col gap-1.5 border-0 bg-transparent p-0 text-[10px] font-medium uppercase leading-none tracking-[0.12em] text-soft transition-colors hover:text-text"
 	data-theme-toggle
 	aria-label="Switch to night mode"
 	aria-pressed="false"
 >
-	<span class="theme-toggle__labels">
-		<span data-label="day">Day</span>
-		<span data-label="night">Night</span>
-	</span>
+	<div class="flex w-full items-center justify-between">
+		<span class="transition-opacity duration-300" data-label="day"> Day </span>
 
-	<span class="theme-toggle__track" aria-hidden="true">
-		<span class="theme-toggle__indicator"></span>
-	</span>
+		<span class="transition-opacity duration-300" data-label="night">
+			Night
+		</span>
+	</div>
+
+	<div class="relative h-2 w-full" aria-hidden="true">
+		<!-- Base line -->
+		<span
+			class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current/20"
+		></span>
+
+		<!-- Active line -->
+		<span
+			class="absolute left-0 top-1/2 h-0.5 w-1/2 -translate-y-1/2 bg-current transition-[left] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+			data-active-line
+		></span>
+
+		<!-- Indicator -->
+		<span
+			class="pointer-events-none absolute left-0 top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-current bg-current transition-[left] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+			data-indicator
+		></span>
+	</div>
 </button>
 
-<style>
-	.theme-toggle {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-
-		width: 92px;
-		padding: 0;
-
-		border: 0;
-		background: transparent;
-
-		color: var(--color-soft);
-		font-size: 10px;
-		font-weight: 500;
-		line-height: 1;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-
-		cursor: pointer;
-		text-align: left;
-	}
-
-	.theme-toggle:hover {
-		color: var(--color-text);
-	}
-
-	.theme-toggle__labels {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-
-	.theme-toggle__labels span {
-		transition: opacity 300ms ease;
-	}
-
-	.theme-toggle__track {
-		position: relative;
-		display: block;
-		width: 100%;
-		height: 5px;
-	}
-
-	/* The quiet base rule */
-	.theme-toggle__track::before {
-		content: "";
-		position: absolute;
-		inset: 50% 0 auto;
-		height: 1px;
-		background: currentColor;
-		opacity: 0.25;
-		transform: translateY(-50%);
-	}
-
-	/* The active half */
-	.theme-toggle__track::after {
-		content: "";
-		position: absolute;
-		top: 50%;
-		left: 0;
-		width: 50%;
-		height: 2px;
-		background: currentColor;
-		transform: translateY(-50%);
-		transition:
-			left 500ms cubic-bezier(0.22, 1, 0.36, 1),
-			width 500ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-
-	.theme-toggle__indicator {
-		position: absolute;
-		z-index: 2;
-
-		top: 50%;
-		left: 0;
-
-		width: 8px;
-		height: 8px;
-
-		border: 1px solid currentColor;
-		border-radius: 50%;
-
-		background: currentColor;
-
-		transform: translate(-1px, -50%);
-
-		transition:
-			left 500ms cubic-bezier(0.22, 1, 0.36, 1),
-			background-color 200ms ease,
-			border-color 200ms ease;
-	}
-
-	/* LIGHT */
-
-	.theme-toggle[data-theme-state="light"]
-		[data-label="day"] {
-		opacity: 1;
-	}
-
-	.theme-toggle[data-theme-state="light"]
-		[data-label="night"] {
-		opacity: 0.4;
-	}
-
-	.theme-toggle[data-theme-state="light"]
-		.theme-toggle__indicator {
-		left: 0;
-	}
-
-	/* DARK */
-
-	.theme-toggle[data-theme-state="dark"]
-		[data-label="day"] {
-		opacity: 0.4;
-	}
-
-	.theme-toggle[data-theme-state="dark"]
-		[data-label="night"] {
-		opacity: 1;
-	}
-
-	.theme-toggle[data-theme-state="dark"]
-		.theme-toggle__track::after {
-		left: 50%;
-	}
-
-	.theme-toggle[data-theme-state="dark"]
-		.theme-toggle__indicator {
-		left: 100%;
-		transform: translate(-7px, -50%);
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.theme-toggle__indicator,
-		.theme-toggle__track::after,
-		.theme-toggle__labels span {
-			transition: none;
-		}
-	}
-</style>
-
 <script>
-	const initThemeToggle = () => {
-		document
-			.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")
-			.forEach((toggle) => {
-				if (toggle.dataset.initialized) return;
+const initThemeToggle = () => {
+	document
+		.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")
+		.forEach((toggle) => {
+			if (toggle.dataset.initialized) return;
 
-				toggle.dataset.initialized = "true";
+			toggle.dataset.initialized = "true";
 
-				const sync = () => {
-					const theme =
-						document.documentElement.dataset.theme === "dark"
-							? "dark"
-							: "light";
+			const day = toggle.querySelector<HTMLElement>('[data-label="day"]');
 
-					toggle.dataset.themeState = theme;
+			const night = toggle.querySelector<HTMLElement>('[data-label="night"]');
 
-					toggle.setAttribute(
-						"aria-pressed",
-						String(theme === "dark"),
-					);
+			const activeLine =
+				toggle.querySelector<HTMLElement>("[data-active-line]");
 
-					toggle.setAttribute(
-						"aria-label",
-						theme === "dark"
-							? "Switch to day mode"
-							: "Switch to night mode",
-					);
-				};
+			const indicator = toggle.querySelector<HTMLElement>("[data-indicator]");
 
-				toggle.addEventListener("click", () => {
-					const root = document.documentElement;
+			const sync = () => {
+				const isDark = document.documentElement.dataset.theme === "dark";
 
-					const next =
-						root.dataset.theme === "dark"
-							? "light"
-							: "dark";
+				day?.classList.toggle("opacity-100", !isDark);
+				day?.classList.toggle("opacity-40", isDark);
 
-					root.dataset.theme = next;
-					localStorage.setItem("theme", next);
+				night?.classList.toggle("opacity-100", isDark);
+				night?.classList.toggle("opacity-40", !isDark);
 
-					sync();
-				});
+				// Both the active line and indicator use the
+				// exact same position.
+				activeLine?.style.setProperty("left", isDark ? "50%" : "0%");
+
+				indicator?.style.setProperty("left", isDark ? "100%" : "0%");
+
+				toggle.setAttribute("aria-pressed", String(isDark));
+
+				toggle.setAttribute(
+					"aria-label",
+					isDark ? "Switch to day mode" : "Switch to night mode",
+				);
+			};
+
+			toggle.addEventListener("click", () => {
+				const root = document.documentElement;
+
+				const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+
+				root.dataset.theme = nextTheme;
+				localStorage.setItem("theme", nextTheme);
 
 				sync();
 			});
-	};
 
-	initThemeToggle();
-	document.addEventListener("astro:page-load", initThemeToggle);
+			sync();
+		});
+};
+
+initThemeToggle();
+
+document.addEventListener("astro:page-load", initThemeToggle);
 </script>
