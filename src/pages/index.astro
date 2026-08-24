@@ -20,51 +20,6 @@ const SOCIAL_LINKS = [
 	{ label: "LinkedIn", href: "https://linkedin.com/in/alifhaider" },
 	{ label: "X", href: "https://x.com/haider_alif" },
 ];
-
-const projects = [
-	{
-		year: "2026",
-		title: "WebSec",
-		description: "SaaS billing, subscriptions & account management",
-		stack: "React · Prisma · SQLite",
-		href: "https://customers.websec.net/",
-		preview: "websec" as const,
-	},
-	{
-		year: "2026",
-		title: "Generative Studio",
-		description:
-			"Image and video generation platform with model integrations, credits, background processing, and asset management.",
-		stack: "Next.js · Prisma · Postgres",
-		href: "#",
-		preview: "studio" as const,
-	},
-	{
-		year: "2025",
-		title: "Nulandia Admin",
-		description:
-			"Tools for managing a game world, its content, and the people working behind it.",
-		stack: "React · TypeScript",
-		href: "https://admin.nulandia.com/",
-		preview: "nulandia" as const,
-	},
-	{
-		year: "2024",
-		title: "HydePenthouse",
-		description: "Booking platform across multiple domains",
-		stack: "Remix · Prisma",
-		href: "https://hydepenthouses.abodems.com/",
-		preview: "hyde" as const,
-	},
-	{
-		year: "2024",
-		title: "Definya",
-		description: "MMORPG game, realtime features & backend work",
-		stack: "React · MongoDB · Redis · WebSockets",
-		href: "https://play.definya.com/",
-		preview: "definya" as const,
-	},
-];
 ---
 
 <Layout title="Alif Haider - Software Engineer">
@@ -165,7 +120,7 @@ const projects = [
 			<Hero title="I build web applications." />
 
 			<!-- Work -->
-			<WorkSection projects={projects} />
+			<WorkSection />
 
 			<!-- About -->
 			<AboutSection />
@@ -174,7 +129,7 @@ const projects = [
 			<ContactSection />
 
 			<!-- Footer -->
-			<Footer year={2021} />
+			<Footer />
 		</main>
 	</div>
 </Layout>
