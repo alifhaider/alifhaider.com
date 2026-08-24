@@ -1,0 +1,19 @@
+---
+interface Props {
+	year?: number;
+}
+
+const { year = new Date().getFullYear() } = Astro.props;
+---
+
+<footer class="flex justify-between pt-6 pb-8 text-[11px] text-soft">
+	<span>© 2021—{year} Alif Haider</span>
+
+	<a
+		class="underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline"
+		href="#top"
+		aria-label="Back to top"
+	>
+		↑
+	</a>
+</footer>

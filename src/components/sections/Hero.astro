@@ -1,0 +1,51 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title = "I build web applications" } = Astro.props;
+---
+
+<section class="border-b border-line py-20 max-md:py-14">
+	<p class="mb-5 text-xs tracking-[0.02em] text-soft">Hi, I'm Alif.</p>
+
+	<h1
+		class="max-w-175 font-serif text-[clamp(3rem,7vw,4.875rem)] font-normal leading-[0.96] tracking-[-0.055em] max-sm:text-5xl"
+	>
+		{title}
+	</h1>
+
+	<div
+		class="mt-8 grid grid-cols-[minmax(0,1fr)_240px] items-start gap-13 max-md:grid-cols-1 max-md:gap-7"
+	>
+		<p class="max-w-155 text-sm leading-7 text-muted">
+			Most of my work is with React ecosystem — building the interface. I also
+			spend a lot of time on the parts behind the interface — APIs, database,
+			realtime features, background jobs, and getting everything running in
+			production.
+		</p>
+
+		<div
+			class="border-l text-xs leading-normal text-muted border-line-strong pl-4.5 space-y-4 max-md:max-w-105"
+		>
+			<p>
+				<span
+					class="mb-1 block text-[10px] uppercase tracking-widest text-text"
+				>
+					Lately
+				</span>
+				Building full-stack applications with JavaScript and TypeScript — React,
+				Next.js, React Router, Remix, Node.js, Prisma, Drizzle and more.
+			</p>
+
+			<p>
+				<span
+					class="mb-1 block text-[10px] uppercase tracking-widest text-text"
+				>
+					Usually
+				</span>
+				Working remotely with small teams and clients.
+			</p>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,46 @@
+---
+interface Props {
+	message?: string;
+}
+
+const { message = "Working on something interesting?" } = Astro.props;
+---
+
+<section class="mt-6 border-b border-line py-16">
+	<p class="mb-5 text-xs tracking-[0.02em] text-soft">
+		{message}
+	</p>
+
+	<h2
+		class="mb-6 max-w-135 font-serif text-[clamp(2.125rem,5vw,3.25rem)] font-normal leading-none tracking-[-0.045em]"
+	>
+		Let's talk about it.
+	</h2>
+
+	<a
+		class="text-sm underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline"
+		href="mailto:hello@alifhaider.dev"
+	>
+		hello@alifhaider.dev ↗
+	</a>
+
+	<div class="mt-8 max-w-sm border-t border-line pt-4">
+		<div class="flex items-end justify-between gap-6">
+			<div>
+				<p class="text-xs text-text">Résumé</p>
+
+				<p class="mt-1 text-xs leading-5 text-muted">
+					Experience, projects & contact details
+				</p>
+			</div>
+
+			<a
+				class="shrink-0 text-xs text-text underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-text focus-visible:outline-none focus-visible:decoration-text"
+				href="/alif-haider-resume.pdf"
+				download="Alif-Haider-Resume.pdf"
+			>
+				Download ↘
+			</a>
+		</div>
+	</div>
+</section>

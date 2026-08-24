@@ -1,0 +1,34 @@
+---
+import ProjectRow from "../ProjectRow.astro";
+
+interface Props {
+	projects: Array<{
+		year: string;
+		title: string;
+		description: string;
+		stack: string;
+		href: string;
+		preview: "websec" | "studio" | "nulandia" | "hyde" | "definya" | "carehub";
+	}>;
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="work" aria-label="Work section">
+	<div class="pt-16">
+		<div
+			class="flex items-baseline justify-between gap-5 border-b border-line-strong pb-3.5 max-sm:pb-2.5"
+		>
+			<h2 class="text-sm font-semibold tracking-[0.01em]">Things I've built</h2>
+
+			<span class="text-xs text-soft">2023—2026</span>
+		</div>
+
+		<div class="border-b border-line">
+			{projects.map((project) => (
+				<ProjectRow project={project} />
+			))}
+		</div>
+	</div>
+</section>
