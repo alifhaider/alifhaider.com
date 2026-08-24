@@ -1,7 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Ignore legacy backup of the old Remix homepage — it is not part of the site. */
-@source not "../../homepage-backup.txt";
+@source not '../../homepage-backup.txt';
 
 /*
   Design tokens (portfolio concept v7).
@@ -11,115 +11,113 @@
 */
 
 :root {
-	--bg: #f6f5f2;
-	--surface: #eceae5;
-	--text: #181817;
-	--muted: #676660;
-	--soft: #8b8982;
-	--line: #d5d2ca;
-	--line-strong: #bcb8af;
+  --bg: #f6f5f2;
+  --surface: #eceae5;
+  --text: #181817;
+  --muted: #676660;
+  --soft: #8b8982;
+  --line: #d5d2ca;
+  --line-strong: #bcb8af;
 }
 
-html[data-theme="dark"] {
-	--bg: #171716;
-	--surface: #222220;
-	--text: #f1f0ec;
-	--muted: #b5b2ab;
-	--soft: #85827b;
-	--line: #383733;
-	--line-strong: #5a5750;
+html[data-theme='dark'] {
+  --bg: #171716;
+  --surface: #222220;
+  --text: #f1f0ec;
+  --muted: #b5b2ab;
+  --soft: #85827b;
+  --line: #383733;
+  --line-strong: #5a5750;
 }
 
 @theme {
-	--breakpoint-md: 860px;
-	--breakpoint-sm: 520px;
+  --breakpoint-md: 860px;
+  --breakpoint-sm: 520px;
 }
 
 @theme inline {
-	--color-bg: var(--bg);
-	--color-surface: var(--surface);
-	--color-text: var(--text);
-	--color-muted: var(--muted);
-	--color-soft: var(--soft);
-	--color-line: var(--line);
-	--color-line-strong: var(--line-strong);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
 
-	--font-sans:
-		"Inter Variable", ui-sans-serif, system-ui, -apple-system,
-		BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--font-serif: "Newsreader Variable", Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Newsreader Variable', Georgia, serif;
 }
 
 @layer base {
-	html {
-		scroll-behavior: smooth;
-	}
-	body {
-		@apply bg-bg font-sans text-text antialiased;
-	}
-	@media (prefers-reduced-motion: reduce) {
-		html {
-			scroll-behavior: auto;
-		}
-	}
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
 @layer components {
-	/* Article content (markdown output) */
-	.article-body p,
-	.article-body li {
-		@apply mb-5 text-[15px] leading-[1.9] text-muted;
-	}
-	.article-body h2 {
-		@apply mb-4 mt-13.5 font-serif text-[34px] font-normal leading-[1.05] tracking-[-0.035em];
-	}
-	.article-body pre {
-		@apply my-8 overflow-x-auto border border-line bg-surface p-[18px_20px] text-text;
-		font:
-			12px / 1.7 ui-monospace,
-			SFMono-Regular,
-			Menlo,
-			Monaco,
-			Consolas,
-			monospace;
-	}
-	.article-body code {
-		font: inherit;
-	}
-	.article-body blockquote {
-		@apply my-9.5 border-l-2 border-text py-[3px] pl-[22px] font-serif text-[28px] leading-[1.25] tracking-[-0.025em] text-text;
-	}
+  /* Article content (markdown output) */
+  .article-body p,
+  .article-body li {
+    @apply mb-5 text-[15px] leading-[1.9] text-muted;
+  }
+  .article-body h2 {
+    @apply mb-4 mt-13.5 font-serif text-[34px] font-normal leading-[1.05] tracking-[-0.035em];
+  }
+  .article-body pre {
+    @apply my-8 overflow-x-auto border border-line bg-surface p-[18px_20px] text-text;
+    font:
+      12px / 1.7 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+  }
+  .article-body code {
+    font: inherit;
+  }
+  .article-body blockquote {
+    @apply my-9.5 border-l-2 border-text py-[3px] pl-[22px] font-serif text-[28px] leading-[1.25] tracking-[-0.025em] text-text;
+  }
 
-	/* Layered diagram embedded in articles (raw HTML in MDX) */
-	.article-diagram {
-		@apply my-[36px_46px] grid grid-cols-4;
-		border-top: 1px solid var(--line-strong);
-		border-bottom: 1px solid var(--line);
-	}
-	.article-diagram > div {
-		@apply flex min-h-[128px] flex-col justify-between border-r border-line p-[17px_14px];
-	}
-	.article-diagram > div:last-child {
-		@apply border-r-0;
-	}
-	.article-diagram span {
-		@apply text-[9px] text-soft;
-	}
-	.article-diagram b {
-		@apply font-serif text-[22px] font-normal tracking-[-0.02em];
-	}
-	.article-diagram small {
-		@apply text-[10px] leading-[1.4] text-muted;
-	}
-	@media (max-width: 760px) {
-		.article-diagram {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-		.article-diagram > div:nth-child(2n) {
-			border-right: 0;
-		}
-		.article-diagram > div:nth-child(n + 3) {
-			border-top: 1px solid var(--line);
-		}
-	}
+  /* Layered diagram embedded in articles (raw HTML in MDX) */
+  .article-diagram {
+    @apply my-[36px_46px] grid grid-cols-4;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line);
+  }
+  .article-diagram > div {
+    @apply flex min-h-[128px] flex-col justify-between border-r border-line p-[17px_14px];
+  }
+  .article-diagram > div:last-child {
+    @apply border-r-0;
+  }
+  .article-diagram span {
+    @apply text-[9px] text-soft;
+  }
+  .article-diagram b {
+    @apply font-serif text-[22px] font-normal tracking-[-0.02em];
+  }
+  .article-diagram small {
+    @apply text-[10px] leading-[1.4] text-muted;
+  }
+  @media (max-width: 760px) {
+    .article-diagram {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .article-diagram > div:nth-child(2n) {
+      border-right: 0;
+    }
+    .article-diagram > div:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+  }
 }
