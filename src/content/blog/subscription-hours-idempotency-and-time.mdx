@@ -1,0 +1,169 @@
+---
+title: How I made unused hours carry over to the next month
+description: WebSec sells monthly hours. If you don't use them all, they should roll over — but only once, even when Stripe retries webhooks. Notes on the three decisions that made it reliable.
+date: 2026-08-25
+tags: ["React Router", "Prisma", "Stripe"]
+readTime: 7 min read
+stack: React Router · Prisma · Stripe
+project: WebSec — SaaS billing & subscriptions
+projectHref: https://customers.websec.net/
+---
+
+This is a note from building [WebSec](https://customers.websec.net/) — a dashboard where clients buy monthly hours, submit security service requests, and track what's left. The billing looks simple from the outside: pick a plan, pay, get hours. The tricky part is what happens when the month ends and you didn't use everything.
+
+> If 10 hours carry over, they should carry over exactly once. Not zero times. Not twice.
+
+That's the whole problem. The rest is architecture.
+
+<div class="article-diagram" aria-label="The core flow: Stripe tells us a period was paid, we roll hours into the next period">
+  <div><span>01</span><b>Stripe</b><small>invoice.paid</small></div>
+  <div><span>02</span><b>Webhook</b><small>may arrive twice</small></div>
+  <div><span>03</span><b>Period</b><small>close old, open new</small></div>
+  <div><span>04</span><b>Hours</b><small>unused → rollover</small></div>
+</div>
+
+## Decision 1 — Treat a subscription as a timeline, not a row
+
+My first instinct was `user → has plan → has status = ACTIVE`. That gets awkward fast: you need a cron to flip ACTIVE to EXPIRED, you lose history, and "what happened last month?" becomes hard to answer.
+
+I modeled it as a chain of monthly windows instead:
+
+```prisma
+model SubscriptionPeriod {
+  startDate   DateTime
+  endDate     DateTime
+  monthlyHours Int
+  rolloverHours Int @default(0)
+  usedHours    Int @default(0)
+  stripeInvoiceId String? @unique
+  previousPeriodId String? @unique
+}
+```
+
+Each row is one month. To know if you have access right now I just check time:
+
+```ts
+// app/utils/subscription/period.server.ts:260
+where: { userId, startDate: { lte: now }, endDate: { gt: now } }
+```
+
+No status column to keep in sync. State is derived:
+
+```ts
+if (!period) return 'EXPIRED'
+if (period.startDate > now) return 'FUTURE'
+if (period.endDate > now) return 'ACTIVE'
+```
+
+If the database is a few seconds stale, the answer is still correct because time moved, not a flag. And because every period links to `previousPeriodId`, I can show the full timeline in the UI without guessing.
+
+<div class="article-diagram" aria-label="Decision: timeline model vs single row">
+  <div><span>before</span><b>One row</b><small>user.plan = ACTIVE<br/>needs cron</small></div>
+  <div><span>after</span><b>Timeline</b><small>period 01 → 02 → 03<br/>state from dates</small></div>
+  <div><span>query</span><b>Now?</b><small>start ≤ now &lt; end</small></div>
+  <div><span>win</span><b>History</b><small>every month is a row</small></div>
+</div>
+
+## Decision 2 — Two buckets of hours, one simple check
+
+WebSec has two kinds of hours and they behave differently:
+
+- **Standalone hours** (`User.purchasedHours`) — from framework packages or one-off buys. They never expire.
+- **Period hours** — `monthlyHours + rolloverHours - usedHours`. They live inside the current month.
+
+I keep the math pure so it's easy to test and reuse:
+
+```ts
+// app/utils/subscription/core.server.ts:5
+export function computePeriodBalance(period) {
+  const totalHours = period.monthlyHours + period.rolloverHours + period.purchasedHours
+  const available = Math.max(0, totalHours - period.usedHours)
+  return { totalHours, available, isEmpty: available === 0 }
+}
+
+export function computeCarryoverHours(period) {
+  return computePeriodBalance(period).available // never negative
+}
+```
+
+`Math.max(0, ...)` is the rule: we never create debt. If you used 30 of 20 hours (because standalone covered it), carryover is 0.
+
+For the product, everything collapses to one gate — "can this person create a service request?"
+
+```ts
+export async function userHasAvailableCredits(userId) {
+  const access = await getServiceAccessCredits(userId)
+  return access.hasCredits // period.available + standalone > 0
+}
+```
+
+And the type that made the UI safest was a discriminated union:
+
+```ts
+type ServiceAccess =
+  | { kind: 'subscription', state: 'ACTIVE' | 'FUTURE' | 'EXPIRED', period, hours }
+  | { kind: 'framework', package, tier, hours }
+  | { kind: 'none' }
+
+// usage: switch(access.kind) — only relevant fields exist
+```
+
+No `plan?` you forget to check.
+
+When an admin marks a request as done, `allocateHoursForServiceRequest()` (`period.server.ts:90`) works in **deltas**, not totals. It spends standalone hours first (they don't expire), then deducts the rest from `period.usedHours`. The `SubscriptionUsage` row still stores the *full* hours for that request, so finance can reconcile later even if part was covered by standalone.
+
+<div class="article-diagram" aria-label="Two buckets decision">
+  <div><span>bucket A</span><b>Standalone</b><small>never expires<br/>spend first</small></div>
+  <div><span>bucket B</span><b>Period</b><small>monthly + rollover<br/>− used</small></div>
+  <div><span>gate</span><b>hasCredits?</b><small>A + B &gt; 0</small></div>
+  <div><span>audit</span><b>Usage row</b><small>stores full hours</small></div>
+</div>
+
+## Decision 3 — Stripe is the truth, so make our side idempotent
+
+The local period is not the source of truth — Stripe is. That means the most important function is what runs when Stripe says `invoice.paid`.
+
+Stripe **will** send that webhook twice. Retries, duplicates, and `invoice.paid` + `customer.subscription.updated` for the same renewal. If we create two periods, the user gets double hours. If we throw 500, Stripe retries forever.
+
+`createRenewalPeriodWithCarryover()` (`period.server.ts:9`) is idempotent on two levels:
+
+```ts
+// 1) fast path — already handled this Stripe invoice?
+if (stripeInvoiceId) {
+  const existing = await tx.subscriptionPeriod.findUnique({ where: { stripeInvoiceId } })
+  if (existing) return existing
+}
+// ... create period with rolloverHours = computeCarryoverHours(frozen)
+// 2) race path — two webhooks ran at the same time
+catch (error) {
+  if (isPrismaUniqueConstraintError(error, 'stripeInvoiceId')) {
+    return tx.subscriptionPeriod.findUnique({ where: { stripeInvoiceId } })
+  }
+  throw error
+}
+```
+
+Pre-check handles the normal retry. The `catch` on the unique constraint handles the race where both pass the pre-check at the same time. You need both — either one alone still duplicates under load.
+
+The same idea applies to payment failures. Both `invoice.payment_failed` and `customer.subscription.past_due` can fire for one missed payment. Each handler checks `period.pastDue` before bumping `paymentFailureCount`. After 3 failures, `finalizeSubscriptionCancellation()` closes the period. Without that guard, three strikes becomes two.
+
+One more thing I didn't expect: **overlap validation**. Renewals freeze the old period (`endDate = newStartDate`) and then validate the new window doesn't overlap another row. Without it, a manual admin reschedule plus a Stripe renewal can create overlapping `[start, end)` windows — and `getCurrentPeriod()` just returns whichever `ORDER BY` wins.
+
+<div class="article-diagram" aria-label="Idempotency decision">
+  <div><span>retry</span><b>Webhook ×2</b><small>Stripe retries</small></div>
+  <div><span>guard 1</span><b>Find by ID</b><small>already have this invoice?</small></div>
+  <div><span>guard 2</span><b>Unique catch</b><small>race → return existing</small></div>
+  <div><span>result</span><b>One period</b><small>exactly once</small></div>
+</div>
+
+## What I kept because it kept things simple
+
+**Transactions only for data.** No PDF, no email, no push inside `$transaction`. `processSuccessfulPayment()` runs after commit — PDF to S3 is even fire-and-forget. If S3 is slow, Stripe still gets a 200 and doesn't retry a payment that already succeeded.
+
+**Upgrades don't create a period.** We update Stripe with `proration_behavior: always_invoice` and create a prorated invoice locally, but we let the *next* `invoice.paid` webhook create the next period. That keeps the renewal date anchored to Stripe. Creating it eagerly drifted by a day every upgrade.
+
+**Pure math.** `computePeriodBalance` has no DB access. It's trivial to test (`core.server.test.ts`) and it makes the renewal readable: `rolloverHours = computeCarryoverHours(frozen)`.
+
+---
+
+Built for [WebSec](https://customers.websec.net/) — the project is in my [work section](/#work). The Stripe dispatch is only ~150 lines (`app/routes/webhooks/stripe.tsx`), the interesting part is the handful of small functions that make time and retries safe.

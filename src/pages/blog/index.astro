@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import PostSketch from "../../components/PostSketch.astro";
 import ThemeToggle from "../../components/ThemeToggle.astro";
 import Layout from "../../layouts/Layout.astro";
 
@@ -29,7 +28,7 @@ const formatDate = (date: Date) =>
 			<a class="font-serif text-[23px] tracking-[-0.03em]" href="/"
 				>Alif Haider</a
 			>
-			<div class="flex items-center gap-5.5 max-sm:gap-[13px]">
+			<div class="flex items-center gap-5.5 max-sm:gap-3">
 				<a
 					class="text-[12px] text-muted underline-offset-[3px] hover:text-text hover:underline"
 					href="/"
@@ -40,19 +39,19 @@ const formatDate = (date: Date) =>
 		</header>
 
 		<section
-			class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-[80px] py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-[24px] max-[760px]:py-[58px_42px]"
+			class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-20 py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-6 max-[760px]:py-[58px_42px]"
 		>
 			<div>
-				<p class="mb-[13px] text-[11px] uppercase tracking-[0.08em] text-soft">
+				<p class="mb-3 text-[11px] uppercase tracking-[0.08em] text-soft">
 					Notes / field journal
 				</p>
 				<h1
-					class="max-w-[680px] font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]"
+					class="max-w-170 font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]"
 				>
 					Things I learn while building software.
 				</h1>
 			</div>
-			<p class="mb-[5px] max-w-[320px] text-[13px] leading-[1.75] text-muted">
+			<p class="mb-1 max-w-[320px] text-[13px] leading-[1.75] text-muted">
 				A small collection of practical notes on React, TypeScript, routing,
 				databases, product work, and the odd problem that takes longer than it
 				should.
@@ -61,7 +60,7 @@ const formatDate = (date: Date) =>
 
 		<section class="border-t border-line-strong" aria-label="Blog posts">
 			<div
-				class="flex justify-between py-[12px] text-[10px] uppercase tracking-[0.08em] text-soft"
+				class="flex justify-between py-3 text-[10px] uppercase tracking-[0.08em] text-soft"
 			>
 				<span>Writing</span
 				><span>01—{String(posts.length).padStart(2, "0")}</span>
@@ -69,21 +68,18 @@ const formatDate = (date: Date) =>
 
 			{posts.map((post, index) => (
         <a
-          class="block border-t border-line py-[28px_30px] transition-[padding-left] duration-[0.2s] motion-reduce:transition-none hover:pl-[12px] max-[760px]:hover:pl-0"
+          class="block border-t border-line py-[28px_30px] transition-[padding-left] duration-200 motion-reduce:transition-none hover:pl-3 max-[760px]:hover:pl-0"
           href={`/blog/${post.id}/`}
         >
-          <div class="flex justify-between gap-[16px] text-[10px] text-soft">
+          <div class="flex justify-between gap-4 text-[10px] text-soft">
             <span>{String(index + 1).padStart(2, "0")}</span>
             <span>{formatDate(post.data.date)}</span>
           </div>
-          <div class="grid grid-cols-[minmax(0,1fr)_180px] items-center gap-[60px] py-[17px_21px] max-[760px]:grid-cols-1 max-[760px]:gap-[22px]">
-            <div>
-              <h2 class="mb-[9px] max-w-[680px] font-serif text-[clamp(28px,4vw,42px)] font-normal leading-[1.04] tracking-[-0.04em] max-[500px]:text-[31px]">{post.data.title}</h2>
-              <p class="max-w-[620px] text-[13px] leading-[1.7] text-muted">{post.data.description}</p>
-            </div>
-            <PostSketch type={post.data.sketch} />
+          <div class="py-[17px_21px]">
+            <h2 class="mb-2 max-w-170 font-serif text-[clamp(28px,4vw,42px)] font-normal leading-[1.04] tracking-[-0.04em] max-[500px]:text-[31px]">{post.data.title}</h2>
+            <p class="max-w-155 text-[13px] leading-[1.7] text-muted">{post.data.description}</p>
           </div>
-          <div class="flex justify-between gap-[16px] text-[10px] text-muted max-[500px]:grid max-[500px]:gap-[8px]">
+          <div class="flex justify-between gap-4 text-[10px] text-muted max-[500px]:grid max-[500px]:gap-2">
             <span>{post.data.stack}</span><span class="text-text">Read note ↗</span>
           </div>
         </a>
@@ -91,10 +87,10 @@ const formatDate = (date: Date) =>
 		</section>
 
 		<section
-			class="mt-[32px] border-y border-line py-[22px] text-[12px] leading-[1.7] text-muted"
+			class="mt-8 border-y border-line py-5.5 text-[12px] leading-[1.7] text-muted"
 		>
-			<p class="max-w-[520px]">
-				<span class="mr-[9px] text-text">More coming</span>
+			<p class="max-w-155">
+				<span class="mr-2 text-text">More coming</span>
 				I'd rather publish a few useful notes than keep a calendar full of
 				posts.
 			</p>
