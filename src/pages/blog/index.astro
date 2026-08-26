@@ -3,106 +3,120 @@ import { getCollection } from "astro:content";
 import ThemeToggle from "../../components/ThemeToggle.astro";
 import Layout from "../../layouts/Layout.astro";
 
+// Data fetching and sorting
 const posts = (await getCollection("blog")).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
+// Utilities
 const formatDate = (date: Date) =>
-	date.toLocaleDateString("en-US", {
-		month: "short",
-		day: "numeric",
-		year: "numeric",
-	});
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+// Constants
+const SITE_TITLE = "Alif Haider";
+const BLOG_DESCRIPTION =
+  "Writing and notes by Alif Haider about web development, React, TypeScript and building full-stack products.";
+const SECTION_LABELS = {
+  header: "Blog posts",
+  footer: "More coming",
+} as const;
+
+// Helper for padding numbers
+const padNumber = (num: number) => String(num).padStart(2, "0");
 ---
 
-<Layout
-	title="Blog — Alif Haider"
-	description="Writing and notes by Alif Haider about web development, React, TypeScript and building full-stack products."
->
-	<main
-		class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]"
-	>
-		<header
-			class="flex min-h-18 items-center justify-between gap-5 border-b border-line max-sm:min-h-15"
-		>
-			<a class="font-serif text-[23px] tracking-[-0.03em]" href="/"
-				>Alif Haider</a
-			>
-			<div class="flex items-center gap-5.5 max-sm:gap-3">
-				<a
-					class="text-[12px] text-muted underline-offset-[3px] hover:text-text hover:underline"
-					href="/"
-					>Home</a
-				>
-				<ThemeToggle />
-			</div>
-		</header>
-
-		<section
-			class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-20 py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-6 max-[760px]:py-[58px_42px]"
-		>
-			<div>
-				<p class="mb-3 text-[11px] uppercase tracking-[0.08em] text-soft">
-					Notes / field journal
-				</p>
-				<h1
-					class="max-w-170 font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]"
-				>
-					Things I learn while building software.
-				</h1>
-			</div>
-			<p class="mb-1 max-w-[320px] text-[13px] leading-[1.75] text-muted">
-				A small collection of practical notes on React, TypeScript, routing,
-				databases, product work, and the odd problem that takes longer than it
-				should.
-			</p>
-		</section>
-
-		<section class="border-t border-line-strong" aria-label="Blog posts">
-			<div
-				class="flex justify-between py-3 text-[10px] uppercase tracking-[0.08em] text-soft"
-			>
-				<span>Writing</span
-				><span>01—{String(posts.length).padStart(2, "0")}</span>
-			</div>
-
-			{posts.map((post, index) => (
+<Layout title={`Blog — ${SITE_TITLE}`} description={BLOG_DESCRIPTION}>
+  <main class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]">
+    <!-- Header -->
+    <header class="flex min-h-18 items-center justify-between gap-5 border-b border-line max-sm:min-h-15">
+      <a class="font-serif text-[23px] tracking-[-0.03em]" href="/">
+        {SITE_TITLE}
+      </a>
+      <div class="flex items-center gap-5.5 max-sm:gap-3">
         <a
+          class="text-xs text-muted underline-offset-[3px] hover:text-text hover:underline"
+          href="/"
+        >
+          Home
+        </a>
+        <ThemeToggle />
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-20 py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-6 max-[760px]:py-[58px_42px]">
+      <div>
+        <p class="mb-3 text-[11px] uppercase tracking-[0.08em] text-soft">
+          Notes / field journal
+        </p>
+        <h1 class="max-w-170 font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]">
+          Things I learn while building software.
+        </h1>
+      </div>
+      <p class="mb-1 max-w-[320px] text-[13px] leading-[1.75] text-muted">
+        A small collection of practical notes on React, TypeScript, routing,
+        databases, product work, and the odd problem that takes longer than it
+        should.
+      </p>
+    </section>
+
+    <!-- Blog Posts List -->
+    <section class="border-t border-line-strong" aria-label={SECTION_LABELS.header}>
+      <div class="flex justify-between py-3 text-[10px] uppercase tracking-[0.08em] text-soft">
+        <span>Writing</span>
+        <span>01—{padNumber(posts.length)}</span>
+      </div>
+
+      {posts.map((post, index) => (
+        <a
+          key={post.id}
           class="block border-t border-line py-[28px_30px] transition-[padding-left] duration-200 motion-reduce:transition-none hover:pl-3 max-[760px]:hover:pl-0"
           href={`/blog/${post.id}/`}
         >
+          <!-- Meta row: index + date -->
           <div class="flex justify-between gap-4 text-[10px] text-soft">
-            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span>{padNumber(index + 1)}</span>
             <span>{formatDate(post.data.date)}</span>
           </div>
-          <div class="py-[17px_21px]">
-            <h2 class="mb-2 max-w-170 font-serif text-[clamp(28px,4vw,42px)] font-normal leading-[1.04] tracking-[-0.04em] max-[500px]:text-[31px]">{post.data.title}</h2>
-            <p class="max-w-155 text-[13px] leading-[1.7] text-muted">{post.data.description}</p>
+
+          <!-- Content -->
+          <div class="pt-4 pb-5">
+            <h2 class="mb-2 max-w-170 font-serif text-[clamp(28px,4vw,42px)] font-normal leading-[1.04] tracking-[-0.04em] max-[500px]:text-[31px]">
+              {post.data.title}
+            </h2>
+            <p class="max-w-155 text-[13px] leading-[1.7] text-muted">
+              {post.data.description}
+            </p>
           </div>
+
+          <!-- Footer: stack + call to action -->
           <div class="flex justify-between gap-4 text-[10px] text-muted max-[500px]:grid max-[500px]:gap-2">
-            <span>{post.data.stack}</span><span class="text-text">Read note ↗</span>
+            <span>{post.data.stack}</span>
+            <span class="text-text">Read note ↗</span>
           </div>
         </a>
       ))}
-		</section>
+    </section>
 
-		<section
-			class="mt-8 border-y border-line py-5.5 text-[12px] leading-[1.7] text-muted"
-		>
-			<p class="max-w-155">
-				<span class="mr-2 text-text">More coming</span>
-				I'd rather publish a few useful notes than keep a calendar full of
-				posts.
-			</p>
-		</section>
+    <!-- More Coming Section -->
+    <section class="mt-8 border-y border-line py-5.5 text-xs leading-[1.7] text-muted">
+      <p class="max-w-155">
+        <span class="mr-2 text-text">{SECTION_LABELS.footer}</span>
+        I'd rather publish a few useful notes than keep a calendar full of
+        posts.
+      </p>
+    </section>
 
-		<footer class="flex justify-between py-[22px_30px] text-[11px] text-soft">
-			<span>© 2026 Alif Haider</span
-			><a
-				class="underline-offset-[3px] hover:text-text hover:underline"
-				href="/"
-				>Back to portfolio ↑</a
-			>
-		</footer>
-	</main>
+    <!-- Footer -->
+    <footer class="flex justify-between pt-5.5 pb-7.5 text-[11px] text-soft">
+      <span>© 2026 {SITE_TITLE}</span>
+      <a class="underline-offset-[3px] hover:text-text hover:underline" href="/">
+        Back to portfolio ↑
+      </a>
+    </footer>
+  </main>
 </Layout>
