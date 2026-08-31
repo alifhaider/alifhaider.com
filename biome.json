@@ -1,83 +1,62 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!!**/dist"]
+  },
   "formatter": {
+    "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
     "lineWidth": 120,
     "attributePosition": "auto",
-    "bracketSameLine": true,
-    "bracketSpacing": true,
-    "includes": ["**", "!**/*.astro", "!src/content/integrations.json", "!src/data/*.json"]
+    "lineEnding": "lf",
+    "indentWidth": 2,
+    "bracketSameLine": true
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "preset": "recommended",
-      "a11y": {
-        "noSvgWithoutTitle": "off"
-      },
       "nursery": {
-        "useSortedClasses": "error",
-        "useExhaustiveSwitchCases": "error"
-      },
-      "style": {
-        "noParameterAssign": "error",
-        "useAsConstAssertion": "error",
-        "useDefaultParameterLast": "error",
-        "useEnumInitializers": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error",
-        "noUnusedTemplateLiteral": "error",
-        "useNumberNamespace": "error",
-        "noInferrableTypes": "error",
-        "noUselessElse": "error"
-      },
-      "suspicious": {
-        "noUnknownAtRules": {
-          "level": "on",
-          "options": { "ignore": ["tailwind"] }
-        }
+        "useSortedClasses": "warn"
       }
     }
   },
   "javascript": {
     "formatter": {
-      "trailingCommas": "all",
-      "quoteStyle": "single",
-      "semicolons": "asNeeded"
+      "semicolons": "asNeeded",
+      "quoteStyle": "single"
     }
   },
   "css": {
-    "parser": { "tailwindDirectives": true },
-    "formatter": { "quoteStyle": "single" }
-  },
-  "json": {
     "parser": {
-      "allowComments": true,
-      "allowTrailingCommas": true
-    },
-    "formatter": {
-      "trailingCommas": "none"
+      "tailwindDirectives": true
     }
   },
-  "vcs": {
-    "clientKind": "git",
+  "assist": {
     "enabled": true,
-    "useIgnoreFile": true
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "overrides": [
     {
-      "includes": ["**/*.astro"],
+      "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
       "linter": {
         "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
           "correctness": {
             "noUnusedVariables": "off",
             "noUnusedImports": "off"
-          },
-          "style": {
-            "useImportType": "off"
           }
         }
       }
