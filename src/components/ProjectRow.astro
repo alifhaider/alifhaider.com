@@ -1,26 +1,26 @@
 ---
 interface Props {
-	project: {
-		year: string;
-		title: string;
-		description: string;
-		stack: string;
-		href: string;
-		preview: string;
-	};
+  project: {
+    year: string
+    title: string
+    description: string
+    stack: string
+    href: string
+    preview: string
+  }
 }
 
-const { project } = Astro.props;
+const { project } = Astro.props
 
 const previewClasses = [
-	"pointer-events-none absolute right-8 top-1/2 z-10",
-	"h-36 w-56 -translate-y-1/2 scale-[.97]",
-	"border border-line-strong bg-bg shadow-[0_14px_30px_rgba(0,0,0,.09)]",
-	"opacity-0 transition-[opacity,scale,translate] duration-200",
-	"group-hover:-translate-x-2 group-hover:scale-100 group-hover:opacity-100",
-	"group-focus-visible:-translate-x-2 group-focus-visible:scale-100 group-focus-visible:opacity-100",
-	"motion-reduce:transition-none max-md:hidden",
-].join(" ");
+  'pointer-events-none absolute right-8 top-1/2 z-10',
+  'h-36 w-56 -translate-y-1/2 scale-[.97]',
+  'border border-line-strong bg-bg shadow-[0_14px_30px_rgba(0,0,0,.09)]',
+  'opacity-0 transition-[opacity,scale,translate] duration-200',
+  'group-hover:-translate-x-2 group-hover:scale-100 group-hover:opacity-100',
+  'group-focus-visible:-translate-x-2 group-focus-visible:scale-100 group-focus-visible:opacity-100',
+  'motion-reduce:transition-none max-md:hidden',
+].join(' ')
 ---
 
 <a

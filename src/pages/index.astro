@@ -1,25 +1,24 @@
 ---
-import AboutSection from "../components/sections/AboutSection.astro";
-import ContactSection from "../components/sections/ContactSection.astro";
-import Footer from "../components/sections/Footer.astro";
-import Hero from "../components/sections/Hero.astro";
-import WorkSection from "../components/sections/WorkSection.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
-import Layout from "../layouts/Layout.astro";
+import AboutSection from '../components/sections/AboutSection.astro'
+import ContactSection from '../components/sections/ContactSection.astro'
+import Footer from '../components/sections/Footer.astro'
+import Hero from '../components/sections/Hero.astro'
+import WorkSection from '../components/sections/WorkSection.astro'
+import ThemeToggle from '../components/ThemeToggle.astro'
+import Layout from '../layouts/Layout.astro'
 
-const LINK_CLASSES =
-	"underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline";
-const SOCIAL_LINK_CLASSES = `text-xs text-muted ${LINK_CLASSES}`;
+const LINK_CLASSES = 'underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline'
+const SOCIAL_LINK_CLASSES = `text-xs text-muted ${LINK_CLASSES}`
 
 const SOCIAL_LINKS = [
-	{
-		label: "Upwork",
-		href: "https://www.upwork.com/freelancers/~014066482556c551be",
-	},
-	{ label: "GitHub", href: "https://github.com/alifhaider" },
-	{ label: "LinkedIn", href: "https://linkedin.com/in/alifhaider" },
-	{ label: "X", href: "https://x.com/haider_alif" },
-];
+  {
+    label: 'Upwork',
+    href: 'https://www.upwork.com/freelancers/~014066482556c551be',
+  },
+  { label: 'GitHub', href: 'https://github.com/alifhaider' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/alifhaider' },
+  { label: 'X', href: 'https://x.com/haider_alif' },
+]
 ---
 
 <Layout title="Alif Haider - Software Engineer">
