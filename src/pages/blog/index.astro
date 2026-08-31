@@ -31,7 +31,7 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
   <main class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]">
     <!-- Header -->
     <header class="flex min-h-18 items-center justify-between gap-5 border-b border-line max-sm:min-h-15">
-      <a class="font-serif text-[23px] tracking-[-0.03em]" href="/">
+      <a class="font-serif text-2xl tracking-tight" href="/">
         {SITE_TITLE}
       </a>
       <div class="flex items-center gap-5.5 max-sm:gap-3">
@@ -46,16 +46,16 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
     </header>
 
     <!-- Hero Section -->
-    <section class="grid grid-cols-[minmax(0,1.2fr)_300px] items-end gap-20 py-[76px_54px] max-[760px]:grid-cols-1 max-[760px]:gap-6 max-[760px]:py-[58px_42px]">
-      <div>
-        <p class="mb-3 text-[11px] uppercase tracking-[0.08em] text-soft">
+    <section class="grid grid-cols-1 gap-6 md:grid-cols-3 items-end md:gap-20 pt-19 pb-10 md:pb-13">
+      <div class="col-span-2">
+        <p class="mb-3 text-tiny uppercase tracking-widest text-soft">
           Notes / field journal
         </p>
-        <h1 class="max-w-170 font-serif text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] max-[500px]:text-[46px]">
+        <h1 class="max-w-170 font-serif sm:text-[clamp(48px,7vw,76px)] font-normal leading-[0.96] tracking-[-0.055em] text-5xl">
           Things I learn while building software.
         </h1>
       </div>
-      <p class="mb-1 max-w-[320px] text-[13px] leading-[1.75] text-muted">
+      <p class="mb-1 col-span-1 max-w-[320px] text-[13px] leading-[1.75] text-muted">
         A small collection of practical notes on React, TypeScript, routing,
         databases, product work, and the odd problem that takes longer than it
         should.
@@ -64,14 +64,14 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
 
     <!-- Blog Posts List -->
     <section class="border-t border-line-strong" aria-label={SECTION_LABELS.header}>
-      <div class="flex justify-between py-3 text-[10px] uppercase tracking-[0.08em] text-soft">
+      <div class="flex justify-between py-3 text-[10px] uppercase tracking-widest text-soft">
         <span>Writing</span>
         <span>01—{padNumber(posts.length)}</span>
       </div>
 
       {posts.map((post, index) => (
         <a
-          class="block border-t border-line py-[28px_30px] transition-[padding-left] duration-200 motion-reduce:transition-none hover:pl-3 max-[760px]:hover:pl-0"
+          class="block border-t border-line py-7 transition-[padding-left] duration-200 motion-reduce:transition-none hover:pl-3 max-[760px]:hover:pl-0"
           href={`/blog/${post.id}/`}
         >
           <!-- Meta row: index + date -->
@@ -82,7 +82,7 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
 
           <!-- Content -->
           <div class="pt-4 pb-5">
-            <h2 class="mb-2 max-w-170 font-serif text-[clamp(28px,4vw,42px)] font-normal leading-[1.04] tracking-[-0.04em] max-[500px]:text-[31px]">
+            <h2 class="mb-2 max-w-170 font-serif sm:text-[clamp(30px,4vw,42px)] font-normal leading-[1.04] tracking-tighter text-3xl">
               {post.data.title}
             </h2>
             <p class="max-w-155 text-[13px] leading-[1.7] text-muted">
@@ -91,7 +91,7 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
           </div>
 
           <!-- Footer: stack + call to action -->
-          <div class="flex justify-between gap-4 text-[10px] text-muted max-[500px]:grid max-[500px]:gap-2">
+          <div class="sm:flex justify-between sm:gap-4 text-[10px] text-muted grid gap-2">
             <span>{post.data.stack}</span>
             <span class="text-text">Read note ↗</span>
           </div>
@@ -109,7 +109,7 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
     </section>
 
     <!-- Footer -->
-    <footer class="flex justify-between pt-5.5 pb-7.5 text-[11px] text-soft">
+    <footer class="flex justify-between pt-5.5 pb-7.5 text-tiny text-soft">
       <span>© 2026 {SITE_TITLE}</span>
       <a class="underline-offset-3 hover:text-text hover:underline" href="/">
         Back to portfolio ↑

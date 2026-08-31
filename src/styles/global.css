@@ -33,6 +33,7 @@ html[data-theme="dark"] {
 @theme {
   --breakpoint-md: 860px;
   --breakpoint-sm: 520px;
+  --text-tiny: 11px;
 }
 
 @theme inline {

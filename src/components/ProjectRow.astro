@@ -39,7 +39,7 @@ const previewClasses = [
 	rel={project.href.startsWith("http") ? "noreferrer" : undefined}
 	aria-label={`${project.title} — ${project.description}`}
 >
-	<div class="text-[11px] text-soft">
+	<div class="text-tiny text-soft">
 		{project.year}
 	</div>
 
@@ -54,7 +54,7 @@ const previewClasses = [
 	</div>
 
 	<div
-		class="text-right text-[11px] leading-normal text-soft max-md:hidden truncate"
+		class="text-right text-tiny leading-normal text-soft max-md:hidden truncate"
 	>
 		{project.stack}
 	</div>
@@ -69,7 +69,7 @@ const previewClasses = [
 	<div class={previewClasses} aria-hidden="true">
 		{project.preview === "nulandia" && (
 			<div class="grid h-full grid-cols-2 gap-2 overflow-hidden p-4 text-text">
-				<b class="col-span-2 text-[11px] font-bold">
+				<b class="col-span-2 text-tiny font-bold">
 					Nulandia
 				</b>
 
@@ -143,7 +143,7 @@ const previewClasses = [
 
 		{project.preview === "websec" && (
 			<div class="p-4">
-				<b class="mb-3 block text-[11px] font-medium">
+				<b class="mb-3 block text-tiny font-medium">
 					Overview
 				</b>
 
