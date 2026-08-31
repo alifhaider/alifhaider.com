@@ -7,7 +7,7 @@ import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://alifhaider.vercel.com',
+  site: 'https://alifhaider.vercel.app',
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
