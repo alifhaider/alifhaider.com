@@ -7,9 +7,6 @@ import WorkSection from '../components/sections/WorkSection.astro'
 import ThemeToggle from '../components/ThemeToggle.astro'
 import Layout from '../layouts/Layout.astro'
 
-const LINK_CLASSES = 'underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline'
-const SOCIAL_LINK_CLASSES = `text-xs text-muted ${LINK_CLASSES}`
-
 const SOCIAL_LINKS = [
   {
     label: 'Upwork',
@@ -18,6 +15,12 @@ const SOCIAL_LINKS = [
   { label: 'GitHub', href: 'https://github.com/alifhaider' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/alifhaider' },
   { label: 'X', href: 'https://x.com/haider_alif' },
+]
+
+const NAV_LINKS: { label: string; href: string; current?: boolean }[] = [
+  { label: 'Work', href: '#work', current: true },
+  { label: 'About', href: '#about' },
+  { label: 'Blog', href: '/blog/' },
 ]
 ---
 
@@ -31,7 +34,7 @@ const SOCIAL_LINKS = [
 		>
 			<div>
 				<a
-					class="inline-block font-serif text-3xl tracking-[-0.035em] underline-offset-4 focus-visible:outline-none focus-visible:underline"
+					class="link inline-block font-serif text-3xl tracking-[-0.035em]"
 					href="#top"
 				>
 					Alif Haider
@@ -57,27 +60,15 @@ const SOCIAL_LINKS = [
 				class="mt-9 grid gap-2.5 text-[13px] max-md:col-span-2 max-md:mt-2.5 max-md:flex max-md:gap-5 max-sm:order-2 max-sm:mt-1"
 				aria-label="Primary navigation"
 			>
-				<a
-					class="w-fit underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline"
-					href="#work"
-					aria-current="page"
-				>
-					Work
-				</a>
-
-				<a
-					class="w-fit underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline"
-					href="#about"
-				>
-					About
-				</a>
-
-				<a
-					class="w-fit underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline"
-					href="/blog/"
-				>
-					Blog
-				</a>
+				{NAV_LINKS.map(({ label, href, current }) => (
+					<a
+						class="link w-fit"
+						href={href}
+						aria-current={current ? 'page' : undefined}
+					>
+						{label}
+					</a>
+				))}
 			</nav>
 
 			<div
@@ -88,7 +79,7 @@ const SOCIAL_LINKS = [
 				>
 					{SOCIAL_LINKS.map(({ label, href }) => (
 						<a
-							class={SOCIAL_LINK_CLASSES}
+							class="link text-xs text-muted"
 							href={href}
 							target="_blank"
 							rel="noreferrer"
@@ -101,12 +92,23 @@ const SOCIAL_LINKS = [
 				<div
 					class="mt-5 flex items-center justify-between gap-3 border-t border-line pt-4 max-md:m-0 max-md:border-0 max-md:p-0"
 				>
-					<a
-						class="text-xs text-muted underline-offset-4 hover:text-text hover:underline focus-visible:outline-none focus-visible:underline max-md:hidden"
-						href="mailto:alifhaider57@gmail.com"
-					>
-						Email me ↗
-					</a>
+					<div class="grid gap-1.5 max-md:hidden">
+						<a
+							class="link link-hover text-xs text-muted"
+							href="mailto:alifhaider57@gmail.com"
+						>
+							Email me ↗
+						</a>
+
+						<a
+							class="link link-hover text-xs text-muted"
+							href="https://cal.com/alifhaider/30min"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Book a call ↗
+						</a>
+					</div>
 
 					<ThemeToggle />
 				</div>
@@ -115,19 +117,14 @@ const SOCIAL_LINKS = [
 
 		<!-- Main -->
 		<main id="top" class="min-w-0">
-			<!-- Hero -->
 			<Hero title="I build web applications." />
 
-			<!-- Work -->
 			<WorkSection />
 
-			<!-- About -->
 			<AboutSection />
 
-			<!-- Contact -->
 			<ContactSection />
 
-			<!-- Footer -->
 			<Footer />
 		</main>
 	</div>

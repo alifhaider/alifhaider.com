@@ -64,6 +64,20 @@ html[data-theme="dark"] {
 }
 
 @layer components {
+  /* Shared text-link, row and section-heading affordances. */
+  .link {
+    @apply underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none;
+  }
+  .link-hover {
+    @apply transition-colors hover:text-text;
+  }
+  .arrow-shift {
+    @apply text-sm text-soft transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none;
+  }
+  .section-heading {
+    @apply flex items-baseline justify-between gap-5 border-b border-line-strong pb-3.5 max-sm:pb-2.5;
+  }
+
   /* Article content (markdown output) */
   .article-body p,
   .article-body li {
