@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import ThemeToggle from '../../components/ThemeToggle.astro'
 import Layout from '../../layouts/Layout.astro'
+import { blogPageTransition } from '../../lib/transitions'
 
 // Data fetching and sorting
 const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -31,7 +32,7 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
   <main class="mx-auto w-[min(1040px,calc(100%-48px))] max-[760px]:w-[min(100%-28px,700px)]">
     <!-- Header -->
     <header class="flex min-h-18 items-center justify-between gap-5 border-b border-line max-sm:min-h-15">
-      <a class="font-serif text-2xl tracking-tight" href="/">
+      <a class="font-serif text-2xl tracking-tight" href="/" transition:name="site-title">
         {SITE_TITLE}
       </a>
       <div class="flex items-center gap-5.5 max-sm:gap-3">
@@ -63,7 +64,11 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
     </section>
 
     <!-- Blog Posts List -->
-    <section class="border-t border-line-strong" aria-label={SECTION_LABELS.header}>
+    <section
+      class="border-t border-line-strong"
+      aria-label={SECTION_LABELS.header}
+      transition:animate={blogPageTransition}
+    >
       <div class="flex justify-between py-3 text-[10px] uppercase tracking-widest text-soft">
         <span>Writing</span>
         <span>01—{padNumber(posts.length)}</span>
@@ -82,7 +87,10 @@ const padNumber = (num: number) => String(num).padStart(2, '0')
 
           <!-- Content -->
           <div class="pt-4 pb-5">
-            <h2 class="mb-2 max-w-170 font-serif sm:text-[clamp(30px,4vw,42px)] font-normal leading-[1.04] tracking-tighter text-3xl">
+            <h2
+              class="mb-2 max-w-170 font-serif sm:text-[clamp(30px,4vw,42px)] font-normal leading-[1.04] tracking-tighter text-3xl"
+              transition:name={`post-title-${post.id}`}
+            >
               {post.data.title}
             </h2>
             <p class="max-w-155 text-[13px] leading-[1.7] text-muted">

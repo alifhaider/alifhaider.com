@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content'
 import ThemeToggle from '../../components/ThemeToggle.astro'
 import Layout from '../../layouts/Layout.astro'
+import { blogPageTransition } from '../../lib/transitions'
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog')
@@ -29,7 +30,7 @@ const dateString = date.toLocaleDateString('en-US', {
 		<header
 			class="flex min-h-18 items-center justify-between gap-5 border-b border-line sm:min-h-16"
 		>
-			<a class="font-serif text-2xl tracking-tight" href="/">Alif Haider</a>
+			<a class="font-serif text-2xl tracking-tight" href="/" transition:name="site-title">Alif Haider</a>
 			<div class="flex items-center gap-5 sm:gap-3">
 				<a
 					class="link link-hover text-xs text-muted"
@@ -39,7 +40,7 @@ const dateString = date.toLocaleDateString('en-US', {
 			</div>
 		</header>
 
-		<article class="py-20 sm:py-16">
+		<article class="py-20 sm:py-16" transition:animate={blogPageTransition}>
 			<header class="mx-auto max-w-4xl">
 				{
 					project && (
@@ -68,6 +69,7 @@ const dateString = date.toLocaleDateString('en-US', {
 				</p>
 				<h1
 					class="font-serif text-5xl font-normal leading-[0.96] tracking-tighter sm:text-6xl lg:text-7xl xl:text-[82px]"
+					transition:name={`post-title-${post.id}`}
 				>
 					{title}
 				</h1>

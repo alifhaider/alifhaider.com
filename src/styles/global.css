@@ -49,6 +49,28 @@ html[data-theme="dark"] {
   --font-serif: "Newsreader Variable", Georgia, serif;
 }
 
+@keyframes blog-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blog-page-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

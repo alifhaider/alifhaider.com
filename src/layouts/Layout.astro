@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions'
 import '@fontsource-variable/inter'
 import '@fontsource-variable/newsreader/opsz.css'
 import '../styles/global.css'
@@ -26,6 +27,7 @@ const twitterImage = new URL('/twitter-image.png', Astro.site)
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="generator" content={Astro.generator}>
+		<ClientRouter />
 		<title>{title}</title>
 		<meta name="description" content={description}>
 		<meta name="color-scheme" content="light dark">
@@ -64,6 +66,14 @@ const twitterImage = new URL('/twitter-image.png', Astro.site)
 				// Storage unavailable — keep the default (light) theme.
 			}
 		})();
+		</script>
+		<script>
+		document.addEventListener("astro:before-swap", (event) => {
+			const theme = document.documentElement.dataset.theme;
+			if (theme) {
+				event.newDocument.documentElement.dataset.theme = theme;
+			}
+		});
 		</script>
 	</head>
 	<body>
