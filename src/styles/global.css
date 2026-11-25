@@ -153,7 +153,8 @@ html[data-theme="dark"] {
     .article-diagram > div:nth-child(2n) {
       border-right: 0;
     }
-    .article-diagram > div:nth-child(n + 3) {
+    .article-diagram > div:nth-child(3),
+    .article-diagram > div:nth-child(4) {
       border-top: 1px solid var(--line);
     }
   }
