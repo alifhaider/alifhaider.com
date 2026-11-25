@@ -1,0 +1,86 @@
+---
+title: I put every dialog in WebSec in the URL
+description: Two dozen modals, no shared open/close state. Moving dialog state into the query string made it linkable, refresh-safe, and easier to open from notifications.
+date: 2026-08-25
+tags: ["React Router", "Zod", "URL state"]
+readTime: 4 min read
+stack: React Router · Zod
+project: WebSec — SaaS billing & subscriptions
+projectHref: https://customers.websec.net/
+---
+
+WebSec has about two dozen dialogs: invoice details, service requests, meeting booking, account deletion. For a while each page owned its own `useState`. That was fine until the same dialog needed to open from somewhere else.
+
+The notification popover was the first crack. A "View invoice" button sits in the header, outside the billing page, so it had no access to the billing page's state. I could have lifted the state into a context, but then every new dialog adds another provider and another `isOpen` flag to keep in sync.
+
+Instead, I made the dialog part of the URL.
+
+```txt
+/billing?dialog=user:invoice-details&invoiceId=inv_123
+```
+
+`?dialog` names the dialog. The rest of the query string is its props.
+
+## One registry
+
+Every dialog is declared in a single object. This is the user-facing one:
+
+```ts
+// app/components/dialogs/user/registry.ts
+export const userDialogs = {
+  'user:invoice-details': defineDialog({
+    component: InvoiceDetailsDialog,
+    schema: z.object({ invoiceId: z.string() }),
+  }),
+  'user:book-meeting': defineDialog({
+    component: BookMeetingDialog,
+    schema: z.object({ serviceRequestId: z.string().optional() }),
+  }),
+}
+```
+
+`defineDialog` only helps with inference. The important part is the Zod schema. It does two jobs: it validates whatever arrived in the address bar, and it produces the prop type for the component. `InvoiceDetailsDialog` receives `{ invoiceId: string }` because its schema says so. If the URL is missing the id, the dialog does not render.
+
+`DialogOutlet` sits once in the root layout. It reads `?dialog`, finds the entry, parses the params, and renders the component:
+
+```tsx
+<Dialog
+  open={currentDialog !== null}
+  onOpenChange={(open) => {
+    if (!open) closeDialog()
+  }}
+>
+  <DialogContent>
+    {currentDialog && (
+      <DialogBody type={currentDialog.type} params={currentDialog.params} />
+    )}
+  </DialogContent>
+</Dialog>
+```
+
+No dialog context, no per-page open state, no portal per route. Escape, the overlay, and the close button all end up in the same `closeDialog` because Radix reports every dismissal through `onOpenChange`.
+
+## Two rules
+
+The first rule is that a dialog only reads the params its schema declares. `extractDialogParams` loops over `Object.keys(schema.shape)`, not the whole query string. So `?status=pending&dialog=user:invoice-details&invoiceId=inv_123` keeps the page filter when the dialog opens and closes. The rest of the URL is not collateral damage.
+
+The second rule is that opening a new dialog clears the previous dialog's params first. Without that, opening invoice details from a service request leaves `publicId` in the URL next to `invoiceId`, and the next refresh opens a dialog with stale fields. `openDialog` deletes every key belonging to the current schema before writing the new ones. Only one dialog can be active, and the URL never carries two dialogs' worth of state.
+
+Both open and close use `setSearchParams(next, { replace: true })`. The address changes, but the back button still goes to the previous page instead of walking through every modal the user opened. Deep links still work because the URL is complete on its own.
+
+## What it unlocked
+
+Notifications store a small command, not a component. A service request notification carries `{ type: 'view-service-request', publicId }`. The client hook turns it into:
+
+```ts
+openDialog('user:service-request-dialog', {
+  publicId,
+  mode: 'view',
+})
+```
+
+The same call works from a notification, a table row, an email link, or the console. I don't need a separate path for each entry point.
+
+The tradeoff is that every param arrives as a string. Numbers need `z.coerce.number()`, and enums need `z.enum([...])`, which also stops someone from inventing a `mode` by hand. That is a small price. The alternative was a growing pile of booleans that only the page that created them understood.
+
+I still use local state for hover, form drafts, and anything that should disappear on refresh. But "which dialog is open" is not local state. It is a location, and locations belong in the URL.
