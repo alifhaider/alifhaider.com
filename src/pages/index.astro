@@ -17,18 +17,17 @@ const SOCIAL_LINKS = [
   { label: 'X', href: 'https://x.com/haider_alif' },
 ]
 
-const NAV_LINKS: { label: string; href: string; current?: boolean }[] = [
+const NAV_LINKS = [
   { label: 'Work', href: '#work', current: true },
   { label: 'About', href: '#about' },
   { label: 'Blog', href: '/blog/' },
 ]
 ---
 
-<Layout title="Alif Haider - Software Engineer">
-	<div
+<Layout>
+	<main
 		class="mx-auto grid max-w-295 grid-cols-[230px_minmax(0,1fr)] gap-18 px-7 max-md:block max-md:max-w-175 max-md:px-4 max-sm:px-3"
 	>
-		<!-- Sidebar -->
 		<aside
 			class="sticky top-0 flex h-screen flex-col py-8 pb-7 max-md:static max-md:grid max-md:h-auto max-md:grid-cols-[1fr_auto] max-md:gap-5 max-md:border-b max-md:border-line max-md:py-6 max-md:pb-4 max-sm:grid-cols-1"
 		>
@@ -44,21 +43,21 @@ const NAV_LINKS: { label: string; href: string; current?: boolean }[] = [
 				<p
 					class="mt-1 text-sm leading-normal font-medium text-muted max-sm:mt-1"
 				>
-					Software engineer<br>
+					Software Engineer<br>
 					<span class="text-xs font-normal mr-1">based in</span>
 					Bangladesh.
 				</p>
 			</div>
 
 			<p
-				class="mt-16 pr-3.5 max-md:hidden text-[13px] leading-relaxed text-muted"
+				class="mt-16 pr-3.5 max-md:hidden text-sm leading-relaxed text-muted"
 			>
 				I build web applications with JavaScript and TypeScript, from the
 				interface to the backend.
 			</p>
 
 			<nav
-				class="mt-9 grid gap-2.5 text-[13px] max-md:col-span-2 max-md:mt-2.5 max-md:flex max-md:gap-5 max-sm:order-2 max-sm:mt-1"
+				class="mt-9 grid gap-2.5 text-sm max-md:col-span-2 max-md:mt-2.5 max-md:flex max-md:gap-5 max-sm:order-2 max-sm:mt-1"
 				aria-label="Primary navigation"
 			>
 				{NAV_LINKS.map(({ label, href, current }) => (
@@ -115,18 +114,17 @@ const NAV_LINKS: { label: string; href: string; current?: boolean }[] = [
 				</div>
 			</div>
 		</aside>
+		<div class="min-w-0">
 
-		<!-- Main -->
-		<main id="top" class="min-w-0">
-			<Hero title="I build web applications." />
-
+			<Hero />
+	
 			<WorkSection />
-
+	
 			<AboutSection />
-
+	
 			<ContactSection />
-
+	
 			<Footer />
-		</main>
-	</div>
+		</div>
+	</main>
 </Layout>
